@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>traceblanche · ski de fond et ski de randonnée nordique, hors ligne</title>
+<meta name="description" content="Carte hors ligne, pistes, pentes, exposition aux avalanches, zones protégées, refuges et zones sans réseau pour le ski de fond et le ski de randonnée nordique en France. Noyau en Rust, app Android prévue, code libre.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://traceblanche.github.io/en/">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="./"><img src="favicon.svg" width="28" height="28" alt="">traceblanche</a>
+<nav aria-label="Navigation principale"><ul>
+<li><a href="demarrage.html">Démarrage</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="confidentialite.html">Confidentialité</a></li>
+<li><a href="licences.html">Licences</a></li>
+<li><a href="en/" lang="en" hreflang="en">English</a></li>
+<li><a href="https://github.com/traceblanche" aria-label="traceblanche sur GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
+</ul></nav>
+</div></header>
+
+<main id="contenu">
+<div class="wrap">
+
+<section class="hero">
+<div class="text">
+<p class="eyebrow">Ski de fond · ski de randonnée nordique · France</p>
+<h1>Le ski nordique, même sans réseau</h1>
+<p class="lead">Au fond d'une combe du Jura ou d'un vallon du Queyras, le réseau tombe. Le plan des pistes est une image, le bulletin d'avalanche est sur un autre site, et vous portez des gants.</p>
+<p>traceblanche met sur votre téléphone, avant le départ, la carte du lieu, ses pistes, ses pentes, ses règles et ses refuges. Tout reste lisible sans réseau. Vous préparez la journée le matin, puis une voix vous guide, téléphone en poche.</p>
+<div class="status"><p><b>Où en est le projet.</b> Le noyau en Rust fonctionne sur deux sites tests, Cervières (Hautes-Alpes) et Chapelle-des-Bois (Doubs). L'app Android est la prochaine étape. Les images de cette page viennent du visualiseur du projet, sur des données réelles.</p></div>
+<div class="actions">
+<a class="btn primary" href="demarrage.html#pack">Construire un premier pack</a>
+<a class="btn secondary" href="https://github.com/traceblanche/traceblanche">Lire le code sur GitHub</a>
+</div>
+</div>
+<figure>
+<img src="img/pentes-cervieres-1600.webp" srcset="img/pentes-cervieres-800.webp 800w, img/pentes-cervieres-1600.webp 1600w" sizes="(min-width: 68rem) 66rem, 100vw" width="1600" height="1000" fetchpriority="high" alt="Carte de Cervières entre Le Laus et le col d'Izoard. Les pentes de plus de 30 degrés sont colorées du jaune au violet. Un itinéraire orange monte du Laus au col en restant entre elles.">
+<figcaption>Cervières, du Laus au col d'Izoard. Pentes de plus de 30° (jaune, orange, rouge, violet) calculées sur le relief LiDAR HD de l'IGN. En orange, un itinéraire calculé par le noyau, en partie hors piste : 5,7 km, pente maximale 24°. Fond © IGN Plan IGN v2 ; pistes © contributeurs d'OpenStreetMap ; refuges © contributeurs de refuges.info.</figcaption>
+</figure>
+</section>
+
+<h2 id="pentes">Pentes et avalanches</h2>
+<div class="text">
+<p>En ski de randonnée nordique, une combe raide se repère mal sur une carte papier. Le pack marque les pentes de plus de 30°, calculées sur le relief LiDAR HD de l'IGN au pas de 5 m : c'est l'image du haut de cette page.</p>
+<p>Il modélise aussi l'exposition aux avalanches à partir du relief et de la forêt, avec les méthodes AutoATES v3.0 et Flow-Py portées en Rust. La comparaison avec les avalanches connues est en cours. Là où Météo-France publie un bulletin d'avalanche pour le massif, le pack l'ajoute avec sa date.</p>
+<p>traceblanche ne dit jamais qu'une pente est sûre. Il montre où le terrain devient raide, pour que vous décidiez avant d'y arriver. Le bulletin d'avalanche et votre jugement sur place restent la référence. <a href="faq.html#avalanches">Lire ce que l'app ne fait pas</a>.</p>
+<p><span class="tag done">calculé aujourd'hui</span><span class="tag plan">app : prévu</span></p>
+</div>
+
+<h2>Ce que contient un pack</h2>
+<p class="text">Un pack couvre un site : environ 40 Mo pour Cervières, 35 Mo pour Chapelle-des-Bois. Vous le téléchargez avant de partir. Ensuite, le téléphone n'a plus besoin du réseau.</p>
+
+<div class="feature">
+<div>
+<h3>Une carte qui reste lisible hors réseau</h3>
+<p class="problem">Une carte en ligne se fige quand le réseau tombe, souvent au pire endroit.</p>
+<p>Le pack emporte deux fonds de carte en tuiles vectorielles : Plan IGN v2 et OpenStreetMap. Les pistes de fond d'OpenStreetMap s'y ajoutent, avec leur nom, leur difficulté, la technique (classique ou skating) et le sens.</p>
+<p><span class="tag done">calculé aujourd'hui</span><span class="tag plan">app : prévu</span></p>
+</div>
+<figure>
+<img src="img/osm-chapelle-1600.webp" srcset="img/osm-chapelle-800.webp 800w, img/osm-chapelle-1600.webp 1600w" sizes="(min-width: 48rem) 36rem, 100vw" width="1600" height="1000" loading="lazy" alt="Carte de Chapelle-des-Bois sur fond OpenStreetMap, avec les pistes de fond en vert, bleu, rouge et noir et les refuges en points bruns.">
+<figcaption>Chapelle-des-Bois sur le fond OpenStreetMap : pistes par difficulté, refuges et abris. Fond Protomaps © contributeurs d'OpenStreetMap ; refuges © contributeurs de refuges.info.</figcaption>
+</figure>
+</div>
+
+<div class="feature flip">
+<div>
+<h3>Un itinéraire et son heure de demi-tour</h3>
+<p class="problem">Le 15 janvier à Cervières, le soleil se couche à 17 h 16. Une boucle trop longue finit dans le noir.</p>
+<p>Le noyau calcule l'itinéraire sur les pistes, sa longueur, sa montée et son temps estimé, en classique ou en skating. Il donne aussi l'heure de retour au plus tard, 30 minutes avant la fin du crépuscule civil.</p>
+<p>Le temps estimé vient d'une formule. Il sera ensuite ajusté sur vos propres sorties.</p>
+<p><span class="tag done">calculé aujourd'hui</span><span class="tag plan">app : prévu</span></p>
+</div>
+<figure>
+<img src="img/itineraire-cervieres-1600.webp" srcset="img/itineraire-cervieres-800.webp 800w, img/itineraire-cervieres-1600.webp 1600w" sizes="(min-width: 48rem) 36rem, 100vw" width="1600" height="1000" loading="lazy" alt="Carte de Cervières avec un itinéraire orange sur les pistes, du hameau du Laus au refuge des Fonts.">
+<figcaption>Du Laus au refuge des Fonts de Cervières par les pistes : 11,36 km, 462 m de montée, temps estimé 2 h 15 en classique. Départ à 13 h le 15 janvier : retour au plus tard à 17 h 19. Fond © IGN Plan IGN v2 ; pistes © contributeurs d'OpenStreetMap.</figcaption>
+</figure>
+</div>
+
+<div class="feature">
+<div>
+<h3>Les zones où même le 112 ne passe pas</h3>
+<p class="problem">Un appel d'urgence ne passe pas partout. Sur le terrain, rien ne l'indique.</p>
+<p>Le pack trace les zones sans aucun réseau mobile, 112 compris, à partir des cartes de couverture de l'ARCEP. Vous savez avant de partir où personne ne pourra vous joindre, et vous prévenez un proche. À Cervières, ces zones couvrent 51 km², près d'un quart de la partie française du site.</p>
+<p><span class="tag done">calculé aujourd'hui</span><span class="tag plan">app : prévu</span></p>
+</div>
+<figure>
+<img src="img/reseau-chapelle-1600.webp" srcset="img/reseau-chapelle-800.webp 800w, img/reseau-chapelle-1600.webp 1600w" sizes="(min-width: 48rem) 36rem, 100vw" width="1600" height="1000" loading="lazy" alt="Carte de Chapelle-des-Bois sur fond Plan IGN. Des zones violettes marquent l'absence de tout réseau mobile, au milieu des pistes de fond.">
+<figcaption>Chapelle-des-Bois : en violet, les zones sans aucun réseau mobile (cartes ARCEP, Mon Réseau Mobile). Fond © IGN Plan IGN v2 ; pistes © contributeurs d'OpenStreetMap ; refuges © contributeurs de refuges.info.</figcaption>
+</figure>
+</div>
+
+<div class="feature flip">
+<div>
+<h3>La neige estimée, versant par versant</h3>
+<p class="problem">Le bulletin donne la neige par massif. Votre itinéraire passe sur un versant précis.</p>
+<p>Le pack projette la simulation nivologique de Météo-France sur le relief. Il en tire une hauteur de neige estimée, puis deux cartes en trois classes (insuffisant, limite, suffisant) : l'une pour une piste damée, l'autre pour le hors piste. Chaque couche affiche sa date.</p>
+<p><span class="tag done">calculé aujourd'hui</span><span class="tag plan">app : prévu</span></p>
+</div>
+<figure>
+<img src="img/neige-cervieres-1600.webp" srcset="img/neige-cervieres-800.webp 800w, img/neige-cervieres-1600.webp 1600w" sizes="(min-width: 48rem) 36rem, 100vw" width="1600" height="1000" loading="lazy" alt="Carte de Cervières où la hauteur de neige estimée est colorée en bleu, plus foncé là où la neige est plus épaisse.">
+<figcaption>Cervières, neige estimée le 13 novembre 2026 à 7 h : du bleu clair (1 à 10 cm) au bleu foncé (plus de 60 cm). Simulation nivologique © Météo-France, relief © IGN LiDAR HD ; fond © IGN Plan IGN v2.</figcaption>
+</figure>
+</div>
+
+<h2>Le reste du pack</h2>
+<div class="features three">
+<div class="card"><h3>Zones protégées et bivouac</h3><p class="problem">Les règles d'une réserve changent selon le mois. Elles sont écrites dans des arrêtés.</p><p>Le pack porte les zones protégées et leurs mois sensibles. Pour les deux sites tests, les règles de passage, de bivouac et de feu sont saisies depuis les arrêtés. Le noyau dit ce qui s'applique à une position et une date.</p><p><span class="tag done">calculé aujourd'hui</span></p></div>
+<div class="card"><h3>Refuges et abris</h3><p class="problem">Un abri ouvert l'an dernier peut être fermé cet hiver.</p><p>Les refuges viennent de refuges.info, avec leur état, leurs places et le dernier commentaire daté.</p><p><span class="tag done">calculé aujourd'hui</span></p></div>
+<div class="card"><h3>Toute la France, ensuite</h3><p class="problem">Chaque domaine nordique publie ses pistes à sa façon.</p><p>Le recensement compte 219 domaines nordiques en France. Les packs de chacun de ces domaines sont prévus après les deux sites tests.</p><p><span class="tag done">recensé</span><span class="tag plan">packs : prévu</span></p></div>
+</div>
+
+<h2>La journée, écran éteint</h2>
+<div class="text">
+<p>Sur le terrain, sortir le téléphone coûte des doigts gelés et de la batterie. L'app est prévue pour s'en passer.</p>
+<ul>
+<li><b>Le matin</b>, un écran unique propose la journée, avec la raison de chaque choix. Vous la validez d'un geste. <span class="tag plan">prévu</span></li>
+<li><b>Pendant la sortie</b>, une voix annonce les directions, le temps restant et les alertes : écart d'itinéraire, pente de plus de 30°, zone protégée, heure de demi-tour, entrée en zone sans réseau. <span class="tag plan">prévu</span></li>
+<li><b>La voix est déjà dans le pack</b> : 884 clips pour Cervières (4 Mo), avec les noms des pistes, des refuges et des lieux. <span class="tag done">calculé aujourd'hui</span></li>
+<li><b>Avec des gants</b> : cibles tactiles d'au moins 72 dp, aucun geste fin indispensable, bouton du casque et boutons de volume. <span class="tag plan">prévu</span></li>
+<li><b>Si vous ne rentrez pas</b>, une alerte part vers le proche choisi, même si votre téléphone est éteint. Ce service est facultatif. <span class="tag plan">prévu</span></li>
+</ul>
+</div>
+
+<h2>Prix</h2>
+<div class="text">
+<p>Le prix envisagé est un paiement unique, par exemple 4,99 €, sans abonnement ni publicité. Le code est libre, sous licence GPL-3.0-or-later : vous pouvez aussi compiler l'app vous-même. <a href="faq.html#prix">Lire la réponse sur le prix</a>.</p>
+</div>
+
+<h2>Contribuer</h2>
+<div class="text">
+<p>Les contributions sont bienvenues : code, tests, corrections de données, sites à ajouter. Les contributions écrites avec un outil d'IA sont bienvenues aussi, relues par leur auteur et accompagnées de leurs preuves.</p>
+<div class="actions">
+<a class="btn primary" href="https://github.com/traceblanche/.github/blob/main/CONTRIBUTING.md">Lire les règles de contribution</a>
+<a class="btn secondary" href="https://github.com/traceblanche/traceblanche/issues">Ouvrir une issue</a>
+</div>
+</div>
+
+</div>
+</main>
+
+<footer><div class="wrap">
+<p>Code sous licence GPL-3.0-or-later, avec une exception pour les boutiques d'applications. Textes et images du site sous licence CC BY-SA 4.0 ; les cartes portent les mentions de leurs sources.</p>
+<p>Une question ou une erreur : <a href="https://github.com/traceblanche/traceblanche/issues">ouvrez une issue sur GitHub</a>. Sources des données : <a href="licences.html">licences</a>.</p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · traceblanche</title>
+<meta name="description" content="What stays on your phone and what the traceblanche server receives: pack downloads, the optional overdue alert, the optional Strava connection.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="fr" href="https://traceblanche.github.io/confidentialite.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="./"><img src="../favicon.svg" width="28" height="28" alt="">traceblanche</a>
+<nav aria-label="Main navigation"><ul>
+<li><a href="./">Home</a></li>
+<li><a href="privacy.html" aria-current="page">Privacy</a></li>
+<li><a href="../confidentialite.html" lang="fr" hreflang="fr">Français</a></li>
+<li><a href="https://github.com/traceblanche" aria-label="traceblanche on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
+</ul></nav>
+</div></header>
+
+<main id="contenu">
+<div class="wrap">
+<div class="text">
+<h1>Privacy</h1>
+<p class="lead">Your position, your tracks and your plans stay on your phone. The server only receives what three specific services need, and two of them are optional.</p>
+<div class="status"><p><b>The app is not published yet.</b> This page describes what is planned. It will be updated before the release on Google Play, and every change will remain visible in <a href="https://github.com/traceblanche/traceblanche.github.io/commits/main/en/privacy.html">the history of this page</a>. The <a href="../confidentialite.html" hreflang="fr" lang="fr">French version</a> is the reference.</p></div>
+<ul class="toc">
+<li><a href="#phone">On the phone</a></li>
+<li><a href="#server">What the server receives</a></li>
+<li><a href="#never">What we do not do</a></li>
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#site">This website</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<h2 id="phone">What stays on the phone</h2>
+<ul>
+<li><b>Your position</b>, read from GPS for the map, the guidance and the alerts. It is sent nowhere.</li>
+<li><b>Your tracks and outings</b>, recorded on the phone. You delete them from the app.</li>
+<li><b>Your day plans</b>, unless you turn on the overdue alert (see below).</li>
+<li><b>The voice</b>: announcements are clips recorded in advance in the pack and assembled on the phone. No text goes to a speech service.</li>
+<li><b>The Health Connect export</b>, if you turn it on, stays on the phone: Health Connect is the Android space that keeps activity and health data on the device.</li>
+</ul>
+
+<h2 id="server">What the server receives</h2>
+
+<h3>1. Pack downloads</h3>
+<p>The app downloads the pack of the site you choose, the way a browser downloads a file. The server sees the IP address of the connection and the file requested, and so the site you chose. It does not receive your position. There is no account. <span class="tag plan">planned</span></p>
+<p>How long the server keeps its logs will be set before the release and written here.</p>
+
+<h3>2. The overdue alert, if you turn it on</h3>
+<p>This service is optional. If you turn it on, the app sends your outing plan to the server: the route, the expected return time and the contact of the person to alert. If you do not confirm your return in time, the server alerts that person, even if your phone is dead. <span class="tag plan">planned</span></p>
+<p>The alert channel (notification, email or SMS) and how long the plan is kept are not decided yet. They will be written here before the service opens.</p>
+
+<h3>3. The Strava connection, if you ask for it</h3>
+<p>This service is optional. To send an outing to Strava, the app goes through Strava's sign-in (OAuth). Strava requires a secret that an app cannot hold without exposing it: a small service on the server holds it and exchanges the sign-in tokens. The app then sends the outing you choose to Strava. traceblanche does not read your Strava data and does not keep it. <span class="tag plan">planned</span></p>
+
+<h3>Later</h3>
+<p>Shared reports (snow, fresh track, full hut) are planned for a later version. This page will say what they send before they ship.</p>
+
+<h2 id="never">What we do not do</h2>
+<ul>
+<li>No advertising. <span class="tag plan">planned</span></li>
+<li>No audience measurement and no advertising tracker in the app. <span class="tag plan">planned</span></li>
+<li>No sale of data. Nothing goes to a third party unless you ask: Strava, or the person to alert. <span class="tag plan">planned</span></li>
+<li>No public map of your off-piste tracks. <span class="tag plan">planned</span></li>
+</ul>
+
+<h2 id="permissions">Planned Android permissions</h2>
+<ul>
+<li><b>Location</b>, including with the screen off during an outing you started, for voice guidance. A notification stays visible while guidance runs.</li>
+<li><b>Notifications</b>, for guidance and alerts.</li>
+<li><b>Internet access</b>, to download packs and, if you turn them on, for the overdue alert and Strava.</li>
+</ul>
+
+<h2>Google Play</h2>
+<p>The purchase goes through Google Play. Google handles the payment under its own privacy rules; traceblanche does not receive your payment details.</p>
+
+<h2 id="site">This website</h2>
+<p>Static pages served by GitHub Pages: no cookies, no scripts, no analytics. GitHub keeps its own server logs, see its <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>.</p>
+
+<h2 id="contact">Contact</h2>
+<p>For a question about your data, <a href="https://github.com/traceblanche/traceblanche/issues">open an issue on GitHub</a>. For a security problem, follow the <a href="https://github.com/traceblanche/.github/blob/main/SECURITY.md">security policy</a>.</p>
+</div>
+</div>
+</main>
+
+<footer><div class="wrap">
+<p>Code under GPL-3.0-or-later, with an app store exception. Site text and images under CC BY-SA 4.0; the maps carry the credits of their sources.</p>
+<p>A question or a mistake: <a href="https://github.com/traceblanche/traceblanche/issues">open an issue on GitHub</a>. Data sources (in French): <a href="../licences.html" lang="fr" hreflang="fr">licences</a>.</p>
+</div></footer>
+</body>
+</html>
