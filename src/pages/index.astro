@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import { heroPreload } from '../lib/images';
+import Fig from '../components/Fig.astro';
+import pentesIzoard from '../assets/maps/pentes-izoard.webp';
+import pistesChapelle from '../assets/maps/pistes-chapelle.webp';
+import itineraireCervieres from '../assets/maps/itineraire-cervieres.webp';
+import reseauChapelle from '../assets/maps/reseau-chapelle.webp';
+import neigeCervieres from '../assets/maps/neige-cervieres.webp';
+const preload = await heroPreload(pentesIzoard);
+---
+<Base bodyClass="home" preload={preload} lang="en" page="home" title="Traces blanches · offline cross-country and Nordic backcountry skiing" description="Offline map, trails, slopes, avalanche exposure, protected areas, huts and no-signal areas for cross-country and Nordic backcountry skiing in France. Rust core, Android app planned, free software.">
+
+<Hero slot="hero" image={pentesIzoard} alt="Map of Cervières below the Col d'Izoard. Slopes steeper than 30 degrees are coloured from yellow to purple. A magenta route climbs to the Refuge Napoléon and the pass, keeping between them." eyebrow="Cross-country · Nordic backcountry · France" title="Nordic skiing, even without a signal"
+  lead="Deep in a Jura combe or a Queyras valley, the signal drops. The trail map is a picture, the avalanche bulletin is on another website, and you are wearing gloves."
+  cta={{ href: "/getting-started.html#pack", label: "Build a first pack" }} />
+<p class="hero-caption">Cervières, below the Col d'Izoard, backcountry style. Slopes steeper than 30° from yellow to purple, computed from the IGN LiDAR HD terrain model. In magenta, the end of a 5.7 km route computed from Le Laus, partly off-piste, steepest slope 24°.<span class="credit">Base map and terrain © IGN · trails © OpenStreetMap contributors · snow for the route: Météo-France</span></p>
+<div class="text">
+<p>Traces blanches puts the map of the area on your phone before you leave, with its trails, slopes, rules and huts. Everything stays readable offline. You plan the day in the morning; then a voice guides you while the phone stays in your pocket.</p>
+<div class="status"><p><b>Where the project stands.</b> The Rust core runs on two test sites, Cervières (Hautes-Alpes) and Chapelle-des-Bois (Doubs). The Android app is the next step. The maps on this page are rendered by the project's viewer, from real data.</p></div>
+<div class="actions">
+<a class="btn secondary" href="https://github.com/tracesblanches/tracesblanches">Read the code on GitHub</a>
+</div>
+</div>
+
+<h2 id="slopes">Slopes and avalanches</h2>
+<div class="text">
+<p>In Nordic backcountry skiing, a steep gully is hard to spot on a paper map. The pack marks the slopes steeper than 30°, computed from the IGN LiDAR HD terrain model at 5 m resolution: that is the map at the top of this page.</p>
+<p>It also models avalanche exposure from terrain and forest, with the AutoATES v3.0 and Flow-Py methods ported to Rust. The comparison with recorded avalanches is in progress. Where Météo-France publishes an avalanche bulletin for the massif, the pack adds it with its date.</p>
+<p>Traces blanches never says that a slope is safe. It shows where the terrain gets steep, so that you decide before you get there. The avalanche bulletin and your own judgement on the spot remain the reference. <a href="/faq.html#avalanches">Read what the app does not do</a>.</p>
+<p><span class="tag done">computed today</span><span class="tag plan">app: planned</span></p>
+</div>
+
+<h2>What a pack holds</h2>
+<p class="text">A pack covers one site: about 40 MB for Cervières, 35 MB for Chapelle-des-Bois. You download it before you leave. After that, the phone needs no network.</p>
+
+<div class="feature">
+<div>
+<h3>A map that stays readable offline</h3>
+<p class="problem">An online map freezes when the signal drops, often at the worst place.</p>
+<p>The pack carries two vector-tile base maps: IGN Plan IGN v2 and OpenStreetMap. Cross-country trails from OpenStreetMap go on top, with their name, difficulty, technique (classic or skating) and direction.</p>
+<p>Three map styles are built from these same files: cross-country, backcountry and guidance, each in light and dark.</p>
+<p><span class="tag done">computed today</span><span class="tag plan">app: planned</span></p>
+</div>
+<Fig src={pistesChapelle} sizes="(min-width: 48rem) 36rem, 100vw" alt="Map of Chapelle-des-Bois with the cross-country trails in green, blue, red and black, their names written along the line and small white chevrons showing the direction." credit="Base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors · huts © refuges.info contributors">Chapelle-des-Bois in the cross-country style: trails coloured by difficulty, names along the line, white chevrons on one-way trails.</Fig>
+</div>
+
+<div class="feature flip">
+<div>
+<h3>A route and its turnaround time</h3>
+<p class="problem">On 15 January in Cervières, the sun sets at 17:16. A loop that is too long ends in the dark.</p>
+<p>The core computes a route on the trails, with its length, its climb and its estimated time, classic or skating. It also gives the latest time to be back: 30 minutes before the end of civil twilight.</p>
+<p>The estimated time comes from a formula. It will then be fitted to your own outings. During the outing, the guidance style shows the route, the next decision and your position, on a background cut down to forest, water, main roads, villages and the trails in grey.</p>
+<p><span class="tag done">computed today</span><span class="tag plan">app: planned</span></p>
+</div>
+<Fig src={itineraireCervieres} sizes="(min-width: 48rem) 36rem, 100vw" alt="Pared-down map of Cervières: a magenta route follows the trails, drawn in grey, from the hamlet of Le Laus to the Fonts hut." credit="Base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors">From Le Laus to the Refuge des Fonts de Cervières on the trails, in the guidance style: 11.36 km, 462 m of climb, estimated 2 h 15 in classic. Leaving at 13:00 on 15 January: back by 17:19 at the latest.</Fig>
+</div>
+
+<div class="feature">
+<div>
+<h3>Where even 112 does not get through</h3>
+<p class="problem">An emergency call does not get through everywhere, and nothing on the ground tells you.</p>
+<p>The pack marks the areas with no mobile network at all, 112 included, from the ARCEP coverage maps. You know before leaving where nobody can reach you, and you tell someone. In Cervières, these areas cover 51 km², nearly a quarter of the French part of the site.</p>
+<p><span class="tag done">computed today</span><span class="tag plan">app: planned</span></p>
+</div>
+<Fig src={reseauChapelle} sizes="(min-width: 48rem) 36rem, 100vw" alt="Map of Chapelle-des-Bois. North-west of the village, dashed purple outlines surround areas with no mobile network, crossed by cross-country trails." credit="Coverage: ARCEP, Mon Réseau Mobile · base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors · huts © refuges.info contributors">Chapelle-des-Bois in the backcountry style: the dashed purple outlines surround the areas with no mobile network at all.</Fig>
+</div>
+
+<div class="feature flip">
+<div>
+<h3>Estimated snow, slope by slope</h3>
+<p class="problem">The bulletin gives the snow for a whole massif. Your route crosses one particular slope.</p>
+<p>The pack projects the Météo-France snowpack simulation onto the terrain. From it, the pack derives an estimated snow depth, then two maps in three classes (insufficient, marginal, sufficient): one for groomed trails, one for off-piste. Each layer shows its date.</p>
+<p><span class="tag done">computed today</span><span class="tag plan">app: planned</span></p>
+</div>
+<Fig src={neigeCervieres} sizes="(min-width: 48rem) 36rem, 100vw" alt="Map of Cervières tinted pink almost everywhere: the estimated snow is not enough for a groomed trail. A few areas, in the centre and the south-east, are pale orange or green." credit="Snowpack simulation © Météo-France · terrain and base map © IGN · trails © OpenStreetMap contributors · huts © refuges.info contributors">Cervières, simulation of 14 November 2026 at 07:00, cross-country style. For a groomed trail, the snow is insufficient (pink) on every trail. Across the site, 12% of the computed cells are marginal (pale orange) and 3% sufficient (green).</Fig>
+</div>
+
+<h2>The rest of the pack</h2>
+<div class="features three">
+<div class="card"><h3>Protected areas and bivouac</h3><p class="problem">The rules of a nature reserve change with the month. They are written in official orders.</p><p>The pack holds the protected areas and their sensitive months. For the two test sites, the rules on access, bivouac and fires are entered from the orders. The core tells you what applies at a given place and date.</p><p><span class="tag done">computed today</span></p></div>
+<div class="card"><h3>Huts and shelters</h3><p class="problem">A shelter that was open last year may be closed this winter.</p><p>Huts come from refuges.info, with their state, their number of places and the latest dated comment.</p><p><span class="tag done">computed today</span></p></div>
+<div class="card"><h3>All of France, next</h3><p class="problem">Every Nordic ski area publishes its trails in its own way.</p><p>The census counts 219 Nordic ski areas in France. Packs for each of them are planned after the two test sites.</p><p><span class="tag done">listed</span><span class="tag plan">packs: planned</span></p></div>
+</div>
+
+<h2>The day, screen off</h2>
+<div class="text">
+<p>On the trail, taking the phone out costs cold fingers and battery. The app is designed to do without it.</p>
+<ul>
+<li><b>In the morning</b>, one screen proposes the day, with the reason for each choice. You confirm it with one gesture. <span class="tag plan">planned</span></li>
+<li><b>During the outing</b>, a voice gives directions, the time left and alerts: off route, slope over 30°, protected area, turnaround time, entering an area with no network. <span class="tag plan">planned</span></li>
+<li><b>The voice is already in the pack</b>: 884 clips for Cervières (4 MB), in French, with the names of trails, huts and places. <span class="tag done">computed today</span></li>
+<li><b>With gloves on</b>: touch targets of at least 72 dp, no fine gestures required, headset and volume buttons. <span class="tag plan">planned</span></li>
+<li><b>If you do not come back</b>, an alert goes to the person you chose, even if your phone is off. This service is optional. <span class="tag plan">planned</span></li>
+</ul>
+</div>
+
+<h2>Price</h2>
+<div class="text">
+<p>The intended price is a single payment, for example €4.99, with no subscription and no ads. The code is free software under GPL-3.0-or-later: you can also build the app yourself. <a href="/faq.html#price">Read the answer on price</a>.</p>
+</div>
+
+<h2>Contribute</h2>
+<div class="text">
+<p>Contributions are welcome: code, tests, data fixes, new sites. Contributions written with an AI tool are welcome too, when their author has reviewed them and brings the evidence. The project documents are in French.</p>
+<div class="actions">
+<a class="btn primary" href="https://github.com/tracesblanches/.github/blob/main/CONTRIBUTING.md" hreflang="fr">Read the contribution rules (in French)</a>
+<a class="btn secondary" href="https://github.com/tracesblanches/tracesblanches/issues">Open an issue</a>
+</div>
+</div>
+
+</Base>

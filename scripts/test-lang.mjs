@@ -1,11 +1,11 @@
 // Language detection and memory of the bilingual site, in headless Chrome (tooling, not served).
-// usage: node scripts/test-lang.mjs [site-root]      needs playwright-core (npm install --no-save
-//        playwright-core) and Chrome; CHROME overrides /usr/bin/google-chrome. Exit status 1 on failure.
+// usage: node scripts/test-lang.mjs [site-root]      site-root defaults to dist/ (run `npm run build`
+//        first); needs Chrome: CHROME overrides /usr/bin/google-chrome. Exit status 1 on failure.
 import { chromium } from "playwright-core";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { serve } from "./pages-server.mjs";
-const root = resolve(process.argv[2] || resolve(dirname(fileURLToPath(import.meta.url)), ".."));
+const root = resolve(process.argv[2] || resolve(dirname(fileURLToPath(import.meta.url)), "..", "dist"));
 const PORT = 8790, B = `http://127.0.0.1:${PORT}`;
 const server = await serve(root, PORT);
 const browser = await chromium.launch({ executablePath: process.env.CHROME || "/usr/bin/google-chrome" });

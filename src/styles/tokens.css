@@ -1,0 +1,106 @@
+/*
+ * Design tokens: the ONLY place where colours, type sizes, spacing and the header height are
+ * set. global.css reads these custom properties.
+ *
+ * Identity of Traces blanches: cold colours of snow and night. Snow white and blue-grey by day,
+ * deep night blue after dark, one ink blue for links and buttons, one warm ember for small
+ * labels. Light and dark follow the system setting (prefers-color-scheme). System fonts: no
+ * web font to download.
+ *
+ * After any change, run `node scripts/check-contrast.mjs`: it reads the pairs declared in the
+ * block "contrast-pairs" at the end of this file, for both schemes, and fails below WCAG 2.2 AA.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Palette, light (snow) */
+  --bg: #f6f8fb;          /* page */
+  --surface: #ffffff;     /* cards, header, tables */
+  --fg: #14202b;          /* text */
+  --muted: #46576a;       /* secondary text, captions */
+  --line: #d9e1ea;        /* rules (decorative) */
+  --accent: #1f4e79;      /* links, buttons */
+  --accent-fg: #ffffff;   /* text on a filled button */
+  --accent-soft: #e4edf6; /* hover */
+  --warm: #a63d0b;        /* small labels */
+  --code: #edf1f6;
+  --done-bg: #e2f1e6; --done-fg: #1b5530;
+  --plan-bg: #fcefe1; --plan-fg: #7e3508;
+  --band: #e9eff5;        /* alternate sections */
+
+  /* Night: the hero and dark bands, the same in both schemes */
+  --night: #0b1621;
+  --on-night: #f4f8fb;
+  --on-night-muted: #c9d6e2;
+  --ice: #8fc1f0;         /* accent on night */
+  --ice-fg: #0b1621;
+
+  /* Type */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --fs-base: 1.0625rem;
+  --fs-hero: clamp(2.25rem, 1.3rem + 4.4vw, 4.5rem);
+  --fs-hero-lead: clamp(1.125rem, 1rem + 0.55vw, 1.375rem);
+  --fs-h2-big: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+
+  /* Space and layout */
+  --max: 68rem;           /* content width */
+  --pad: 1.1rem;          /* side padding */
+  --radius: .75rem;
+  --space-section: clamp(3.5rem, 2.4rem + 4vw, 6.5rem);
+  --shadow: 0 1px 2px rgba(20, 32, 43, .06), 0 4px 16px rgba(20, 32, 43, .06);
+
+  /* Header: two rows on a phone (brand and tools, then page links), one row from 48rem.
+     The home hero fills the rest of the first screen: 100svh minus this height. */
+  --header-h: 5.875rem;   /* 48 + 44 px rows + 2 px padding + 1 px rule, rounded up */
+}
+@media (min-width: 48rem) {
+  :root { --header-h: 3.625rem; } /* 56 px row + 1 px rule + 1 px padding */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d141b;
+    --surface: #141e28;
+    --fg: #e6edf3;
+    --muted: #a6b5c4;
+    --line: #263442;
+    --accent: #8fc1f0;
+    --accent-fg: #0b1621;
+    --accent-soft: #182a3b;
+    --warm: #f5a462;
+    --code: #17222d;
+    --done-bg: #16301f; --done-fg: #93d6aa;
+    --plan-bg: #33230f; --plan-fg: #f6bd82;
+    --band: #111b25;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+  }
+}
+
+/*
+contrast-pairs (foreground / background / minimum ratio), checked in light and in dark
+fg            bg        4.5
+fg            surface   4.5
+fg            band      4.5
+muted         bg        4.5
+muted         surface   4.5
+muted         band      4.5
+accent        bg        4.5
+accent        surface   4.5
+accent        band      4.5
+accent-fg     accent    4.5   filled button
+warm          bg        4.5
+warm          surface   4.5
+warm          band      4.5
+done-fg       done-bg   4.5
+plan-fg       plan-bg   4.5
+fg            code      4.5
+on-night      night     4.5
+on-night-muted night    4.5
+ice           night     4.5
+ice-fg        ice       4.5   filled button on night
+accent        accent-soft 4.5 link on hover
+fg            accent-soft 4.5
+end-contrast-pairs
+*/

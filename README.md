@@ -4,7 +4,15 @@ Le site de [Traces blanches](https://github.com/tracesblanches/tracesblanches), 
 
 **[Site](https://tracesblanches.github.io/)** · [Code source](https://github.com/tracesblanches/tracesblanches) · [Démarrage](https://tracesblanches.github.io/fr/demarrage.html) · [FAQ](https://tracesblanches.github.io/fr/faq.html) · [Confidentialité](https://tracesblanches.github.io/fr/confidentialite.html) · [Licences](https://tracesblanches.github.io/fr/licences.html) · [Version française](https://tracesblanches.github.io/fr/)
 
-HTML et CSS, sans étape de construction. GitHub Pages sert `main` tel quel.
+Site statique construit avec [Astro](https://astro.build/) (Node et Astro aux versions fixées par `.nvmrc`, `package.json` et `package-lock.json`). Le flux `.github/workflows/pages.yml` construit, vérifie et déploie `dist/` sur GitHub Pages ; Pages n'est pas encore activé.
+
+```sh
+nvm use            # Node de .nvmrc
+npm ci
+npm run dev        # http://localhost:4321/
+npm run build      # dist/
+bash scripts/check.sh
+```
 
 ## Deux langues
 
@@ -33,9 +41,14 @@ Les images de `img/` sont des rendus du visualiseur du projet (`tools/viewer`, s
 ## Vérifier
 
 ```sh
-scripts/check-links.py           # liens, images, ancres, une seule <h1>, paires de langues, hreflang, sélecteur
-npm install --no-save playwright-core
-node scripts/test-lang.mjs       # détection et mémoire de la langue dans Chrome sans tête
+node scripts/check-contrast.mjs      # contrastes des couleurs (src/styles/tokens.css), clair et sombre
+npx astro check                      # types
+npm run build
+python3 -I scripts/check-links.py    # liens, images, ancres, une seule <h1>, paires, hreflang, sélecteur, hachages CSP, sitemap
+java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only --skip-non-html --also-check-css dist
+node scripts/test-lang.mjs           # détection et mémoire de la langue dans Chrome sans tête
+node scripts/lighthouse.mjs          # mobile et bureau, chaque note >= 98
+node scripts/shots.mjs DOSSIER       # captures 390 et 1280 px, clair et sombre, poids des pages
 ```
 
 ## Nom

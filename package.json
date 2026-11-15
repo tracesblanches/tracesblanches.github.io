@@ -1,0 +1,26 @@
+{
+  "name": "tracesblanches-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.22.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "bash scripts/check.sh"
+  },
+  "dependencies": {
+    "astro": "7.4.12",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "lighthouse": "13.6.0",
+    "playwright-core": "1.65.1",
+    "typescript": "5.9.3",
+    "vnu-jar": "26.11.14"
+  }
+}

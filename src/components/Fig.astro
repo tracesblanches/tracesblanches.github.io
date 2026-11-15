@@ -1,0 +1,12 @@
+---
+// A map or picture with its caption and, on a line of its own, the credit of its sources.
+import type { ImageMetadata } from 'astro';
+import Img from './Img.astro';
+
+interface Props { src: ImageMetadata; alt: string; sizes: string; credit: string; eager?: boolean; class?: string }
+const { src, alt, sizes, credit, eager = false, class: cls } = Astro.props;
+---
+<figure class={cls}>
+<Img src={src} alt={alt} sizes={sizes} eager={eager} />
+<figcaption><slot /><span class="credit">{credit}</span></figcaption>
+</figure>

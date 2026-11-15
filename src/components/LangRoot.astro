@@ -1,0 +1,7 @@
+---
+// Language detection, on the English home page at the root only (src/scripts/lang-root.js).
+// Inlined so that it runs before the page is drawn; allowed by the hash computed in
+// astro.config.mjs from the same file.
+import code from '../scripts/lang-root.js?raw';
+---
+<script is:inline set:html={code.trim()} />

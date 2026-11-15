@@ -1,0 +1,39 @@
+---
+// A responsive picture from an image in src/assets: AVIF and WebP in several widths, a JPEG
+// fallback, intrinsic size set (no layout shift). `sizes` must say how wide the image is drawn
+// (CSS px) at each viewport width, so that the browser picks the right file.
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import { widthsFor, srcset, QUALITY, type Crop } from '../lib/images';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  sizes: string;
+  widths?: number[];
+  /** The page's largest image (LCP): loaded at once, high priority. */
+  eager?: boolean;
+  class?: string;
+  /** Art direction for screens held upright: a portrait file, or else a crop of `src`. */
+  portrait?: ImageMetadata;
+  portraitCrop?: Crop;
+  portraitSizes?: string;
+}
+const { src, alt, sizes, widths, eager = false, class: cls, portrait, portraitCrop, portraitSizes } = Astro.props;
+const w = widthsFor(src, widths);
+const [avif, webp] = await Promise.all([srcset(src, w, 'avif'), srcset(src, w, 'webp')]);
+// Upright screens: the portrait file, or a crop of the picture, or nothing.
+const up = portrait ? { im: portrait, crop: undefined } : portraitCrop ? { im: src, crop: portraitCrop } : undefined;
+const pw = up ? widthsFor(up.im, widths, up.crop) : [];
+const [pAvif, pWebp] = up ? await Promise.all([srcset(up.im, pw, 'avif', up.crop), srcset(up.im, pw, 'webp', up.crop)]) : [];
+const fbW = w.find((x) => x >= 1080) ?? w[w.length - 1];
+const fallback = await getImage({ src, width: fbW, format: 'jpg', quality: QUALITY.jpg });
+---
+<picture class={cls}>
+  {up && <source media="(orientation: portrait)" type="image/avif" srcset={pAvif} sizes={portraitSizes ?? sizes} />}
+  {up && <source media="(orientation: portrait)" type="image/webp" srcset={pWebp} sizes={portraitSizes ?? sizes} />}
+  <source type="image/avif" srcset={avif} sizes={sizes} />
+  <source type="image/webp" srcset={webp} sizes={sizes} />
+  <img src={fallback.src} width={fallback.attributes.width} height={fallback.attributes.height} alt={alt}
+    loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : undefined} />
+</picture>

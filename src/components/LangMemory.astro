@@ -1,0 +1,6 @@
+---
+// Remembers a click on FR or EN (src/scripts/lang-memory.js), on every page. Inlined (a few
+// lines); allowed by the hash computed in astro.config.mjs from the same file.
+import code from '../scripts/lang-memory.js?raw';
+---
+<script is:inline set:html={code.trim()} />
