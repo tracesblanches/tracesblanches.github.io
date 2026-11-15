@@ -1,10 +1,10 @@
 import type { ImageMetadata } from 'astro';
 import type { Lang } from '../i18n';
 import pentesIzoard from '../assets/maps/pentes-izoard.webp';
-import itineraireCervieres from '../assets/maps/itineraire-cervieres.webp';
-import pistesChapelle from '../assets/maps/pistes-chapelle.webp';
-import reseauChapelle from '../assets/maps/reseau-chapelle.webp';
-import neigeCervieres from '../assets/maps/neige-cervieres.webp';
+import itineraireLausFonts from '../assets/maps/itineraire-laus-fonts.webp';
+import pistesGerardmer from '../assets/maps/pistes-gerardmer.webp';
+import reseauBeille from '../assets/maps/reseau-beille.webp';
+import srnGtj from '../assets/maps/srn-gtj.webp';
 import france from '../assets/maps/france.png';
 
 // The pictures of the home page, one per slot. Each slot shows a picture dropped in
@@ -25,7 +25,7 @@ interface Visual {
   credit?: Text;
 }
 
-const ILLU: Text = { en: 'Illustration: Traces Blanches', fr: 'Illustration : Traces Blanches' };
+const ILLU: Text = { en: 'Illustration: Traces Blanches', fr: 'Illustration\u00a0: Traces Blanches' };
 const OWN: Record<Slot, { alt: Text; caption?: Text; credit?: Text }> = {
   accueil: { alt: { en: '', fr: '' }, credit: ILLU },
   'accueil-2': { alt: { en: '', fr: '' }, credit: ILLU },
@@ -39,61 +39,71 @@ const OWN: Record<Slot, { alt: Text; caption?: Text; credit?: Text }> = {
   france: { alt: { en: '', fr: '' } },
 };
 
-// Provisional renders of the project's maps (scripts/render-maps.mjs, scripts/render-france.mjs),
-// with the captions and credits they carried on the site. `nature` has none yet: the section
-// shows no picture until one is dropped in.
-const MAPS: Partial<Record<Slot, Visual>> = {
-  accueil: {
+// Renders of the project's maps (scripts/render-maps.mjs, scripts/render-france.mjs), each with
+// its caption and its short credit. They come from packs of several massifs: one example each,
+// never the frame of the app, which covers the whole of France. Used by the home page (through
+// the slots below) and by the features page.
+export const MAP = {
+  pentes: {
     image: pentesIzoard,
-    alt: { en: "Map of Cervières below the Col d'Izoard. Slopes steeper than 30 degrees are coloured from yellow to purple. A magenta route climbs to the Refuge Napoléon and the pass, keeping between them.",
-      fr: "Carte de Cervières sous le col d'Izoard. Les pentes de plus de 30 degrés sont colorées du jaune au violet. Un itinéraire magenta monte vers le refuge Napoléon puis le col en passant entre elles." },
-    credit: { en: "Cervières, slopes over 30° · base map and terrain © IGN · trails © OpenStreetMap contributors",
-      fr: "Cervières, pentes de plus de 30° · fond et relief © IGN · pistes © contributeurs d'OpenStreetMap" },
+    alt: { en: "Map below the Col d'Izoard, in the Hautes-Alpes. Slopes steeper than 30 degrees are coloured from yellow to purple. A magenta off-piste route climbs to the Refuge Napoléon and the pass, keeping between them.",
+      fr: "Carte sous le col d'Izoard, dans les Hautes-Alpes. Les pentes de plus de 30 degrés sont colorées du jaune au violet. Un itinéraire hors piste magenta monte vers le refuge Napoléon puis le col en passant entre elles." },
+    caption: { en: "Below the Col d'Izoard (Hautes-Alpes), in the backcountry style: slopes over 30° from yellow to purple, and an off-piste route computed to keep between them.",
+      fr: "Sous le col d'Izoard (Hautes-Alpes), avec le style hors piste : pentes de plus de 30° du jaune au violet, et un itinéraire hors piste calculé pour passer entre elles." },
+    credit: { en: 'Base map and terrain © IGN · trails © OpenStreetMap contributors', fr: "Fond et relief © IGN · pistes © contributeurs d'OpenStreetMap" },
   },
-  matin: {
-    image: itineraireCervieres,
-    alt: { en: 'Pared-down map of Cervières: a magenta route follows the trails, drawn in grey, from the hamlet of Le Laus to the Fonts hut.',
-      fr: 'Carte épurée de Cervières : un itinéraire magenta suit les pistes, dessinées en gris, du hameau du Laus au refuge des Fonts.' },
-    caption: { en: 'From Le Laus to the Refuge des Fonts de Cervières on the trails, in the guidance style: 11.36 km, 462 m of climb, estimated 2 h 15 in classic. Leaving at 13:00 on 15 January: back by 17:19 at the latest.',
-      fr: 'Du Laus au refuge des Fonts de Cervières par les pistes, avec le style de guidage : 11,36 km, 462 m de montée, temps estimé 2 h 15 en classique. Départ à 13 h le 15 janvier : retour au plus tard à 17 h 19.' },
+  route: {
+    image: itineraireLausFonts,
+    alt: { en: 'Pared-down map of a valley of the Hautes-Alpes: a magenta route follows the trails, drawn in grey, from the hamlet of Le Laus to the Fonts hut.',
+      fr: "Carte épurée d'une vallée des Hautes-Alpes : un itinéraire magenta suit les pistes, dessinées en gris, du hameau du Laus au refuge des Fonts." },
+    caption: { en: 'An example in the Hautes-Alpes, in the guidance style: from Le Laus to the Refuge des Fonts on the trails, 11.36 km, 462 m of climb, estimated 2 h 15 in classic. Leaving at 13:00 on 15 January: back by 17:19 at the latest.',
+      fr: 'Un exemple dans les Hautes-Alpes, avec le style de guidage : du Laus au refuge des Fonts par les pistes, 11,36 km, 462 m de montée, temps estimé 2 h 15 en classique. Départ à 13 h le 15 janvier : retour au plus tard à 17 h 19.' },
     credit: { en: 'Base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors', fr: "Fond © IGN Plan IGN v2 · pistes © contributeurs d'OpenStreetMap" },
   },
-  piste: {
-    image: pistesChapelle,
-    alt: { en: 'Map of Chapelle-des-Bois with the cross-country trails in green, blue, red and black, their names written along the line and small white chevrons showing the direction.',
-      fr: 'Carte de Chapelle-des-Bois avec les pistes de fond en vert, bleu, rouge et noir, leur nom écrit le long du tracé et de petits chevrons blancs qui indiquent le sens.' },
-    caption: { en: 'Chapelle-des-Bois in the cross-country style: trails coloured by difficulty, names along the line, white chevrons on one-way trails.',
-      fr: 'Chapelle-des-Bois avec le style ski de fond : pistes par couleur de difficulté, nom le long du tracé, chevrons blancs pour le sens unique.' },
-    credit: { en: 'Base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors · huts © refuges.info contributors',
-      fr: "Fond © IGN Plan IGN v2 · pistes © contributeurs d'OpenStreetMap · refuges © contributeurs de refuges.info" },
+  pistes: {
+    image: pistesGerardmer,
+    alt: { en: 'Map of the cross-country trails around Gérardmer, in the Vosges: green, blue and red lines wind through the forest between lakes and ski lifts.',
+      fr: 'Carte des pistes de fond autour de Gérardmer, dans les Vosges : des tracés verts, bleus et rouges serpentent dans la forêt entre les lacs et les remontées.' },
+    caption: { en: 'Gérardmer (Vosges), in the cross-country style: trails coloured by difficulty, on the IGN base map.',
+      fr: 'Gérardmer (Vosges), avec le style ski de fond : les pistes par couleur de difficulté, sur le fond IGN.' },
+    credit: { en: 'Base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors', fr: "Fond © IGN Plan IGN v2 · pistes © contributeurs d'OpenStreetMap" },
   },
-  retour: {
-    image: reseauChapelle,
-    alt: { en: 'Map of Chapelle-des-Bois. North-west of the village, dashed purple outlines surround areas with no mobile network, crossed by cross-country trails.',
-      fr: 'Carte de Chapelle-des-Bois. Au nord-ouest du village, des contours violets en tirets entourent des zones sans réseau mobile, traversées par des pistes de fond.' },
-    caption: { en: 'Chapelle-des-Bois in the backcountry style: the dashed purple outlines surround the areas with no mobile network at all.',
-      fr: 'Chapelle-des-Bois avec le style hors piste : les contours violets en tirets entourent les zones sans aucun réseau mobile.' },
-    credit: { en: 'Coverage: ARCEP, Mon Réseau Mobile · base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors · huts © refuges.info contributors',
-      fr: "Couverture : ARCEP, Mon Réseau Mobile · fond © IGN Plan IGN v2 · pistes © contributeurs d'OpenStreetMap · refuges © contributeurs de refuges.info" },
+  reseau: {
+    image: reseauBeille,
+    alt: { en: 'Map of the Plateau de Beille, in the Ariège Pyrenees. Dashed purple outlines surround wide areas with no mobile network, south and east of the trails.',
+      fr: "Carte du plateau de Beille, dans les Pyrénées ariégeoises. Des contours violets en tirets entourent de vastes zones sans réseau mobile, au sud et à l'est des pistes." },
+    caption: { en: 'Plateau de Beille (Ariège), in the backcountry style: the dashed purple outlines surround the areas with no mobile network at all, 25 km² of the 84 km² studied around the area.',
+      fr: 'Plateau de Beille (Ariège), avec le style hors piste : les contours violets en tirets entourent les zones sans aucun réseau mobile, 25 km² sur les 84 km² étudiés autour du domaine.' },
+    credit: { en: 'Coverage: ARCEP, Mon Réseau Mobile, maps of 30 June 2026 · base map © IGN Plan IGN v2 · trails © OpenStreetMap contributors · huts © refuges.info contributors',
+      fr: "Couverture : ARCEP, Mon Réseau Mobile, cartes du 30 juin 2026 · fond © IGN Plan IGN v2 · pistes © contributeurs d'OpenStreetMap · refuges © contributeurs de refuges.info" },
   },
-  securite: {
-    image: neigeCervieres,
-    alt: { en: 'Map of Cervières tinted pink almost everywhere: the estimated snow is not enough for a groomed trail. A few areas, in the centre and the south-east, are pale orange or green.',
-      fr: 'Carte de Cervières presque entièrement teintée de rose : la neige estimée est insuffisante pour une piste damée. Quelques zones, au centre et au sud-est, sont en orange pâle ou en vert.' },
-    caption: { en: 'Cervières, simulation of 14 November 2026 at 07:00, cross-country style. For a groomed trail, the snow is insufficient (pink) on every trail. Across the site, 12% of the computed cells are marginal (pale orange) and 3% sufficient (green).',
-      fr: 'Cervières, simulation du 14 novembre 2026 à 7 h, style ski de fond. Pour une piste damée, la neige est insuffisante (rose) sur toutes les pistes. Sur le site, 12 % des cellules calculées sont en classe limite (orange pâle) et 3 % en classe suffisante (vert).' },
-    credit: { en: 'Snowpack simulation © Météo-France · terrain and base map © IGN · trails © OpenStreetMap contributors · huts © refuges.info contributors',
-      fr: "Simulation nivologique © Météo-France · relief et fond © IGN · pistes © contributeurs d'OpenStreetMap · refuges © contributeurs de refuges.info" },
+  gtj: {
+    image: srnGtj,
+    alt: { en: 'Map of the Haut-Jura between Prémanon and Les Rousses. A blue-green line, the Grande Traversée du Jura, runs north-east inside a pale band; groomed trails cross it.',
+      fr: 'Carte du Haut-Jura entre Prémanon et Les Rousses. Une ligne bleu-vert, la Grande Traversée du Jura, file vers le nord-est dans une bande pâle ; des pistes damées la croisent.' },
+    caption: { en: 'The Grande Traversée du Jura between Prémanon and Les Rousses (Jura), in the backcountry style: in blue-green, the line of the traverse and the band around it.',
+      fr: 'La Grande Traversée du Jura entre Prémanon et Les Rousses (Jura), avec le style hors piste : en bleu-vert, le tracé de la traversée et la bande qui l\'entoure.' },
+    credit: { en: 'Traverse: DATAtourisme (Licence Ouverte), © OpenStreetMap contributors, Camptocamp contributors (CC BY-SA) · base map © IGN Plan IGN v2 · huts © refuges.info contributors',
+      fr: "Traversée : DATAtourisme (Licence Ouverte), © contributeurs d'OpenStreetMap, contributeurs de Camptocamp (CC BY-SA) · fond © IGN Plan IGN v2 · refuges © contributeurs de refuges.info" },
   },
   france: {
     image: france,
-    alt: { en: 'Map of metropolitan France. White dots mark the Nordic ski areas, most of them in the Alps, the Jura, the Vosges, the Massif Central and the Pyrenees. Orange outlines mark Nordic backcountry areas and traverses, mostly in the Vercors and the Jura.',
-      fr: "Carte de la France métropolitaine. Des points blancs marquent les domaines nordiques, surtout dans les Alpes, le Jura, les Vosges, le Massif central et les Pyrénées. Des contours orange marquent des domaines et des traversées de ski de randonnée nordique, surtout dans le Vercors et le Jura." },
-    caption: { en: 'White: the 219 Nordic ski areas of the census. Orange: the first Nordic backcountry areas and traverses found outside resorts, still being checked.',
-      fr: 'En blanc, les 219 domaines nordiques du recensement. En orange, les premiers domaines et traversées de ski de randonnée nordique repérés hors stations, encore en cours de vérification.' },
-    credit: { en: 'Areas © OpenStreetMap contributors, OpenSkiMap, Geotrek · outlines: IGN Admin Express via Etalab, Licence Ouverte',
-      fr: "Domaines © contributeurs d'OpenStreetMap, OpenSkiMap, Geotrek · contours : IGN Admin Express via Etalab, Licence Ouverte" },
+    alt: { en: 'Map of metropolitan France. White dots mark the Nordic ski areas, in the Alps, the Jura, the Vosges, the Massif Central, the Pyrenees, the Ardennes and the Morvan. Orange outlines mark Nordic backcountry areas and traverses. Light blue rings mark the areas whose pack is already built, spread over every massif.',
+      fr: "Carte de la France métropolitaine. Des points blancs marquent les domaines nordiques, dans les Alpes, le Jura, les Vosges, le Massif central, les Pyrénées, les Ardennes et le Morvan. Des contours orange marquent des domaines et des traversées de ski de randonnée nordique. Des anneaux bleu clair marquent les domaines dont le pack est déjà construit, répartis dans tous les massifs." },
+    caption: { en: 'White: the 219 Nordic ski areas of the census. Orange: the Nordic backcountry areas and traverses found outside resorts, still being checked. Light blue rings: the packs already built, for 30 Nordic areas, the Vercors high plateaus, the Grande Traversée du Jura and the Corrençon – Col de Rousset traverse.',
+      fr: 'En blanc, les 219 domaines nordiques du recensement. En orange, les domaines et traversées de ski de randonnée nordique repérés hors stations, encore en cours de vérification. Anneaux bleu clair : les packs déjà construits, pour 30 domaines nordiques, les hauts plateaux du Vercors, la Grande Traversée du Jura et la traversée Corrençon – col de Rousset.' },
+    credit: { en: 'Areas © OpenStreetMap contributors, OpenSkiMap, Geotrek, DATAtourisme · outlines: IGN Admin Express via Etalab, Licence Ouverte',
+      fr: "Domaines © contributeurs d'OpenStreetMap, OpenSkiMap, Geotrek, DATAtourisme · contours : IGN Admin Express via Etalab, Licence Ouverte" },
   },
+} satisfies Record<string, Visual & { caption: Text; credit: Text }>;
+
+// The slots that show a map until a picture is dropped: `nature` has none.
+const MAPS: Partial<Record<Slot, Visual>> = {
+  accueil: MAP.pentes,
+  matin: MAP.route,
+  piste: MAP.pistes,
+  retour: MAP.reseau,
+  france: MAP.france,
 };
 
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/visuels/*.{jpg,jpeg,png,webp,avif}', { eager: true });

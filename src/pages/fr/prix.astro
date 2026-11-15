@@ -1,25 +1,5 @@
 ---
-import Base from '../../layouts/Base.astro';
+// Ancienne page « Prix » : devenue « Obtenir l'app » (/fr/obtenir.html).
+import Redirect from '../../components/Redirect.astro';
 ---
-<Base lang="fr" page="price" title="Prix · Traces Blanches" description="Traces Blanches se paie une seule fois, par Google Play : sans abonnement, sans publicité, sans option payante en plus. Le montant sera annoncé à la sortie.">
-<div class="text">
-<h1>Prix</h1>
-<p class="lead">Vous payez l'app une seule fois. Ensuite, elle est à vous : pas d'abonnement à renouveler avant l'hiver suivant.</p>
-
-<h2 id="paiement">Un seul paiement</h2>
-<p>Le montant sera annoncé à la sortie. Vous payez par Google Play, une fois. Il n'y a ni abonnement, ni publicité, ni option payante en plus. Google traite le paiement ; Traces Blanches ne reçoit pas vos coordonnées bancaires.</p>
-
-<h2 id="inclus">Ce que couvre le prix</h2>
-<p>Le paiement donne toute l'app, avec les packs des sites. Vous téléchargez le pack du lieu où vous skiez, puis la carte, les pentes, les zones protégées, les refuges et la voix marchent sans réseau.</p>
-<p>L'envoi d'une sortie vers Strava, prévu et facultatif, reste hors du prix : les conditions de Strava interdisent de le faire payer.</p>
-
-<h2 id="pourquoi">Pourquoi un paiement unique</h2>
-<p>Le projet évite tout service qui coûte de l'argent pour chaque utilisateur, chaque année : la carte est sur votre téléphone, et le calcul de l'itinéraire s'y fera aussi. C'est ce qui rend possible un paiement unique.</p>
-
-<h2 id="code-ouvert">Un code ouvert</h2>
-<p>Le code de l'app est ouvert : chacun peut le lire et vérifier ce que fait l'app. Votre paiement finance le travail sur l'app et sur ses cartes.</p>
-
-<h2 id="quand">Quand payer ?</h2>
-<p>À la sortie. L'app sortira d'abord sur Google Play pour Android, en test interne, puis pour tous. La version iPhone viendra ensuite. Le bouton ci-dessous vous permet de suivre la sortie.</p>
-</div>
-</Base>
+<Redirect path="/fr/prix.html" />

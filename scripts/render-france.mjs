@@ -1,5 +1,7 @@
 // Map of France for the home page: the Nordic ski areas of the census and the Nordic
 // backcountry areas and traverses found outside resorts, on the outline of the departments.
+// An ice-blue ring marks each one whose pack is already built (catalog state built or
+// built_outside_build_all; an area cut into sections, when every section is built).
 // usage: node scripts/render-france.mjs <catalog.geojson> <departements.geojson> <out.png>
 //   <catalog.geojson>: data/out/france/catalog.geojson of the project repository (census);
 //   <departements.geojson>: Etalab administrative outlines, departements-1000m.geojson
@@ -28,8 +30,17 @@ svg += `<g fill="#18283a" stroke="#2c4258" stroke-width="2" stroke-linejoin="rou
 const feats = cat.features.filter((f) => f.properties.center && inFrance(f.properties.center));
 const n = { nordic_station: 0, srn_area: 0, traverse: 0 };
 for (const f of feats) n[f.properties.kind]++;
+const BUILT = new Set(["built", "built_outside_build_all"]);
+const parts = (id) => cat.features.filter((f) => f.properties.parent === id);
+const isBuilt = (f) => f.properties.build?.state === "sections"
+  ? parts(f.properties.id).length > 0 && parts(f.properties.id).every(isBuilt)
+  : BUILT.has(f.properties.build?.state);
+// Sections are drawn through their parent.
+const built = feats.filter((f) => !f.properties.parent && isBuilt(f));
 // Backcountry areas and traverses: their outline; stations: a dot.
 svg += `<g fill="rgba(245,164,98,.35)" stroke="#f5a462" stroke-width="3">${feats.filter((f) => f.properties.kind !== "nordic_station").map((f) => `<path d="${rings(f.geometry).map(path).join("")}"/>`).join("")}</g>`;
-svg += `<g fill="#f4f8fb" stroke="#0b1621" stroke-width="3">${feats.filter((f) => f.properties.kind === "nordic_station").map((f) => { const [x, y] = px(f.properties.center); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9"/>`; }).join("")}</g></svg>`;
+svg += `<g fill="#f4f8fb" stroke="#0b1621" stroke-width="3">${feats.filter((f) => f.properties.kind === "nordic_station").map((f) => { const [x, y] = px(f.properties.center); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9"/>`; }).join("")}</g>`;
+svg += `<g fill="none" stroke="#8fc1f0" stroke-width="5">${built.map((f) => { const [x, y] = px(f.properties.center); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="19"/>`; }).join("")}</g></svg>`;
 await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(out);
-console.log(`${out}: ${n.nordic_station} Nordic ski areas, ${n.srn_area} backcountry areas, ${n.traverse} traverses inside metropolitan France`);
+const nb = (k) => built.filter((f) => f.properties.kind === k).length;
+console.log(`${out}: ${n.nordic_station} Nordic ski areas, ${n.srn_area} backcountry areas, ${n.traverse} traverses inside metropolitan France; packs built: ${nb("nordic_station")} areas, ${nb("srn_area")} backcountry areas, ${nb("traverse")} traverses`);

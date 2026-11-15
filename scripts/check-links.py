@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Checks the links of the built bilingual site (dist/): English at the root, French in fr/.
 
-usage: scripts/check-links.py [site-root]      site-root defaults to dist/ (run `npm run build` first)
+usage: scripts/check-links.py [--external] [site-root]   site-root defaults to dist/ (run `npm run build` first)
 
 For every page: each internal link, image (src and srcset, <source srcset>, preloaded
 imagesrcset, og:image), script and stylesheet points to an existing file, and each #anchor exists
@@ -21,9 +21,14 @@ and the redirect pages.
 Redirect pages (former addresses, src/components/Redirect.astro) are recognised by their
 <meta http-equiv="refresh">: each has a delay of 0, a canonical equal to its target, a link to the
 target in its body, the <html lang> of its folder, noindex, and an internal target that exists.
-External links are listed, not fetched. Exit status 1 on any problem.
+Every external <a> carries rel="noopener". External links are listed; with --external they are
+also fetched by Google Chrome (scripts/check-external.mjs): a final answer of 400 or more fails,
+except behind a bot wall (reported) or for a DOI that doi.org redirects. Exit status 1 on any problem.
 """
 import base64
+import os
+import subprocess
+import tempfile
 import hashlib
 import re
 import html.parser
@@ -32,7 +37,9 @@ import sys
 import urllib.parse
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
-ROOT = pathlib.Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else REPO / "dist"
+ARGS = [a for a in sys.argv[1:] if a != "--external"]
+FETCH_EXTERNAL = "--external" in sys.argv[1:]
+ROOT = pathlib.Path(ARGS[0]).resolve() if ARGS else REPO / "dist"
 SITE = "https://tracesblanches.github.io/"
 SKIP_DIRS = set()
 MEMORY = (REPO / "src/scripts/lang-memory.js").read_text(encoding="utf-8").strip()
@@ -47,6 +54,7 @@ class Page(html.parser.HTMLParser):
         self.alternates, self.canonical, self.switch, self.scripts = {}, None, {}, []
         self.inline, self.csp, self.csp_pos, self.in_script, self.script_pos = [], None, None, False, []
         self.refresh, self.robots = None, None
+        self.no_noopener = []
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -58,6 +66,9 @@ class Page(html.parser.HTMLParser):
             self.h1 += 1
         if tag == "a" and "href" in a:
             self.links.append(a["href"])
+            ext = urllib.parse.urlparse(a["href"])
+            if ext.scheme in ("http", "https") and not a["href"].startswith(SITE) and "noopener" not in (a.get("rel") or "").split():
+                self.no_noopener.append(a["href"])
             if "data-lang" in a:
                 self.switch[a["data-lang"]] = a["href"]
         if tag == "link" and "href" in a:
@@ -172,6 +183,8 @@ for page, info in parsed.items():
     has_detect = DETECT in info.inline
     if page not in redirects and has_detect != (rel(page) == "index.html"):
         problems.append(f"{rel(page)}: language detection script {'present' if has_detect else 'missing'} (only on the English home page)")
+    for h in info.no_noopener:
+        problems.append(f"{rel(page)}: external link without rel=noopener: {h}")
     dup = {i for i in info.ids if info.ids.count(i) > 1}
     if dup:
         problems.append(f"{rel(page)}: duplicate ids {sorted(dup)}")
@@ -246,6 +259,15 @@ for page, to in sorted(redirects.items()):
     print(f"  redirect: {rel(page)} -> {to}")
 for e in sorted(external):
     print("  external:", e)
+if FETCH_EXTERNAL:
+    links = sorted(e for e in external if urllib.parse.urlparse(e).scheme in ("http", "https"))
+    with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
+        f.write("\n".join(links) + "\n")
+    print(f"\nfetching {len(links)} external links (scripts/check-external.mjs)", flush=True)
+    code = subprocess.call(["node", str(REPO / "scripts/check-external.mjs"), f.name])
+    os.unlink(f.name)
+    if code:
+        problems.append("external links: see the FAIL lines above")
 for p in problems:
     print("PROBLEM:", p)
 sys.exit(1 if problems else 0)

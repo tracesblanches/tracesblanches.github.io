@@ -1,0 +1,77 @@
+---
+// Features (/features.html, /fr/fonctionnalites.html): each feature explained in a few sentences,
+// by moment of the day then by theme, each with its state (computed today, planned). Text in
+// src/copy/features.ts; pictures are the maps of src/data/visuals.ts (real packs, several
+// massifs) and the illustrations of src/assets/visuels/. Written blocks with headings, no bullets.
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import Img from './Img.astro';
+import { type Lang, href } from '../i18n';
+import { FEATURES, type Part } from '../copy/features';
+import { MAP } from '../data/visuals';
+import lynx from '../assets/visuels/accueil.webp';
+import deer from '../assets/visuels/accueil-2.webp';
+import otter from '../assets/visuels/nature.webp';
+import { typo } from '../lib/typo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = FEATURES[lang];
+const t = (x: string) => typo(lang, x);
+const ILLU = { en: 'Illustration: Traces Blanches', fr: 'Illustration\u00a0: Traces Blanches' }[lang];
+const ART: Record<NonNullable<Part['art']>, { image: ImageMetadata; alt: string; caption?: string; credit: string }> = {
+  route: { image: MAP.route.image, alt: MAP.route.alt[lang], caption: MAP.route.caption[lang], credit: MAP.route.credit[lang] },
+  pistes: { image: MAP.pistes.image, alt: MAP.pistes.alt[lang], caption: MAP.pistes.caption[lang], credit: MAP.pistes.credit[lang] },
+  pentes: { image: MAP.pentes.image, alt: MAP.pentes.alt[lang], caption: MAP.pentes.caption[lang], credit: MAP.pentes.credit[lang] },
+  gtj: { image: MAP.gtj.image, alt: MAP.gtj.alt[lang], caption: MAP.gtj.caption[lang], credit: MAP.gtj.credit[lang] },
+  reseau: { image: MAP.reseau.image, alt: MAP.reseau.alt[lang], caption: MAP.reseau.caption[lang], credit: MAP.reseau.credit[lang] },
+  france: { image: MAP.france.image, alt: MAP.france.alt[lang], caption: MAP.france.caption[lang], credit: MAP.france.credit[lang] },
+  lynx: { image: lynx, alt: '', credit: ILLU },
+  deer: { image: deer, alt: '', credit: ILLU },
+  otter: { image: otter, alt: '', credit: ILLU },
+};
+const tag = (t: string) => (t === 'today' ? { cls: 'done', label: c.tags.today } : { cls: 'plan', label: c.tags.planned });
+// The picture beside the intro of a part: about 55 % of the 68rem column from 48rem, else full width.
+const SIDE = '(min-width: 68rem) 36rem, (min-width: 48rem) 54vw, calc(100vw - 2.2rem)';
+---
+<Base lang={lang} page="features" title={c.title} description={t(c.description)}>
+<header class="text">
+<h1>{c.h1}</h1>
+<p class="lead">{t(c.lead)}</p>
+<div class="status"><p set:html={t(c.state)} /></div>
+</header>
+<nav aria-label={c.tocLabel}>
+<ul class="toc">{c.parts.map((p) => <li><a href={`#${p.id}`}>{p.title}</a></li>)}</ul>
+</nav>
+
+{c.parts.map((p, i) => {
+  const art = p.art ? ART[p.art] : undefined;
+  return (
+    <section class="part" aria-labelledby={p.id}>
+      <div class:list={['part-head', { flip: i % 2 === 1, solo: !art }]}>
+        <div class="part-intro">
+          <h2 id={p.id} class="big">{p.title}</h2>
+          <p class="lead" set:html={t(p.intro)} />
+        </div>
+        {art && (
+          <figure class="part-art">
+            <Img src={art.image} alt={art.alt} sizes={SIDE} />
+            <figcaption>{typo(lang, art.caption)}<span class="credit">{typo(lang, art.credit)}</span></figcaption>
+          </figure>
+        )}
+      </div>
+      <div class="feats">
+        {p.features.map((f) => (
+          <article class="feat">
+            <h3>{t(f.title)}</h3>
+            {f.text.map((x) => <p set:html={t(x)} />)}
+            <p class="feat-tags">{f.tags.map((t) => <span class:list={['tag', tag(t).cls]}>{tag(t).label}</span>)}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+})}
+
+<p class="text part-more"><a href={href('privacy', lang)}>{c.more.privacy}</a> · <a href={href('get', lang)}>{c.more.get}</a></p>
+</Base>

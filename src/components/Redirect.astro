@@ -2,16 +2,27 @@
 // A former address that now lives elsewhere (src/i18n/index.ts, MOVED): a static page that opens
 // its target at once (meta refresh), names it with a link for browsers that do not follow the
 // refresh, and gives it as canonical. No header, no scripts; kept out of the sitemap.
+// `repo`: a technical page now in the source code on GitHub; `page`: a page of this site with a
+// new address (the former "Price" page is now "Get the app").
 import { type Lang, MOVED } from '../i18n';
 
 interface Props { path: string }
 const moved = MOVED.find((m) => m.path === Astro.props.path);
 if (!moved) throw new Error(`no MOVED entry for ${Astro.props.path}`);
 const lang: Lang = moved.lang;
-const T = {
-  en: { title: 'This page has moved · Traces Blanches', h1: 'This page has moved', text: 'Installing, building and contributing are explained in the source code of Traces Blanches, on GitHub:', link: 'open the source code', home: 'Back to the home page', homeHref: '/' },
-  fr: { title: 'Cette page a déménagé · Traces Blanches', h1: 'Cette page a déménagé', text: "L'installation, la compilation et les contributions sont expliquées dans le code source de Traces Blanches, sur GitHub :", link: 'ouvrir le code source', home: "Revenir à l'accueil", homeHref: '/fr/' },
-}[lang];
+const TEXT = {
+  repo: {
+    en: { title: 'This page has moved · Traces Blanches', h1: 'This page has moved', text: 'Installing, building and contributing are explained in the source code of Traces Blanches, on GitHub:', link: 'open the source code' },
+    fr: { title: 'Cette page a déménagé · Traces Blanches', h1: 'Cette page a déménagé', text: "L'installation, la compilation et les contributions sont expliquées dans le code source de Traces Blanches, sur GitHub :", link: 'ouvrir le code source' },
+  },
+  page: {
+    en: { title: 'This page has moved · Traces Blanches', h1: 'This page has moved', text: 'The price and what the purchase includes are now on the page', link: 'Get the app' },
+    fr: { title: 'Cette page a déménagé · Traces Blanches', h1: 'Cette page a déménagé', text: "Le prix et ce que comprend l'achat sont maintenant sur la page", link: "Obtenir l'app" },
+  },
+} as const;
+const HOME = { en: { home: 'Back to the home page', homeHref: '/' }, fr: { home: "Revenir à l'accueil", homeHref: '/fr/' } }[lang];
+const T = TEXT[moved.kind][lang];
+const external = moved.kind === 'repo';
 ---
 <!doctype html>
 <html lang={lang}>
@@ -25,7 +36,7 @@ const T = {
 </head>
 <body>
 <h1>{T.h1}</h1>
-<p>{T.text} <a href={moved.to}>{T.link}</a>.</p>
-<p><a href={T.homeHref}>{T.home}</a></p>
+<p>{T.text} <a href={moved.to} rel={external ? 'noopener' : undefined}>{T.link}</a>.</p>
+<p><a href={HOME.homeHref}>{HOME.home}</a></p>
 </body>
 </html>

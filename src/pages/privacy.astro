@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import { link } from '../data/sources';
 ---
 <Base lang="en" page="privacy" title="Privacy · Traces Blanches" description="What stays on your phone and what the Traces Blanches server receives: pack downloads, the optional overdue alert, the optional Strava connection.">
 <div class="text">
 <h1>Privacy</h1>
 <p class="lead">Your position, your tracks and your plans stay on your phone. The server only receives what three specific services need, and two of them are optional.</p>
-<div class="status"><p><b>The app is not published yet.</b> This page describes what is planned. It will be updated before the release on Google Play, and every change will remain visible in <a href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/privacy.astro">the history of this page</a>. The <a href="/fr/confidentialite.html" hreflang="fr">French version</a> is the reference.</p></div>
+<div class="status"><p><b>The app is not published yet.</b> This page describes what is planned. It will be updated before the release on Google Play, and every change will remain visible in <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/privacy.astro">the history of this page</a>. The <a href="/fr/confidentialite.html" hreflang="fr">French version</a> is the reference.</p></div>
 <ul class="toc">
 <li><a href="#phone">On the phone</a></li>
 <li><a href="#server">What the server receives</a></li>
@@ -21,13 +22,13 @@ import Base from '../layouts/Base.astro';
 <li><b>Your tracks and outings</b>, recorded on the phone. You delete them from the app.</li>
 <li><b>Your day plans</b>, unless you turn on the overdue alert (see below).</li>
 <li><b>The voice</b>: announcements are clips recorded in advance in the pack and assembled on the phone. No text goes to a speech service.</li>
-<li><b>The Health Connect export</b>, if you turn it on, stays on the phone: Health Connect is the Android space that keeps activity and health data on the device.</li>
+<li><b>The Health Connect export</b>, if you turn it on, stays on the phone: <a href={link('healthConnect', 'en')} rel="noopener">Health Connect</a> is the Android space that keeps activity and health data on the device.</li>
 </ul>
 
 <h2 id="server">What the server receives</h2>
 
 <h3>1. Pack downloads</h3>
-<p>The app downloads the pack of the site you choose, the way a browser downloads a file. The server sees the IP address of the connection and the file requested, and so the site you chose. It does not receive your position. There is no account. <span class="tag plan">planned</span></p>
+<p>The app downloads the pack of the ski area you choose, the way a browser downloads a file. The server sees the IP address of the connection and the file requested, and so the area you chose. It does not receive your position. There is no account. <span class="tag plan">planned</span></p>
 <p>How long the server keeps its logs will be set before the release and written here.</p>
 
 <h3>2. The overdue alert, if you turn it on</h3>
@@ -35,7 +36,7 @@ import Base from '../layouts/Base.astro';
 <p>The alert channel (notification, email or SMS) and how long the plan is kept are not decided yet. They will be written here before the service opens.</p>
 
 <h3>3. The Strava connection, if you ask for it</h3>
-<p>This service is optional. To send an outing to Strava, you sign in to your Strava account from the app. Strava requires a secret key that an app cannot hold without exposing it: a small service on the server holds it and completes the sign-in. The app then sends the outing you choose to Strava. Traces Blanches does not read your Strava data and does not keep it. <span class="tag plan">planned</span></p>
+<p>This service is optional. To send an outing to <a href={link('strava', 'en')} rel="noopener">Strava</a>, you sign in to your Strava account from the app. Strava requires a secret key that an app cannot hold without exposing it: a small service on the server holds it and completes the sign-in. The app then sends the outing you choose to Strava. Traces Blanches does not read your Strava data and does not keep it. <span class="tag plan">planned</span></p>
 
 <h3>Later</h3>
 <p>Shared reports (snow, fresh track, full hut) are planned for a later version. This page will say what they send before they ship.</p>
@@ -56,13 +57,13 @@ import Base from '../layouts/Base.astro';
 </ul>
 
 <h2>Google Play</h2>
-<p>The purchase goes through Google Play. Google handles the payment under its own privacy rules; Traces Blanches does not receive your payment details.</p>
+<p>The purchase goes through <a href={link('googlePlay', 'en')} rel="noopener">Google Play</a>. Google handles the payment under its own privacy rules; Traces Blanches does not receive your payment details.</p>
 
 <h2 id="site">This website</h2>
-<p>Static pages served by GitHub Pages: no cookies, no analytics. A script of a few lines handles the language. On your first visit to the home page, it reads your browser's preferred language and opens the French version if that is French. When you pick FR or EN at the top of a page, it keeps that choice in your browser's local storage. A second script of a few lines opens and closes the menu on a phone and runs the pause button of the home page pictures; it stores nothing. Nothing is sent.</p>
-<p>GitHub keeps its own server logs, see its <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>.</p>
+<p>Static pages served by <a href={link('githubPages', 'en')} rel="noopener">GitHub Pages</a>: no cookies, no analytics. A script of a few lines handles the language. On your first visit to the home page, it reads your browser's preferred language and opens the French version if that is French. When you pick FR or EN at the top of a page, it keeps that choice in your browser's local storage. A second script of a few lines opens and closes the menu on a phone and runs the pause button of the home page pictures; it stores nothing. Nothing is sent.</p>
+<p>GitHub keeps its own server logs, see its <a rel="noopener" href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>.</p>
 
 <h2 id="contact">Contact</h2>
-<p>For a question about your data, <a href="https://github.com/tracesblanches/tracesblanches/issues">ask it on GitHub</a>. For a security problem, follow the <a href="https://github.com/tracesblanches/.github/blob/main/SECURITY.md">security policy</a>.</p>
+<p>For a question about your data, <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches/issues">ask it on GitHub</a>. For a security problem, follow the <a rel="noopener" href="https://github.com/tracesblanches/.github/blob/main/SECURITY.md">security policy</a>.</p>
 </div>
 </Base>

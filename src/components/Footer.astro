@@ -13,7 +13,7 @@ const langs: Lang[] = bilingual ? ['en', 'fr'] : [lang];
 {langs.map((l) => {
   const f = UI[l].footer;
   return (
-    <p lang={bilingual && l !== lang ? l : undefined}><a href={pagePath('credits', l)}>{f.credits}</a>. {f.code} <a href={REPO}>{f.source}</a>. {f.site} {f.ask} <a href={ISSUES}>{f.askLink}</a>.</p>
+    <p lang={bilingual && l !== lang ? l : undefined}><a href={pagePath('credits', l)}>{f.credits}</a>. {f.code} <a href={REPO} rel="noopener">{f.source}</a>. {f.site} {f.ask} <a href={ISSUES} rel="noopener">{f.askLink}</a>.</p>
   );
 })}
 </div></footer>

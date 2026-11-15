@@ -6,8 +6,10 @@
 //   44.84465,6.8157 --date 2027-01-15 --start 13:00 --out FILE`. Needs playwright-core and Chrome
 //   (CHROME overrides /usr/bin/google-chrome). Then, per image, one 1600 px WebP master (Astro derives the sizes the site serves):
 //   magick X.png -strip -quality 80 -define webp:method=6 src/assets/maps/NAME.webp
-//   (srn-izoard → pentes-izoard, fond-chapelle → pistes-chapelle, guidage-cervieres →
-//   itineraire-cervieres, reseau-chapelle and neige-cervieres keep their names).
+//   (srn-izoard → pentes-izoard, guidage-cervieres → itineraire-laus-fonts; pistes-gerardmer,
+//   reseau-beille and srn-gtj keep their names; fond-chapelle, reseau-chapelle and
+//   neige-cervieres are no longer on the site). The third argument may be "-" when
+//   guidage-cervieres is not asked for.
 // The viewer's own controls (panel, buttons, attribution, scale) are hidden by injected CSS;
 // layers whose sources may not appear in a published image (CLPA, Biodiv'sports, track
 // status, avalanche model fed by the CLPA) are hidden or filtered out before the shot.
@@ -16,8 +18,10 @@ import { readFileSync, mkdirSync } from "node:fs";
 
 const [base, outdir, lausFonts, ...only] = process.argv.slice(2);
 mkdirSync(outdir, { recursive: true });
-const laus = JSON.parse(readFileSync(lausFonts, "utf8"));
-const lausLine = laus.features.find((f) => f.properties.kind === "route").geometry.coordinates;
+// The Le Laus - Les Fonts route is only needed by guidage-cervieres ("-" skips it).
+const lausLine = lausFonts && lausFonts !== "-"
+  ? JSON.parse(readFileSync(lausFonts, "utf8")).features.find((f) => f.properties.kind === "route").geometry.coordinates
+  : null;
 
 const W = 960, H = 600, DPR = 1600 / 960; // 1600 × 1000 px images
 
@@ -35,6 +39,10 @@ const SHOTS = {
   "guidage-cervieres": { site: "cervieres", style: "guidage", hash: "12.62/44.8620/6.7665", route: lausLine },
   "reseau-chapelle": { site: "chapelle-des-bois", style: "srn", hash: "12.9/46.6130/6.1000", hide: ["zones"] },
   "neige-cervieres": { site: "cervieres", style: "fond", hash: "12.6/44.8560/6.7700", show: ["snow-groomed"] },
+  // Other massifs (packs of build-all, public sources only).
+  "pistes-gerardmer": { site: "gerardmer", style: "fond", hash: "13.3/48.0420/6.9250" },
+  "reseau-beille": { site: "plateau-de-beille", style: "srn", hash: "12.4/42.7150/1.7000", hide: ["zones"] },
+  "srn-gtj": { site: "srn-traversee-datatourisme-6-80785b47-1e6c-37be-99fc-d401c59b1fb7-3", style: "srn", hash: "11.8/46.4650/6.0900", hide: ["zones"] },
 };
 
 const browser = await chromium.launch({
@@ -43,6 +51,7 @@ const browser = await chromium.launch({
 });
 for (const [name, s] of Object.entries(SHOTS)) {
   if (only.length && !only.includes(name)) continue;
+  if (s.route === null) throw new Error(`${name} needs the Le Laus - Les Fonts route file`);
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: DPR });
   const errors = [];
   page.on("pageerror", (e) => errors.push(String(e)));

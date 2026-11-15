@@ -5,9 +5,10 @@
 // The page links sit in a <details>: on a phone its <summary> is the menu button and the list
 // drops down under the header (one row of header), with the main button at its top; without
 // JavaScript the native disclosure still opens and closes it. src/scripts/ui.js adds
-// aria-expanded, Escape, closing when the focus or a click leaves it. From 48rem the summary is
-// hidden, the list shows in the row and the main button sits in the row, before the switch
-// (global.css, "header"; only where ::details-content is supported, else the menu button stays).
+// aria-expanded, Escape, closing when the focus or a click leaves it. From 48rem the main button
+// sits in the row, before the switch; from 64rem the summary is hidden and the list shows in the
+// row too (global.css, "header"; only where ::details-content is supported, else the menu button
+// stays).
 import Logo from './Logo.astro';
 import { type Lang, type PageId, NAV, LANG_NAMES, pagePath } from '../i18n';
 import { UI, RELEASE_ISSUE } from '../i18n/ui';
@@ -22,7 +23,7 @@ const ui = UI[lang];
 <header class="top"><div class="wrap">
 <a class="brand" href={pagePath('home', lang)}><Logo /></a>
 <div class="tools">
-<a class="btn primary cta" href={RELEASE_ISSUE}>{ui.notify}</a>
+<a class="btn primary cta" href={RELEASE_ISSUE} rel="noopener">{ui.notify}</a>
 <div class="lang" role="group" aria-label={ui.langLabel}>{SWITCH.map((l) => (
   page && l === lang
     ? <span aria-current="true">{l.toUpperCase()}</span>
@@ -34,7 +35,7 @@ const ui = UI[lang];
 <summary><svg class="menu-open" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="menu-close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="visually-hidden">{ui.menu}</span></summary>
 <nav class="site" aria-label={ui.navLabel}><ul>
 {NAV.map((id) => <li><a href={pagePath(id, lang)} aria-current={id === page ? 'page' : undefined}>{ui.nav[id as Exclude<PageId, 'home'>]}</a></li>)}
-<li class="menu-cta"><a class="btn primary" href={RELEASE_ISSUE}>{ui.notify}</a></li>
+<li class="menu-cta"><a class="btn primary" href={RELEASE_ISSUE} rel="noopener">{ui.notify}</a></li>
 </ul></nav>
 </details>
 )}

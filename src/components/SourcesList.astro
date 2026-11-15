@@ -1,0 +1,40 @@
+---
+// The "Sources" section of the Sources and credits page: the published papers the calculations
+// rest on (authors, year, title, journal, DOI link), then the methods, scales and official data
+// that are not papers. Lists in src/data/sources.ts.
+import type { Lang } from '../i18n';
+import { REFS, METHODS } from '../data/sources';
+import { typo } from '../lib/typo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const T = {
+  en: { h: 'Sources', lead: 'The calculations of the app rest on published work. Here it is, with what the app takes from each.', papers: 'Scientific papers', methods: 'Methods, scales and official data', what: 'What the app takes:', doi: 'DOI', and: ' and ', et: ' et ' },
+  fr: { h: 'Sources', lead: "Les calculs de l'app reposent sur des travaux publiés. Les voici, avec ce que l'app prend à chacun.", papers: 'Articles scientifiques', methods: 'Méthodes, échelles et données officielles', what: "Ce que l'app en prend :", doi: 'DOI', and: ' et ', et: ' et ' },
+}[lang];
+const authors = (s: string) => s.replace(T.et, T.and);
+// After "What the app takes:", a sentence goes on in lower case (acronyms such as BERA stay).
+const low = (s: string) => (/^[A-ZÀ-Ý][a-zà-ÿ']/.test(s) ? s[0].toLowerCase() + s.slice(1) : s);
+---
+<section class="text sources" aria-labelledby="sources">
+<h2 id="sources">{T.h}</h2>
+<p class="lead">{typo(lang, T.lead)}</p>
+<h3 id="articles">{T.papers}</h3>
+<ol class="refs">
+{REFS.map((r) => (
+  <li id={`ref-${r.id}`}>
+    <span class="ref-cite">{authors(r.authors)} ({r.year}). <cite lang="en">{r.title}</cite>. <i>{r.where}</i>. {T.doi} <a href={r.href} rel="noopener">{r.doi}</a></span>
+    <span class="ref-use">{typo(lang, T.what)} {typo(lang, low(r.use[lang]))}</span>
+  </li>
+))}
+</ol>
+<h3 id="methodes">{T.methods}</h3>
+<ul class="refs">
+{METHODS.map((m) => (
+  <li id={`ref-${m.id}`}>
+    <span class="ref-cite"><a href={m.href} rel="noopener">{typo(lang, m.name[lang])}</a>. {typo(lang, m.who[lang])}.</span>
+    <span class="ref-use">{typo(lang, T.what)} {typo(lang, low(m.use[lang]))}</span>
+  </li>
+))}
+</ul>
+</section>

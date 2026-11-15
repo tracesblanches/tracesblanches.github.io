@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { link, REFS } from '../../data/sources';
+import { REPO } from '../../i18n';
+const ref = (id: string) => REFS.find((r) => r.id === id)!.href;
 ---
 <Base lang="fr" page="faq" title="Questions fréquentes · Traces Blanches" description="Hors ligne, batterie, avalanches, vos données, prix, téléphones compatibles : les réponses aux questions sur Traces Blanches, l'app de ski nordique hors ligne.">
 <div class="text">
@@ -18,10 +21,10 @@ import Base from '../../layouts/Base.astro';
 <h2 id="hors-ligne">Hors ligne</h2>
 
 <h3>Qu'est-ce qui marche sans réseau ?</h3>
-<p>Tout ce qui est dans le pack du site : la carte, les pistes, les pentes, l'exposition aux avalanches, les zones protégées, les refuges, les zones sans réseau, la neige estimée et la voix. Le calcul de l'itinéraire se fera sur le téléphone. Votre position vient des satellites, qui ne demandent aucun réseau.</p>
+<p>Tout ce qui est dans le pack de votre domaine : la carte, les pistes, les pentes, l'exposition aux avalanches, les zones protégées, les refuges, les zones sans réseau, la neige estimée et la voix. Le calcul de l'itinéraire se fera sur le téléphone. Votre position vient des satellites, qui ne demandent aucun réseau.</p>
 
 <h3>Que faut-il télécharger avant de partir ?</h3>
-<p>Le pack du site où vous skiez. Aujourd'hui, il pèse environ 40 Mo pour Cervières et 35 Mo pour Chapelle-des-Bois. Vous le téléchargerez dans l'app, au chalet ou chez vous, avant de partir. La mise à jour des seules informations du jour (neige, bulletin, météo) est prévue.</p>
+<p>Le pack du domaine où vous skiez. Il pèse d'environ 9 à 46 Mo pour un domaine nordique, et jusqu'à 100 Mo environ pour un tronçon de grande traversée. Vous le téléchargerez dans l'app, au chalet ou chez vous, avant de partir. La mise à jour des seules informations du jour (neige, bulletin, météo) est prévue.</p>
 
 <h3>Et si le pack date de quelques jours ?</h3>
 <p>Chaque information porte sa date. Les pentes et l'exposition aux avalanches dépendent du relief et de la forêt : elles ne changent pas d'un jour à l'autre. Les zones protégées sont à mettre à jour chaque mois. La neige, le bulletin d'avalanche et la météo vieillissent en heures ou en jours : l'app affichera leur âge à côté, pour que vous jugiez s'il faut encore les croire.</p>
@@ -29,7 +32,7 @@ import Base from '../../layouts/Base.astro';
 <h2 id="batterie">Batterie</h2>
 
 <h3>Combien de temps tient la batterie ?</h3>
-<p>Nous ne le savons pas encore : la mesure n'est pas faite. Des sorties de mesure par grand froid sont prévues cet hiver, à Cervières en janvier et à Chapelle-des-Bois en février et mars. Les chiffres seront publiés ici.</p>
+<p>Nous ne le savons pas encore : la mesure n'est pas faite. Des sorties de mesure par grand froid sont prévues cet hiver, dans les Alpes du Sud en janvier et dans le Jura en février et mars. Les chiffres seront publiés ici.</p>
 
 <h3>Que fait l'app pour l'économiser ?</h3>
 <p>Ce qui est prévu : le guidage à la voix, écran éteint ; un GPS sollicité selon le besoin ; les arrêts repérés par le capteur de mouvement ; l'altitude lue sur le baromètre. L'app prévoira la batterie restante en fin de sortie et gardera une réserve pour un appel d'urgence.</p>
@@ -37,16 +40,16 @@ import Base from '../../layouts/Base.astro';
 <h2 id="avalanches">Avalanches</h2>
 
 <h3>L'app dit-elle si une pente est sûre ?</h3>
-<p>Non, jamais. Aucune carte ne peut le dire. Traces Blanches montre où le terrain est raide et où il est exposé selon un calcul. L'app affiche le bulletin d'avalanche du jour quand Météo-France en publie un. La décision reste la vôtre, sur place.</p>
+<p>Non, jamais. Aucune carte ne peut le dire. Traces Blanches montre où le terrain est raide et où il est exposé selon un calcul. L'app affiche le <a href={link('bera', 'fr')} rel="noopener">bulletin d'avalanche</a> du jour quand <a href={link('meteofrance', 'fr')} rel="noopener">Météo-France</a> en publie un. La décision reste la vôtre, sur place.</p>
 
 <h3>D'où viennent les pentes ?</h3>
-<p>Des relevés laser de l'IGN, avec une mesure tous les 5 m. La carte les classe en quatre tranches : 30 à 35°, 35 à 40°, 40 à 45°, 45° et plus. Une pente de moins de 30° peut quand même être sous une pente plus raide : regardez aussi au-dessus de vous.</p>
+<p>Des <a href={link('lidarMnt', 'fr')} rel="noopener">relevés laser de l'IGN</a>, avec une mesure tous les 5 m. La carte les classe en quatre tranches : 30 à 35°, 35 à 40°, 40 à 45°, 45° et plus. Une pente de moins de 30° peut quand même être sous une pente plus raide : regardez aussi au-dessus de vous.</p>
 
 <h3>Qu'est-ce que l'exposition aux avalanches de la carte ?</h3>
-<p>Un calcul, pas une observation. Le calcul repère les endroits d'où une avalanche peut partir, d'après le relief et la forêt, puis suit sa course vers le bas. Il reprend deux méthodes publiées par des chercheurs. La comparaison avec les avalanches connues est en cours. Une avalanche peut partir là où le calcul ne la voit pas.</p>
+<p>Un calcul, pas une observation. Le calcul repère les endroits d'où une avalanche peut partir, d'après le relief et la forêt, puis suit sa course vers le bas. Il reprend deux méthodes publiées par des chercheurs : <a href={ref('autoates2')} rel="noopener">AutoATES</a> pour les zones de départ et <a href={ref('flowpy')} rel="noopener">Flow-Py</a> pour la course de l'avalanche. La <a href={link('lidarMnh', 'fr')} rel="noopener">hauteur de végétation de l'IGN</a> donne la forêt. La comparaison avec les avalanches connues est en cours. Une avalanche peut partir là où le calcul ne la voit pas.</p>
 
 <h3>Et le bulletin d'avalanche ?</h3>
-<p>Le pack reprend le bulletin d'estimation du risque d'avalanche (BERA) de Météo-France pour le massif du site, avec sa date. Le Jura n'a pas de BERA : pour Chapelle-des-Bois, le pack renvoie vers la météo montagne de Météo-France et vers le bulletin de l'institut suisse SLF, qui couvre le Jura suisse voisin.</p>
+<p>Le pack reprend le <a href={link('bera', 'fr')} rel="noopener">bulletin d'estimation du risque d'avalanche</a> (BERA) de Météo-France pour le massif du domaine, avec sa date. Le Jura n'a pas de BERA : <a href={link('juraNoBera', 'fr')} rel="noopener">Météo-France y diffuse des messages d'avertissement</a>, et le pack renvoie vers la météo montagne de Météo-France et vers le <a href={link('slf', 'fr')} rel="noopener">bulletin de l'institut suisse SLF</a>, qui couvre le Jura suisse voisin. Pour apprendre à lire un bulletin, l'<a href={link('anena', 'fr')} rel="noopener">ANENA</a> propose des formations.</p>
 
 <h3>L'app trace-t-elle des itinéraires hors piste ?</h3>
 <p>Le calcul sait déjà le faire : il évite les pentes de plus de 30°, refuse les zones interdites à la date choisie et tient compte de la neige estimée. Dans l'app, cette fonction est prévue pour une deuxième version.</p>
@@ -54,7 +57,7 @@ import Base from '../../layouts/Base.astro';
 <h2 id="donnees">Vos données</h2>
 
 <h3>Ma position est-elle envoyée quelque part ?</h3>
-<p>Non. Votre position, vos traces et vos plans de journée restent sur votre téléphone. Deux exceptions, prévues et facultatives, seulement si vous les choisissez : l'alerte en cas de non-retour, qui dépose votre plan de sortie pour prévenir un proche, et l'envoi d'une sortie vers Strava.</p>
+<p>Non. Votre position, vos traces et vos plans de journée restent sur votre téléphone. Deux exceptions, prévues et facultatives, seulement si vous les choisissez : l'alerte en cas de non-retour, qui dépose votre plan de sortie pour prévenir un proche, et l'envoi d'une sortie vers <a href={link('strava', 'fr')} rel="noopener">Strava</a>.</p>
 
 <h3>Faut-il créer un compte ?</h3>
 <p>Non. L'app télécharge les packs sans compte. Elle ne contiendra ni publicité, ni mesure d'audience.</p>
@@ -65,21 +68,21 @@ import Base from '../../layouts/Base.astro';
 <h2 id="prix">Prix</h2>
 
 <h3>Combien coûtera l'app ?</h3>
-<p>Le montant sera annoncé à la sortie. Vous paierez une seule fois, par Google Play. Il n'y aura ni abonnement, ni publicité. La page <a href="/fr/prix.html">prix</a> dit ce que couvre ce paiement.</p>
+<p>Le montant sera annoncé à la sortie. Vous paierez une seule fois, par <a href={link('googlePlay', 'fr')} rel="noopener">Google Play</a>. Il n'y aura ni abonnement, ni publicité. La page <a href="/fr/obtenir.html">Obtenir l'app</a> dit ce que comprend l'achat.</p>
 
 <h3>Pourquoi payer une app dont le code est ouvert ?</h3>
-<p>Le paiement finance le travail sur l'app et sur ses cartes. Le code reste ouvert : chacun peut le lire et vérifier ce que fait l'app.</p>
+<p>Le paiement finance le travail sur l'app et sur ses cartes. Le code reste ouvert : chacun peut <a href={REPO} rel="noopener">le lire</a> et vérifier ce que fait l'app.</p>
 
 <h3>L'envoi vers Strava sera-t-il payant ?</h3>
-<p>Non. Les conditions de Strava interdisent de faire payer ce qui passe par leur service. L'envoi d'une sortie vers Strava, prévu et facultatif, restera hors de ce que vous payez.</p>
+<p>Non. <a href={link('strava', 'fr')} rel="noopener">Les conditions de l'API Strava</a> interdisent de faire payer ce qui passe par leur service. L'envoi d'une sortie vers Strava, prévu et facultatif, restera hors de ce que vous payez.</p>
 
 <h2 id="appareils">Téléphones</h2>
 
 <h3>Sur quels téléphones l'app tournera-t-elle ?</h3>
-<p>Sur les téléphones Android, à partir d'Android 10. Elle sortira d'abord sur Google Play, en test interne, puis pour tous.</p>
+<p>Sur les téléphones Android, à partir d'Android 10. Elle sortira d'abord sur <a href={link('googlePlay', 'fr')} rel="noopener">Google Play</a>, en test interne, puis pour tous.</p>
 
 <h3>Et sur iPhone ?</h3>
-<p>Plus tard. L'app Android vient d'abord. La licence du code prévoit déjà la diffusion par l'App Store.</p>
+<p>Pas pour l'instant. L'app Android vient d'abord, et aucune version iPhone n'est programmée. La licence du code autorise déjà la diffusion par l'App Store.</p>
 
 <h3>Faut-il une montre ?</h3>
 <p>Non. Le téléphone seul suffit. Une app pour montre Wear OS est prévue en option, pour le confort : direction, temps restant, vibrations.</p>
@@ -87,21 +90,21 @@ import Base from '../../layouts/Base.astro';
 <h2 id="autres">Autres questions</h2>
 
 <h3>Quels lieux sont couverts ?</h3>
-<p>Aujourd'hui, deux sites tests : Cervières (Hautes-Alpes) et Chapelle-des-Bois (Doubs). Le recensement compte 219 domaines nordiques en France ; leurs packs sont prévus ensuite.</p>
+<p>Toute la France. Le recensement compte 219 domaines nordiques, des Ardennes aux Pyrénées, et 43 domaines et traversées de ski de randonnée nordique hors stations, comme la <a href={link('gtj', 'fr')} rel="noopener">Grande Traversée du Jura</a>. Les packs de 30 domaines nordiques répartis dans tous les massifs sont construits, ainsi que ceux de la Grande Traversée du Jura et des hauts plateaux du Vercors ; les autres sont prévus. La page <a href="/fr/fonctionnalites.html#france">fonctionnalités</a> montre la carte.</p>
 
 <h3>D'où viennent les cartes et les informations ?</h3>
-<p>De sources publiques et ouvertes : IGN, OpenStreetMap, Météo-France, ARCEP, l'inventaire national du patrimoine naturel, refuges.info et Camptocamp, entre autres. La page <a href="/fr/licences.html">crédits</a> les cite toutes.</p>
+<p>De sources publiques et ouvertes : <a href={link('ign', 'fr')} rel="noopener">IGN</a>, <a href={link('osm', 'fr')} rel="noopener">OpenStreetMap</a>, <a href={link('meteofrance', 'fr')} rel="noopener">Météo-France</a>, <a href={link('arcep', 'fr')} rel="noopener">ARCEP</a>, l'<a href={link('inpn', 'fr')} rel="noopener">inventaire national du patrimoine naturel</a>, <a href={link('refugesInfo', 'fr')} rel="noopener">refuges.info</a> et <a href={link('camptocamp', 'fr')} rel="noopener">Camptocamp</a>, entre autres. La page <a href="/fr/licences.html">sources et crédits</a> les cite toutes, avec les articles sur lesquels reposent les calculs.</p>
 
 <h3>Pourquoi l'état des pistes manque-t-il ?</h3>
-<p>Les domaines publient l'état de leurs pistes sans autoriser sa reprise. Il n'est donc pas dans l'app. Nous allons demander un accord écrit à l'Espace Nordique Jurassien et à Nordic France.</p>
+<p>Les domaines publient l'état de leurs pistes sans autoriser sa reprise. Il n'est donc pas dans l'app. Nous allons demander un accord écrit à l'<a href={link('enj', 'fr')} rel="noopener">Espace nordique jurassien</a> et à <a href={link('nordicFrance', 'fr')} rel="noopener">Nordic France</a>.</p>
 
 <h3>Le plan des pistes de la station est-il dans l'app ?</h3>
-<p>Non. Le plan dessiné par une station lui appartient, et nous ne le reprenons jamais. Les pistes de l'app viennent d'OpenStreetMap, la carte collaborative du monde.</p>
+<p>Non. Le plan dessiné par une station lui appartient, et nous ne le reprenons jamais. Les pistes de l'app viennent d'<a href={link('osm', 'fr')} rel="noopener">OpenStreetMap</a>, la carte collaborative du monde.</p>
 
 <h3>Une piste est fausse ou manque. Que faire ?</h3>
-<p>Si elle est fausse dans OpenStreetMap, vous pouvez la corriger là-bas : la correction arrivera dans le pack suivant. Sinon, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose">signalez-la sur GitHub</a>, avec le lieu et la date du constat.</p>
+<p>Si elle est fausse dans OpenStreetMap, vous pouvez la corriger là-bas : la correction arrivera dans le pack suivant. Sinon, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose" rel="noopener">signalez-la sur GitHub</a>, avec le lieu et la date du constat.</p>
 
 <h3>Comment poser une autre question ?</h3>
-<p><a href="https://github.com/tracesblanches/tracesblanches/issues">Posez-la sur GitHub</a>. Les réponses utiles à tous viendront sur cette page.</p>
+<p><a href="https://github.com/tracesblanches/tracesblanches/issues" rel="noopener">Posez-la sur GitHub</a>. Les réponses utiles à tous viendront sur cette page.</p>
 </div>
 </Base>

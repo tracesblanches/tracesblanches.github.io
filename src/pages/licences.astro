@@ -1,33 +1,43 @@
 ---
 import Base from '../layouts/Base.astro';
 import { REPO } from '../i18n';
+import { link } from '../data/sources';
+import SourcesList from '../components/SourcesList.astro';
 ---
-<Base lang="en" page="credits" title="Credits · Traces Blanches" description="The sources of the maps and information of Traces Blanches (IGN, OpenStreetMap, Météo-France, ARCEP, refuges.info, Camptocamp…), with the credit and licence of each.">
+<Base lang="en" page="credits" title="Sources and credits · Traces Blanches" description="The papers behind the calculations of Traces Blanches (avalanche terrain, runout, skiing time) and the sources of its maps and information (IGN, OpenStreetMap, Météo-France, ARCEP, refuges.info, Camptocamp…), with the credit and licence of each.">
 <div class="text">
-<h1>Credits</h1>
-<p class="lead">The maps and information of Traces Blanches come from public sources. Each asks to be credited, with its licence: here they are.</p>
+<h1>Sources and credits</h1>
+<p class="lead">The calculations of Traces Blanches rest on published work, and its maps and information come from public sources. Here are both, with the credit and licence each one asks for.</p>
+<ul class="toc">
+<li><a href="#sources">Sources</a></li>
+<li><a href="#credits">Data and their credits</a></li>
+<li><a href="#maps">Maps on this site</a></li>
+<li><a href="#site">This website</a></li>
+</ul>
 <p>In the app, “© OpenStreetMap” will sit in a corner of the map and the other credits on a “Data licences” screen. <span class="tag plan">planned</span></p>
 </div>
 
-<h2 id="sources">Sources and their credits</h2>
+<SourcesList lang="en" />
+
+<h2 id="credits">Data and their credits</h2>
 <div class="table">
 <table class="stack">
 <thead><tr><th scope="col">Data</th><th scope="col">Source</th><th scope="col">Licence</th><th scope="col">Credit</th></tr></thead>
 <tbody>
-<tr><td data-label="Data">Base map</td><td data-label="Source">IGN, Plan IGN v2 (vector tiles)</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">© IGN – Plan IGN v2, with the update date</td></tr>
+<tr><td data-label="Data">Base map</td><td data-label="Source"><a href={link('planIgn', 'en')} rel="noopener">IGN, Plan IGN v2</a> (vector tiles)</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">© IGN – Plan IGN v2, with the update date</td></tr>
 <tr><td data-label="Data">Base map</td><td data-label="Source">Protomaps, OpenStreetMap extract</td><td data-label="Licence">ODbL 1.0</td><td data-label="Credit">Protomaps © OpenStreetMap contributors</td></tr>
-<tr><td data-label="Data">Trails, ski areas, routing</td><td data-label="Source">OpenStreetMap, daily OpenSnowMap extract; OpenSkiMap</td><td data-label="Licence">ODbL 1.0</td><td data-label="Credit">© OpenStreetMap contributors; OpenSkiMap.org</td></tr>
-<tr><td data-label="Data">Terrain, slopes, forest</td><td data-label="Source">IGN, LiDAR HD terrain and canopy height models</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">IGN, LiDAR HD MNT and MNH, with the edition</td></tr>
-<tr><td data-label="Data">Estimated snow</td><td data-label="Source">Météo-France, snowpack simulation; massif outlines from snowtools (CNRM)</td><td data-label="Licence">Licence Ouverte 2.0; CeCILL-C</td><td data-label="Credit">Météo-France; snowtools, CNRM</td></tr>
-<tr><td data-label="Data">Avalanche bulletin</td><td data-label="Source">Météo-France, BERA</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">Météo-France, BERA of the day</td></tr>
+<tr><td data-label="Data">Trails, ski areas, routing</td><td data-label="Source"><a href={link('osm', 'en')} rel="noopener">OpenStreetMap</a>, daily <a href={link('opensnowmap', 'en')} rel="noopener">OpenSnowMap</a> extract; <a href={link('openskimap', 'en')} rel="noopener">OpenSkiMap</a></td><td data-label="Licence">ODbL 1.0</td><td data-label="Credit">© OpenStreetMap contributors; OpenSkiMap.org</td></tr>
+<tr><td data-label="Data">Terrain, slopes, forest</td><td data-label="Source">IGN, LiDAR HD <a href={link('lidarMnt', 'en')} rel="noopener">terrain</a> and <a href={link('lidarMnh', 'en')} rel="noopener">canopy height</a> models</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">IGN, LiDAR HD MNT and MNH, with the edition</td></tr>
+<tr><td data-label="Data">Estimated snow</td><td data-label="Source">Météo-France, <a href={link('snowSim', 'en')} rel="noopener">snowpack simulation</a>; massif outlines from <a href={link('snowtools', 'en')} rel="noopener">snowtools</a> (CNRM)</td><td data-label="Licence">Licence Ouverte 2.0; CeCILL-C</td><td data-label="Credit">Météo-France; snowtools, CNRM</td></tr>
+<tr><td data-label="Data">Avalanche bulletin</td><td data-label="Source">Météo-France, <a href={link('bera', 'en')} rel="noopener">BERA</a> (<a href={link('beraData', 'en')} rel="noopener">open data</a>)</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">Météo-France, BERA of the day</td></tr>
 <tr><td data-label="Data">Hourly weather</td><td data-label="Source">Météo-France, AROME <span class="tag plan">planned</span></td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">Météo-France, AROME</td></tr>
-<tr><td data-label="Data">Protected areas</td><td data-label="Source">PatriNat (OFB, MNHN, CNRS, IRD), INPN; Géoportail de l'urbanisme; FOEN for the Swiss game reserves</td><td data-label="Licence">INPN: open licence to be confirmed; GPU: Licence Ouverte; FOEN: opendata.swiss, source required</td><td data-label="Credit">PatriNat, INPN; Géoportail de l'urbanisme; © FOEN, © swisstopo</td></tr>
+<tr><td data-label="Data">Protected areas</td><td data-label="Source">PatriNat (OFB, MNHN, CNRS, IRD), <a href={link('inpn', 'en')} rel="noopener">INPN</a>; <a href={link('gpu', 'en')} rel="noopener">Géoportail de l'urbanisme</a>; FOEN for the Swiss game reserves</td><td data-label="Licence">INPN: open licence to be confirmed; GPU: Licence Ouverte; FOEN: opendata.swiss, source required</td><td data-label="Credit">PatriNat, INPN; Géoportail de l'urbanisme; © FOEN, © swisstopo</td></tr>
 <tr><td data-label="Data">Bivouac and access rules</td><td data-label="Source">Public orders, entered by hand</td><td data-label="Licence">Licence Ouverte 2.0 (our entry)</td><td data-label="Credit">Reference of the text behind each rule</td></tr>
-<tr><td data-label="Data">No-signal areas</td><td data-label="Source">ARCEP, Mon Réseau Mobile</td><td data-label="Licence">Licence Ouverte</td><td data-label="Credit">ARCEP, Mon Réseau Mobile, with the date of the maps</td></tr>
-<tr><td data-label="Data">Huts and shelters</td><td data-label="Source">refuges.info; Camptocamp (collaborative documents)</td><td data-label="Licence">CC BY-SA 2.0 and 3.0, published together under CC BY-SA 4.0</td><td data-label="Credit">© refuges.info contributors; contributors and link of the Camptocamp document</td></tr>
-<tr><td data-label="Data">Municipalities</td><td data-label="Source">geo.api.gouv.fr; IGN, Admin Express</td><td data-label="Licence">Licence Ouverte (Admin Express)</td><td data-label="Credit">geo.api.gouv.fr; IGN, Admin Express</td></tr>
-<tr><td data-label="Data">Avalanche exposure methods</td><td data-label="Source">AutoATES v3.0; com4FlowPy (AvaFrame)</td><td data-label="Licence">Published methods; their licences are in the source code</td><td data-label="Credit">AutoATES; AvaFrame</td></tr>
-<tr><td data-label="Data">Voice</td><td data-label="Source">Pocket TTS (Kyutai), “estelle” voice; pockettts.cpp</td><td data-label="Licence">CC BY 4.0; CC0; MIT</td><td data-label="Credit">Synthetic voice: Pocket TTS, Kyutai</td></tr>
+<tr><td data-label="Data">No-signal areas</td><td data-label="Source">ARCEP, <a href={link('arcep', 'en')} rel="noopener">Mon Réseau Mobile</a> (<a href={link('arcepData', 'en')} rel="noopener">open data</a>)</td><td data-label="Licence">Licence Ouverte</td><td data-label="Credit">ARCEP, Mon Réseau Mobile, with the date of the maps</td></tr>
+<tr><td data-label="Data">Huts and shelters</td><td data-label="Source"><a href={link('refugesInfo', 'en')} rel="noopener">refuges.info</a>; <a href={link('camptocamp', 'en')} rel="noopener">Camptocamp</a> (collaborative documents)</td><td data-label="Licence">CC BY-SA 2.0 and 3.0, published together under CC BY-SA 4.0</td><td data-label="Credit">© refuges.info contributors; contributors and link of the Camptocamp document</td></tr>
+<tr><td data-label="Data">Municipalities</td><td data-label="Source"><a href={link('geoApi', 'en')} rel="noopener">geo.api.gouv.fr</a>; IGN, <a href={link('adminExpress', 'en')} rel="noopener">Admin Express</a></td><td data-label="Licence">Licence Ouverte (Admin Express)</td><td data-label="Credit">geo.api.gouv.fr; IGN, Admin Express</td></tr>
+<tr><td data-label="Data">Avalanche exposure methods</td><td data-label="Source"><a href={link('autoates3', 'en')} rel="noopener">AutoATES v3.0</a>; com4FlowPy (<a href={link('avaframe', 'en')} rel="noopener">AvaFrame</a>); see the <a href="#articles">papers</a></td><td data-label="Licence">Published methods; their licences are in the source code</td><td data-label="Credit">AutoATES; AvaFrame</td></tr>
+<tr><td data-label="Data">Voice</td><td data-label="Source"><a href={link('pocketTts', 'en')} rel="noopener">Pocket TTS</a> (<a href={link('kyutai', 'en')} rel="noopener">Kyutai</a>), “estelle” voice; pockettts.cpp</td><td data-label="Licence">CC BY 4.0; CC0; MIT</td><td data-label="Credit">Synthetic voice: Pocket TTS, Kyutai</td></tr>
 <tr><td data-label="Data">Waxing</td><td data-label="Source">Temperature ranges published by Swix and Toko (waxing tips)</td><td data-label="Licence">Facts cited, no table copied</td><td data-label="Credit">After Swix, Toko</td></tr>
 </tbody>
 </table>
@@ -37,23 +47,23 @@ import { REPO } from '../i18n';
 <p>None of these credits means that the source endorses Traces Blanches. Trail maps drawn by ski resorts are never reused.</p>
 
 <h2 id="maps">Maps on this site</h2>
-<p>The maps on this site come from the Cervières and Chapelle-des-Bois packs and from the census of Nordic ski areas. Each caption carries a short credit; here are the full sources.</p>
+<p>The maps on this site come from packs of several massifs (Hautes-Alpes, Vosges, Ariège Pyrenees, Haut-Jura) and from the census of Nordic ski areas. Each caption carries a short credit; here are the full sources.</p>
 <ul>
 <li><b>Base map</b>: IGN, Plan IGN v2, Licence Ouverte 2.0.</li>
 <li><b>Slopes and terrain</b>: IGN, LiDAR HD terrain model, Licence Ouverte 2.0.</li>
 <li><b>Trails</b>: © OpenStreetMap contributors, ODbL 1.0, daily OpenSnowMap extract; Nordic centres: Protomaps © OpenStreetMap contributors.</li>
+<li><b>Grande Traversée du Jura</b>: route from <a href={link('datatourisme', 'en')} rel="noopener">DATAtourisme</a>, Licence Ouverte 2.0, and © OpenStreetMap contributors, ODbL 1.0; nearby routes from Camptocamp contributors, CC BY-SA 3.0.</li>
 <li><b>Huts</b>: © refuges.info contributors, CC BY-SA.</li>
 <li><b>No-signal areas</b>: ARCEP, Mon Réseau Mobile, maps of 30 June 2026, Licence Ouverte.</li>
-<li><b>Snow</b>: Météo-France, snowpack simulation of 14 November 2026, Licence Ouverte 2.0; massif outlines from snowtools (CNRM), CeCILL-C.</li>
-<li><b>Map of France</b>: Nordic ski areas © OpenStreetMap contributors, ODbL 1.0, OpenSkiMap; Nordic backcountry areas from OpenStreetMap and Geotrek; department outlines: IGN Admin Express via Etalab, Licence Ouverte.</li>
+<li><b>Map of France</b>: Nordic ski areas © OpenStreetMap contributors, ODbL 1.0, OpenSkiMap; Nordic backcountry areas from OpenStreetMap, <a href={link('geotrek', 'en')} rel="noopener">Geotrek</a> and DATAtourisme; packs built: project catalogue of 15 November 2026; department outlines: IGN Admin Express via Etalab, Licence Ouverte.</li>
 </ul>
 <p>No map on this site shows a source whose licence forbids sharing it.</p>
 
 <h2 id="code">The code of the app</h2>
-<p>The code of the app is open. Its licences, and the detail of each source with the passages read, are in the <a href={REPO}>source code</a>.</p>
+<p>The code of the app is open. Its licences, and the detail of each source with the passages read, are in the <a href={REPO} rel="noopener">source code</a>.</p>
 
 <h2 id="site">This website</h2>
 <p>Illustrations: Traces Blanches.</p>
-<p>The text and images of this website are under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> licence. The maps use data from the sources above and carry their credits in their captions.</p>
+<p>The text and images of this website are under the <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a> licence. The maps use data from the sources above and carry their credits in their captions.</p>
 </div>
 </Base>

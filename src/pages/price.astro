@@ -1,25 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
+// Former "Price" page: now "Get the app" (/get.html).
+import Redirect from '../components/Redirect.astro';
 ---
-<Base lang="en" page="price" title="Price · Traces Blanches" description="You pay for Traces Blanches once, through Google Play: no subscription, no ads, no paid extras. The amount will be announced at release.">
-<div class="text">
-<h1>Price</h1>
-<p class="lead">You pay for the app once. After that, it is yours: no subscription to renew before next winter.</p>
-
-<h2 id="payment">A single payment</h2>
-<p>The amount will be announced at release. You pay through Google Play, once. There is no subscription, no advertising and no paid extra. Google handles the payment; Traces Blanches does not receive your payment details.</p>
-
-<h2 id="included">What the price covers</h2>
-<p>The payment gives you the whole app, with the packs of the sites. You download the pack of the place where you ski, then the map, the slopes, the protected areas, the huts and the voice work without a signal.</p>
-<p>Sending an outing to Strava, planned and optional, stays outside the price: Strava's terms forbid charging for it.</p>
-
-<h2 id="why">Why a single payment</h2>
-<p>The project avoids any service that costs money for every user, every year: the map is on your phone, and routing will run there too. That is what makes a single payment possible.</p>
-
-<h2 id="open-code">Open code</h2>
-<p>The code of the app is open: anyone can read it and check what the app does. Your payment funds the work on the app and its maps.</p>
-
-<h2 id="when">When do I pay?</h2>
-<p>At release. The app will come out on Google Play for Android first, as an internal test, then for everyone. The iPhone version will follow. The button below lets you follow the release.</p>
-</div>
-</Base>
+<Redirect path="/price.html" />

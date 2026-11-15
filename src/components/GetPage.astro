@@ -1,0 +1,131 @@
+---
+// "Get the app" (/get.html, /fr/obtenir.html; formerly "Price"): one purchase on Google Play, what
+// it includes, what stays outside, why a single payment, and the questions about the price. The
+// price block uses the poster palette (night blue, peach snow, white) with the fox illustration.
+// Facts: one payment, no subscription, no ads (project rules, privacy page); Google Play's own
+// rules for refunds and for several phones (support pages, read on 15 November 2026); no iPhone
+// version is scheduled (the code licence only allows App Store distribution, docs/licences).
+import Base from '../layouts/Base.astro';
+import Img from './Img.astro';
+import { type Lang, REPO, href } from '../i18n';
+import { RELEASE_ISSUE, ISSUES, UI } from '../i18n/ui';
+import { link } from '../data/sources';
+import fox from '../assets/visuels/securite.webp';
+import { typo } from '../lib/typo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const a = (url: string, text: string) => `<a href="${url}" rel="noopener">${text}</a>`;
+const play = link('googlePlay', lang);
+
+const T = {
+  en: {
+    title: 'Get the app · Traces Blanches',
+    description: 'Traces Blanches is bought once, on Google Play: the whole of France, every area and every pack, the updates, no ads, no subscription. The amount will be announced at release.',
+    h1: 'Get the app',
+    lead: 'One purchase, and the whole of France goes with you on skis. Nothing to renew before next winter.',
+    label: 'Single purchase · Google Play',
+    amount: 'Amount announced at release',
+    once: `Paid once, through ${a(play, 'Google Play')}. Google handles the payment: Traces Blanches never sees your bank details.`,
+    alt: 'Illustration: a red fox stands on a snowy ridge below white peaks, its tracks behind it.',
+    includesTitle: 'What the purchase includes',
+    includes: [
+      { h: 'All of France', p: 'The 219 Nordic ski areas of the census and the Nordic backcountry areas outside resorts, as their packs are built.' },
+      { h: 'Every pack', p: 'Download as many areas as you like, at no extra cost. Each one then works without a network.' },
+      { h: 'The updates', p: 'New versions of the app and of the packs come without paying again.' },
+      { h: 'No ads', p: 'No advertising and no audience tracking in the app.' },
+      { h: 'No subscription', p: 'You pay once. Nothing renews, nothing expires.' },
+      { h: 'Your data stays with you', p: 'Your position, your tracks and your day plans stay on your phone.' },
+    ],
+    notesLabel: 'About the price',
+    outsideTitle: 'Outside the price',
+    outside: `Sending an outing to Strava, planned and optional, stays free: ${a(link('strava', lang), "Strava's API terms")} forbid charging for it.`,
+    whyTitle: 'Why a single payment',
+    why: 'The map lives on your phone, and the route will be worked out there too. No service costs money for each skier every year, so one payment is enough.',
+    codeTitle: 'Open code',
+    code: `Anyone can read ${a(REPO, 'the code of the app')} and check what it does. Your payment funds the work on the app and on its maps.`,
+    faqTitle: 'Questions about the price',
+    faq: [
+      { q: 'Can I get a refund?', a: `Refunds follow ${a(link('playRefund', lang), "Google Play's refund policies")}, which depend on the item, the time since the purchase and your country. You can also ${a(ISSUES, 'write to us on GitHub')}.` },
+      { q: 'Can I install it on several phones?', a: `Yes. ${a(link('playDevices', lang), 'Google Play lets you use')} an app you bought on any Android phone signed in to the same Google account, without paying again.` },
+      { q: 'Will there be an iPhone version?', a: 'Not for now. The app comes out on Android first, and no iPhone version is scheduled. The licence of the code already allows distribution on the App Store.' },
+      { q: 'When do I pay?', a: `At release. The app will come out on ${a(play, 'Google Play')} as an internal test first, then for everyone. The button lets you follow the release.` },
+    ],
+    more: 'Every feature, explained',
+  },
+  fr: {
+    title: "Obtenir l'app · Traces Blanches",
+    description: "Traces Blanches s'achète une fois, sur Google Play : toute la France, tous les domaines et tous les packs, les mises à jour, sans publicité ni abonnement. Le montant sera annoncé à la sortie.",
+    h1: "Obtenir l'app",
+    lead: "Un seul achat, et toute la France part avec vous à ski. Rien à renouveler avant l'hiver suivant.",
+    label: 'Achat unique · Google Play',
+    amount: 'Montant annoncé à la sortie',
+    once: `Payé une fois, par ${a(play, 'Google Play')}. Google traite le paiement : Traces Blanches ne voit jamais vos coordonnées bancaires.`,
+    alt: 'Illustration : un renard roux sur une crête enneigée sous des sommets blancs, ses traces derrière lui.',
+    includesTitle: "Ce que comprend l'achat",
+    includes: [
+      { h: 'Toute la France', p: 'Les 219 domaines nordiques du recensement et les domaines de ski de randonnée nordique hors stations, à mesure que leurs packs sont construits.' },
+      { h: 'Tous les packs', p: 'Téléchargez autant de domaines que vous voulez, sans supplément. Chacun marche ensuite sans réseau.' },
+      { h: 'Les mises à jour', p: "Les nouvelles versions de l'app et des packs arrivent sans payer de nouveau." },
+      { h: 'Aucune publicité', p: "Ni publicité, ni mesure d'audience dans l'app." },
+      { h: 'Aucun abonnement', p: "Vous payez une fois. Rien ne se renouvelle, rien n'expire." },
+      { h: 'Vos données restent chez vous', p: 'Votre position, vos traces et vos plans de journée restent sur votre téléphone.' },
+    ],
+    notesLabel: 'À propos du prix',
+    outsideTitle: 'Hors du prix',
+    outside: `L'envoi d'une sortie vers Strava, prévu et facultatif, reste gratuit : ${a(link('strava', lang), "les conditions de l'API Strava")} interdisent de le faire payer.`,
+    whyTitle: 'Pourquoi un paiement unique',
+    why: "La carte vit sur votre téléphone, et l'itinéraire s'y calculera aussi. Aucun service ne coûte de l'argent pour chaque skieur, chaque année : un seul paiement suffit.",
+    codeTitle: 'Un code ouvert',
+    code: `Chacun peut lire ${a(REPO, "le code de l'app")} et vérifier ce qu'elle fait. Votre paiement finance le travail sur l'app et sur ses cartes.`,
+    faqTitle: 'Questions sur le prix',
+    faq: [
+      { q: 'Puis-je être remboursé ?', a: `Le remboursement suit ${a(link('playRefund', lang), 'les conditions de remboursement de Google Play')}, qui dépendent de l'article, du temps écoulé depuis l'achat et de votre pays. Vous pouvez aussi ${a(ISSUES, 'nous écrire sur GitHub')}.` },
+      { q: "Puis-je l'installer sur plusieurs téléphones ?", a: `Oui. ${a(link('playDevices', lang), 'Google Play vous laisse utiliser')} une app achetée sur tout téléphone Android connecté au même compte Google, sans payer de nouveau.` },
+      { q: 'Y aura-t-il une version iPhone ?', a: "Pas pour l'instant. L'app sort d'abord sur Android, et aucune version iPhone n'est programmée. La licence du code autorise déjà une diffusion sur l'App Store." },
+      { q: 'Quand payer ?', a: `À la sortie. L'app sortira d'abord sur ${a(play, 'Google Play')}, en test interne, puis pour tous. Le bouton vous permet de suivre la sortie.` },
+    ],
+    more: 'Toutes les fonctionnalités, expliquées',
+  },
+}[lang];
+// The fox beside the price on a wide screen (about 44 % of the 68rem column), above it on a phone.
+const t = (x: string) => typo(lang, x);
+const FOX = '(min-width: 68rem) 29rem, (min-width: 48rem) 44vw, calc(100vw - 2.2rem)';
+---
+<Base lang={lang} page="get" title={T.title} description={t(T.description)}>
+<div class="get">
+<header class="get-head text">
+<h1>{T.h1}</h1>
+<p class="lead">{t(T.lead)}</p>
+</header>
+
+<section class="buy on-night" aria-labelledby="buy-amount">
+<div class="buy-art"><Img src={fox} alt={T.alt} sizes={FOX} eager /></div>
+<div class="buy-body">
+<p class="buy-label">{T.label}</p>
+<p id="buy-amount" class="buy-amount">{T.amount}</p>
+<p class="buy-once" set:html={t(T.once)} />
+<div class="actions"><a class="btn primary big" href={RELEASE_ISSUE} rel="noopener">{UI[lang].notify}</a></div>
+</div>
+</section>
+
+<section class="get-section" aria-labelledby="includes">
+<h2 id="includes" class="big">{T.includesTitle}</h2>
+<div class="includes">
+{T.includes.map((x) => <div class="include"><h3>{x.h}</h3><p>{t(x.p)}</p></div>)}
+</div>
+</section>
+
+<section class="get-section get-notes" aria-label={T.notesLabel}>
+<div class="note"><h2 id="outside">{T.outsideTitle}</h2><p set:html={t(T.outside)} /></div>
+<div class="note"><h2 id="why">{T.whyTitle}</h2><p>{t(T.why)}</p></div>
+<div class="note"><h2 id="open-code">{T.codeTitle}</h2><p set:html={t(T.code)} /></div>
+</section>
+
+<section class="get-section text" aria-labelledby="price-faq">
+<h2 id="price-faq" class="big">{T.faqTitle}</h2>
+{T.faq.map((f) => <details><summary>{t(f.q)}</summary><p set:html={t(f.a)} /></details>)}
+<p><a href={href('features', lang)}>{T.more}</a></p>
+</section>
+</div>
+</Base>

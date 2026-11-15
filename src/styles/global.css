@@ -57,11 +57,16 @@ a:hover { text-decoration-thickness: 2px; }
 .top .site a:hover { background: var(--accent-soft); }
 .top .site a[aria-current=page] { color: var(--accent); font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .4em; }
 .top .site a:focus-visible { outline-offset: -3px; }
+/* From 48rem the main button sits in the row (the menu keeps the page links); from 64rem, where
+   the four page links fit, they sit in the row too. */
 @media (min-width: 48rem) {
-  .top .wrap { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "brand menu tools"; column-gap: 1rem; }
   .logo { font-size: 1.05rem; white-space: nowrap; }
   .tools { gap: .35rem; }
   .tools .cta { display: inline-flex; min-height: 40px; padding: .3rem .8rem; font-size: .88rem; white-space: nowrap; }
+  .top .site .menu-cta { display: none; }
+}
+@media (min-width: 64rem) {
+  .top .wrap { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "brand menu tools"; column-gap: 1rem; }
   @supports selector(::details-content) {
     .top .site .menu-cta { display: none; }
     .top details.menu { justify-self: stretch; }
@@ -232,3 +237,82 @@ h2.big { font-size: var(--fs-h2-big); line-height: 1.12; letter-spacing: -.025em
   .scene.solo { grid-template-columns: minmax(0, 1fr); }
   .split { grid-template-columns: 1.4fr 1fr; gap: 3.5rem; align-items: start; }
 }
+
+/* ---------------------------------------------------------------- home: all of France
+   A night band right under the hero. The text keeps to the left edge of the page column; on a
+   wide screen the map takes all the room on its right, up to the edge of the window. */
+.france { margin: calc(var(--space-section) / 2) calc(50% - 50vw) 0; padding: var(--space-section) var(--pad); background: var(--night); color: var(--on-night); }
+.france-in { display: grid; gap: 1.75rem; align-items: center; }
+.france-text { max-width: 36rem; }
+.france-text p { color: var(--on-night-muted); font-size: 1.08rem; }
+.france a { color: var(--ice); }
+.france-map { margin: 0; max-width: 56rem; }
+.france-map img { border: 0; border-radius: 0; box-shadow: none; background: var(--night); }
+.france-map figcaption { color: var(--on-night-muted); max-width: 44rem; }
+@media (min-width: 64rem) {
+  .france { padding-left: max(var(--pad), calc(50vw - var(--max) / 2 + var(--pad))); padding-right: max(var(--pad), 3vw); }
+  .france-in { grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); gap: 3rem; }
+}
+
+/* ---------------------------------------------------------------- get the app
+   The price block in the poster palette (night blue, peach snow, white) with the fox, then
+   what the purchase includes in six short blocks, then notes and questions. */
+.get-head { margin-top: .5rem; }
+.buy { display: grid; margin: 1.5rem 0 0; border-radius: 1.25rem; overflow: hidden; background: var(--poster-night); color: var(--snow-white); box-shadow: var(--shadow); }
+.buy-art picture { display: block; height: 100%; }
+.buy-art img { display: block; width: 100%; height: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 60% 50%; }
+.buy-body { padding: 1.75rem 1.4rem 2rem; }
+.buy-label { font: 600 .78rem/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--snow-peach); margin: 0 0 .8rem; }
+.buy-amount { font-size: clamp(1.9rem, 1.3rem + 2.6vw, 2.9rem); line-height: 1.08; font-weight: 700; letter-spacing: -.02em; margin: 0 0 1rem; text-wrap: balance; }
+.buy-once { font-size: 1.05rem; max-width: 30rem; margin: 0; }
+.buy a:not(.btn) { color: var(--snow-peach); }
+.buy .actions { margin: 1.5rem 0 0; }
+.buy .btn.primary { background: var(--snow-peach); border-color: var(--snow-peach); color: var(--poster-night); }
+.get-section { padding-top: clamp(2.75rem, 2rem + 3vw, 4.5rem); }
+.includes { display: grid; gap: 1rem; }
+.include { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--snow-rose); border-radius: var(--radius); padding: 1.1rem 1.2rem 1.2rem; }
+.include h3 { margin: 0 0 .35rem; font-size: 1.12rem; }
+.include p { margin: 0; color: var(--muted); }
+.get-notes { display: grid; gap: 1.6rem; }
+.note h2 { font-size: 1.2rem; margin: 0 0 .45rem; }
+.note p { margin: 0; }
+@media (min-width: 48rem) {
+  .buy { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+  .buy-art { order: 2; }
+  .buy-art img { aspect-ratio: auto; min-height: 22rem; }
+  .buy-body { align-self: center; padding: 2.5rem 2.25rem 2.75rem 2.5rem; }
+  .includes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  .includes, .get-notes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .get-notes { gap: 2.25rem; }
+}
+
+/* ---------------------------------------------------------------- features
+   One part per moment or theme: its intro beside a picture, then written blocks in two
+   columns on a wide screen. */
+.part { padding-top: clamp(3rem, 2.2rem + 3.5vw, 5.5rem); }
+.part-head { display: grid; gap: 1.25rem; align-items: center; }
+.part-intro { max-width: 36rem; }
+.part-intro .lead { margin-bottom: 0; }
+.part-art { margin: 0; }
+.feats { display: grid; gap: 1rem; margin-top: 1.75rem; }
+.feat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.2rem .6rem; }
+.feat h3 { margin: 0 0 .5rem; font-size: 1.15rem; }
+.feat-tags { margin: .2rem 0 .4rem; }
+.part-more { margin-top: 2.5rem; }
+@media (min-width: 48rem) {
+  .part-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 2.5rem; }
+  .part-head.flip { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+  .part-head.flip .part-art { order: -1; }
+  .part-head.solo { grid-template-columns: minmax(0, 1fr); }
+  .feats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+}
+
+/* ---------------------------------------------------------------- sources */
+.refs { padding-left: 1.4rem; }
+ul.refs { list-style: none; padding-left: 0; }
+.refs li { margin: 0 0 1rem; }
+.ref-cite, .ref-use { display: block; }
+.ref-cite a { overflow-wrap: anywhere; }
+.ref-use { color: var(--muted); font-size: .95rem; margin-top: .15rem; }

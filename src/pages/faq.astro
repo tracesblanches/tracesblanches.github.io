@@ -1,5 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import { link, REFS } from '../data/sources';
+import { REPO } from '../i18n';
+const ref = (id: string) => REFS.find((r) => r.id === id)!.href;
 ---
 <Base lang="en" page="faq" title="Frequently asked questions · Traces Blanches" description="Offline use, battery, avalanches, your data, price, compatible phones: answers to questions about Traces Blanches, the offline Nordic skiing app.">
 <div class="text">
@@ -18,10 +21,10 @@ import Base from '../layouts/Base.astro';
 <h2 id="offline">Offline</h2>
 
 <h3>What works without a signal?</h3>
-<p>Everything in the site's pack: the map, the trails, the slopes, avalanche exposure, protected areas, huts, no-signal areas, estimated snow and the voice. Routing will run on the phone. Your position comes from satellites, which need no network.</p>
+<p>Everything in the pack of your ski area: the map, the trails, the slopes, avalanche exposure, protected areas, huts, no-signal areas, estimated snow and the voice. Routing will run on the phone. Your position comes from satellites, which need no network.</p>
 
 <h3>What do I download before leaving?</h3>
-<p>The pack of the site where you ski. Today it weighs about 40 MB for Cervières and 35 MB for Chapelle-des-Bois. You will download it in the app, at the chalet or at home, before you leave. Updating only the day's information (snow, bulletin, weather) is planned.</p>
+<p>The pack of the area where you ski. It weighs from about 9 to 46 MB for a Nordic area, and up to about 100 MB for a section of a great traverse. You will download it in the app, at the chalet or at home, before you leave. Updating only the day's information (snow, bulletin, weather) is planned.</p>
 
 <h3>What if the pack is a few days old?</h3>
 <p>Each piece of information carries its date. Slopes and avalanche exposure depend on terrain and forest: they do not change from one day to the next. Protected areas need an update every month. Snow, the avalanche bulletin and the weather age in hours or days: the app will show their age next to them, so that you can judge whether to still trust them.</p>
@@ -29,7 +32,7 @@ import Base from '../layouts/Base.astro';
 <h2 id="battery">Battery</h2>
 
 <h3>How long does the battery last?</h3>
-<p>We do not know yet: the measurement has not been made. Test outings in deep cold are planned this winter, in Cervières in January and in Chapelle-des-Bois in February and March. The figures will be published here.</p>
+<p>We do not know yet: the measurement has not been made. Test outings in deep cold are planned this winter, in the Southern Alps in January and in the Jura in February and March. The figures will be published here.</p>
 
 <h3>What does the app do to save it?</h3>
 <p>What is planned: voice guidance with the screen off; GPS used only as much as needed; stops noticed by the motion sensor; altitude read from the barometer. The app will forecast the battery left at the end of the outing and keep a reserve for an emergency call.</p>
@@ -37,16 +40,16 @@ import Base from '../layouts/Base.astro';
 <h2 id="avalanches">Avalanches</h2>
 
 <h3>Does the app tell me whether a slope is safe?</h3>
-<p>No, never. No map can tell you that. Traces Blanches shows where the terrain is steep and where a computation finds it exposed. It shows the day's avalanche bulletin when Météo-France publishes one. The decision stays yours, on the spot.</p>
+<p>No, never. No map can tell you that. Traces Blanches shows where the terrain is steep and where a computation finds it exposed. It shows the day's <a href={link('bera', 'en')} rel="noopener">avalanche bulletin</a> when <a href={link('meteofrance', 'en')} rel="noopener">Météo-France</a> publishes one. The decision stays yours, on the spot.</p>
 
 <h3>Where do the slopes come from?</h3>
-<p>From the laser survey of IGN, the French mapping agency, with one measurement every 5 m. The map sorts them into four bands: 30 to 35°, 35 to 40°, 40 to 45°, 45° and more. A slope under 30° can still lie below a steeper one: look above you too.</p>
+<p>From the <a href={link('lidarMnt', 'en')} rel="noopener">laser survey of IGN</a>, the French mapping agency, with one measurement every 5 m. The map sorts them into four bands: 30 to 35°, 35 to 40°, 40 to 45°, 45° and more. A slope under 30° can still lie below a steeper one: look above you too.</p>
 
 <h3>What is the avalanche exposure on the map?</h3>
-<p>A computation, not an observation. It finds the places where an avalanche could start, from terrain and forest, then follows its path downhill. It uses two methods published by researchers. The comparison with recorded avalanches is in progress. An avalanche can start where the computation does not see one.</p>
+<p>A computation, not an observation. It finds the places where an avalanche could start, from terrain and forest, then follows its path downhill. It uses two methods published by researchers: <a href={ref('autoates2')} rel="noopener">AutoATES</a> for the release areas and <a href={ref('flowpy')} rel="noopener">Flow-Py</a> for the runout. The <a href={link('lidarMnh', 'en')} rel="noopener">canopy height of IGN</a> gives the forest. The comparison with recorded avalanches is in progress. An avalanche can start where the computation does not see one.</p>
 
 <h3>And the avalanche bulletin?</h3>
-<p>The pack takes the Météo-France avalanche bulletin (BERA) for the site's massif, with its date. The Jura has no BERA: for Chapelle-des-Bois, the pack points to the Météo-France mountain weather and to the bulletin of the Swiss institute SLF, which covers the neighbouring Swiss Jura.</p>
+<p>The pack takes the <a href={link('bera', 'en')} rel="noopener">Météo-France avalanche bulletin</a> (BERA) for the area's massif, with its date. The Jura has no BERA: <a href={link('juraNoBera', 'en')} rel="noopener">Météo-France issues warning messages there</a>, and the pack points to the Météo-France mountain weather and to the <a href={link('slf', 'en')} rel="noopener">bulletin of the Swiss institute SLF</a>, which covers the neighbouring Swiss Jura. To learn to read a bulletin, the <a href={link('anena', 'en')} rel="noopener">ANENA</a> runs courses.</p>
 
 <h3>Does the app plan off-piste routes?</h3>
 <p>The computation can already do it: it avoids slopes over 30°, refuses areas closed on the chosen date and takes the estimated snow into account. In the app, this feature is planned for a second version.</p>
@@ -54,7 +57,7 @@ import Base from '../layouts/Base.astro';
 <h2 id="data">Your data</h2>
 
 <h3>Is my position sent anywhere?</h3>
-<p>No. Your position, your tracks and your day plans stay on your phone. Two exceptions, planned and optional, only if you choose them: the overdue alert, which leaves your outing plan on the server to warn someone close, and sending an outing to Strava.</p>
+<p>No. Your position, your tracks and your day plans stay on your phone. Two exceptions, planned and optional, only if you choose them: the overdue alert, which leaves your outing plan on the server to warn someone close, and sending an outing to <a href={link('strava', 'en')} rel="noopener">Strava</a>.</p>
 
 <h3>Do I need an account?</h3>
 <p>No. The app downloads packs without an account. It will carry no ads and no audience measurement.</p>
@@ -65,21 +68,21 @@ import Base from '../layouts/Base.astro';
 <h2 id="price">Price</h2>
 
 <h3>How much will the app cost?</h3>
-<p>The amount will be announced at release. You will pay once, through Google Play. There will be no subscription and no ads. The <a href="/price.html">price</a> page says what this payment covers.</p>
+<p>The amount will be announced at release. You will pay once, through <a href={link('googlePlay', 'en')} rel="noopener">Google Play</a>. There will be no subscription and no ads. The <a href="/get.html">Get the app</a> page says what the purchase includes.</p>
 
 <h3>Why pay for an app whose code is open?</h3>
-<p>The payment funds the work on the app and its maps. The code stays open: anyone can read it and check what the app does.</p>
+<p>The payment funds the work on the app and its maps. The code stays open: anyone can <a href={REPO} rel="noopener">read it</a> and check what the app does.</p>
 
 <h3>Will uploading to Strava cost extra?</h3>
-<p>No. Strava's terms forbid charging for what goes through their service. Sending an outing to Strava, planned and optional, will stay outside what you pay for.</p>
+<p>No. <a href={link('strava', 'en')} rel="noopener">Strava's API terms</a> forbid charging for what goes through their service. Sending an outing to Strava, planned and optional, will stay outside what you pay for.</p>
 
 <h2 id="devices">Phones</h2>
 
 <h3>Which phones will the app run on?</h3>
-<p>Android phones, from Android 10. It will come out on Google Play first, as an internal test, then for everyone.</p>
+<p>Android phones, from Android 10. It will come out on <a href={link('googlePlay', 'en')} rel="noopener">Google Play</a> first, as an internal test, then for everyone.</p>
 
 <h3>What about the iPhone?</h3>
-<p>Later. The Android app comes first. The code licence already allows distribution through the App Store.</p>
+<p>Not for now. The Android app comes first, and no iPhone version is scheduled. The code licence already allows distribution through the App Store.</p>
 
 <h3>Do I need a watch?</h3>
 <p>No. The phone alone is enough. A Wear OS watch app is planned as an option, for comfort: direction, time left, vibrations.</p>
@@ -87,21 +90,21 @@ import Base from '../layouts/Base.astro';
 <h2 id="other">Other questions</h2>
 
 <h3>Which places are covered?</h3>
-<p>Today, two test sites: Cervières (Hautes-Alpes) and Chapelle-des-Bois (Doubs). The census counts 219 Nordic ski areas in France; their packs come next.</p>
+<p>The whole of France. The census counts 219 Nordic ski areas, from the Ardennes to the Pyrenees, and 43 Nordic backcountry areas and traverses outside resorts, such as the <a href={link('gtj', 'en')} rel="noopener">Grande Traversée du Jura</a>. The packs of 30 Nordic areas spread over every massif are built, and so are those of the Grande Traversée du Jura and the Vercors high plateaus; the others are planned. The <a href="/features.html#france">features</a> page shows the map.</p>
 
 <h3>Where do the maps and information come from?</h3>
-<p>From public and open sources: IGN, OpenStreetMap, Météo-France, ARCEP, the French national natural heritage inventory, refuges.info and Camptocamp, among others. The <a href="/licences.html">credits</a> page names them all.</p>
+<p>From public and open sources: <a href={link('ign', 'en')} rel="noopener">IGN</a>, <a href={link('osm', 'en')} rel="noopener">OpenStreetMap</a>, <a href={link('meteofrance', 'en')} rel="noopener">Météo-France</a>, <a href={link('arcep', 'en')} rel="noopener">ARCEP</a>, the <a href={link('inpn', 'en')} rel="noopener">French national natural heritage inventory</a>, <a href={link('refugesInfo', 'en')} rel="noopener">refuges.info</a> and <a href={link('camptocamp', 'en')} rel="noopener">Camptocamp</a>, among others. The <a href="/licences.html">sources and credits</a> page names them all, with the papers the calculations rest on.</p>
 
 <h3>Why is trail status missing?</h3>
-<p>Ski areas publish the state of their trails without allowing its reuse. So it is not in the app. We will ask the Espace Nordique Jurassien and Nordic France for written permission.</p>
+<p>Ski areas publish the state of their trails without allowing its reuse. So it is not in the app. We will ask the <a href={link('enj', 'en')} rel="noopener">Espace Nordique Jurassien</a> and <a href={link('nordicFrance', 'en')} rel="noopener">Nordic France</a> for written permission.</p>
 
 <h3>Is the resort's trail map in the app?</h3>
-<p>No. A trail map drawn by a resort belongs to it, and we never reuse it. The app's trails come from OpenStreetMap, the collaborative map of the world.</p>
+<p>No. A trail map drawn by a resort belongs to it, and we never reuse it. The app's trails come from <a href={link('osm', 'en')} rel="noopener">OpenStreetMap</a>, the collaborative map of the world.</p>
 
 <h3>A trail is wrong or missing. What can I do?</h3>
-<p>If it is wrong in OpenStreetMap, you can fix it there: the fix will reach the next pack. Otherwise, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose">report it on GitHub</a>, with the place and the date you saw the problem.</p>
+<p>If it is wrong in OpenStreetMap, you can fix it there: the fix will reach the next pack. Otherwise, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose" rel="noopener">report it on GitHub</a>, with the place and the date you saw the problem.</p>
 
 <h3>How do I ask another question?</h3>
-<p><a href="https://github.com/tracesblanches/tracesblanches/issues">Ask it on GitHub</a>. Answers that help everyone will come to this page.</p>
+<p><a href="https://github.com/tracesblanches/tracesblanches/issues" rel="noopener">Ask it on GitHub</a>. Answers that help everyone will come to this page.</p>
 </div>
 </Base>

@@ -46,7 +46,7 @@ const n = Math.min(slides.length, 2);
 {eyebrow && <p class="eyebrow">{eyebrow}</p>}
 <h1 id="hero-title">{title}</h1>
 <p class="hero-lead">{lead}</p>
-<div class="actions"><a class="btn primary big" href={cta.href}>{cta.label}</a></div>
+<div class="actions"><a class="btn primary big" href={cta.href} rel="noopener">{cta.label}</a></div>
 </div>
 </div>
 {n > 1 && (
