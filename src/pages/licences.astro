@@ -14,7 +14,7 @@ import SourcesList from '../components/SourcesList.astro';
 <li><a href="#maps">Maps on this site</a></li>
 <li><a href="#site">This website</a></li>
 </ul>
-<p>In the app, “© OpenStreetMap” will sit in a corner of the map and the other credits on a “Data licences” screen. <span class="tag plan">planned</span></p>
+<p>In the app, a small ⓘ in a corner of the map opens the sources and licences of the data it shows, with the version of each pack.</p>
 </div>
 
 <SourcesList lang="en" />
@@ -30,7 +30,6 @@ import SourcesList from '../components/SourcesList.astro';
 <tr><td data-label="Data">Terrain, slopes, forest</td><td data-label="Source">IGN, LiDAR HD <a href={link('lidarMnt', 'en')} rel="noopener">terrain</a> and <a href={link('lidarMnh', 'en')} rel="noopener">canopy height</a> models</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">IGN, LiDAR HD MNT and MNH, with the edition</td></tr>
 <tr><td data-label="Data">Estimated snow</td><td data-label="Source">Météo-France, <a href={link('snowSim', 'en')} rel="noopener">snowpack simulation</a>; massif outlines from <a href={link('snowtools', 'en')} rel="noopener">snowtools</a> (CNRM)</td><td data-label="Licence">Licence Ouverte 2.0; CeCILL-C</td><td data-label="Credit">Météo-France; snowtools, CNRM</td></tr>
 <tr><td data-label="Data">Avalanche bulletin</td><td data-label="Source">Météo-France, <a href={link('bera', 'en')} rel="noopener">BERA</a> (<a href={link('beraData', 'en')} rel="noopener">open data</a>)</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">Météo-France, BERA of the day</td></tr>
-<tr><td data-label="Data">Hourly weather</td><td data-label="Source">Météo-France, AROME <span class="tag plan">planned</span></td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">Météo-France, AROME</td></tr>
 <tr><td data-label="Data">Protected areas</td><td data-label="Source">PatriNat (OFB, MNHN, CNRS, IRD), <a href={link('inpn', 'en')} rel="noopener">INPN</a>; <a href={link('gpu', 'en')} rel="noopener">Géoportail de l'urbanisme</a>; FOEN for the Swiss game reserves</td><td data-label="Licence">INPN: open licence to be confirmed; GPU: Licence Ouverte; FOEN: opendata.swiss, source required</td><td data-label="Credit">PatriNat, INPN; Géoportail de l'urbanisme; © FOEN, © swisstopo</td></tr>
 <tr><td data-label="Data">Bivouac and access rules</td><td data-label="Source">Public orders, entered by hand</td><td data-label="Licence">Licence Ouverte 2.0 (our entry)</td><td data-label="Credit">Reference of the text behind each rule</td></tr>
 <tr><td data-label="Data">No-signal areas</td><td data-label="Source">ARCEP, <a href={link('arcep', 'en')} rel="noopener">Mon Réseau Mobile</a> (<a href={link('arcepData', 'en')} rel="noopener">open data</a>)</td><td data-label="Licence">Licence Ouverte</td><td data-label="Credit">ARCEP, Mon Réseau Mobile, with the date of the maps</td></tr>

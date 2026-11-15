@@ -22,7 +22,6 @@ const slides = (['accueil', 'accueil-2'] as const).map(visual).filter((v) => v.i
   .map((v) => ({ image: v.image!, portrait: v.portrait, alt: v.alt[lang], credit: v.credit?.[lang] }));
 const preload = slides.length ? await heroPreload(slides[0].image, slides[0].portrait) : [];
 const SCENES: Slot[] = ['matin', 'piste', 'retour'];
-const tag = (t: string) => (t === 'today' ? { cls: 'done', label: c.today } : { cls: 'plan', label: c.planned });
 // A picture beside a text column: drawn at about 60 % of the 68rem column from 48rem, else full width.
 const SIDE = '(min-width: 68rem) 38rem, (min-width: 48rem) 56vw, calc(100vw - 2.2rem)';
 // The map of France, in its night band: the window minus the text column from 64rem (56rem at most), else full width.
@@ -58,7 +57,6 @@ const fr = visual('france');
         <p class="step">{i + 1}</p>
         <h3>{t(s.title)}</h3>
         {s.text.map((x) => <p set:html={t(x)} />)}
-        <p>{s.tags.map((t) => <span class:list={['tag', tag(t).cls]}>{tag(t).label}</span>)}</p>
       </div>
       {v.image && (
         <figure class="scene-art">

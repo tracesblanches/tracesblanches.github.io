@@ -14,7 +14,7 @@ import SourcesList from '../../components/SourcesList.astro';
 <li><a href="#cartes">Cartes du site</a></li>
 <li><a href="#site">Ce site</a></li>
 </ul>
-<p>Dans l'app, « © OpenStreetMap » sera dans un coin de la carte et les autres mentions dans un écran « Licences des données ». <span class="tag plan">prévu</span></p>
+<p>Dans l'app, un petit ⓘ dans un coin de la carte ouvre les sources et les licences des données qu'elle montre, avec la version de chaque pack.</p>
 </div>
 
 <SourcesList lang="fr" />
@@ -30,7 +30,6 @@ import SourcesList from '../../components/SourcesList.astro';
 <tr><td data-label="Donnée">Relief, pentes, forêt</td><td data-label="Source">IGN, <a href={link('lidarMnt', 'fr')} rel="noopener">MNT</a> et <a href={link('lidarMnh', 'fr')} rel="noopener">MNH</a> LiDAR HD</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Mention">IGN, LiDAR HD MNT et MNH, avec l'édition</td></tr>
 <tr><td data-label="Donnée">Neige estimée</td><td data-label="Source">Météo-France, <a href={link('snowSim', 'fr')} rel="noopener">simulation nivologique</a>&nbsp;; contours des massifs de <a href={link('snowtools', 'fr')} rel="noopener">snowtools</a> (CNRM)</td><td data-label="Licence">Licence Ouverte 2.0 ; CeCILL-C</td><td data-label="Mention">Météo-France ; snowtools, CNRM</td></tr>
 <tr><td data-label="Donnée">Bulletin d'avalanche</td><td data-label="Source">Météo-France, <a href={link('bera', 'fr')} rel="noopener">BERA</a> (<a href={link('beraData', 'fr')} rel="noopener">données publiques</a>)</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Mention">Météo-France, BERA du jour</td></tr>
-<tr><td data-label="Donnée">Météo heure par heure</td><td data-label="Source">Météo-France, AROME <span class="tag plan">prévu</span></td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Mention">Météo-France, AROME</td></tr>
 <tr><td data-label="Donnée">Zones protégées</td><td data-label="Source">PatriNat (OFB, MNHN, CNRS, IRD), <a href={link('inpn', 'fr')} rel="noopener">INPN</a>&nbsp;; <a href={link('gpu', 'fr')} rel="noopener">Géoportail de l'urbanisme</a>&nbsp;; OFEV pour les districts francs suisses</td><td data-label="Licence">INPN : licence ouverte à confirmer ; GPU : Licence Ouverte ; OFEV : opendata.swiss, source obligatoire</td><td data-label="Mention">PatriNat, INPN ; Géoportail de l'urbanisme ; © OFEV, © swisstopo</td></tr>
 <tr><td data-label="Donnée">Règles de bivouac et d'accès</td><td data-label="Source">Arrêtés publics, saisis à la main</td><td data-label="Licence">Licence Ouverte 2.0 (notre saisie)</td><td data-label="Mention">Référence du texte de chaque règle</td></tr>
 <tr><td data-label="Donnée">Zones sans réseau</td><td data-label="Source">ARCEP, <a href={link('arcep', 'fr')} rel="noopener">Mon Réseau Mobile</a> (<a href={link('arcepData', 'fr')} rel="noopener">données ouvertes</a>)</td><td data-label="Licence">Licence Ouverte</td><td data-label="Mention">ARCEP, Mon Réseau Mobile, avec la date des cartes</td></tr>

@@ -1,6 +1,6 @@
 ---
 // Features (/features.html, /fr/fonctionnalites.html): each feature explained in a few sentences,
-// by moment of the day then by theme, each with its state (computed today, planned). Text in
+// by moment of the day then by theme; only what is coded is described. Text in
 // src/copy/features.ts; pictures are the maps of src/data/visuals.ts (real packs, several
 // massifs) and the illustrations of src/assets/visuels/. Written blocks with headings, no bullets.
 import type { ImageMetadata } from 'astro';
@@ -30,7 +30,6 @@ const ART: Record<NonNullable<Part['art']>, { image: ImageMetadata; alt: string;
   deer: { image: deer, alt: '', credit: ILLU },
   otter: { image: otter, alt: '', credit: ILLU },
 };
-const tag = (t: string) => (t === 'today' ? { cls: 'done', label: c.tags.today } : { cls: 'plan', label: c.tags.planned });
 // The picture beside the intro of a part: about 55 % of the 68rem column from 48rem, else full width.
 const SIDE = '(min-width: 68rem) 36rem, (min-width: 48rem) 54vw, calc(100vw - 2.2rem)';
 ---
@@ -38,7 +37,6 @@ const SIDE = '(min-width: 68rem) 36rem, (min-width: 48rem) 54vw, calc(100vw - 2.
 <header class="text">
 <h1>{c.h1}</h1>
 <p class="lead">{t(c.lead)}</p>
-<div class="status"><p set:html={t(c.state)} /></div>
 </header>
 <nav aria-label={c.tocLabel}>
 <ul class="toc">{c.parts.map((p) => <li><a href={`#${p.id}`}>{p.title}</a></li>)}</ul>
@@ -65,7 +63,6 @@ const SIDE = '(min-width: 68rem) 36rem, (min-width: 48rem) 54vw, calc(100vw - 2.
           <article class="feat">
             <h3>{t(f.title)}</h3>
             {f.text.map((x) => <p set:html={t(x)} />)}
-            <p class="feat-tags">{f.tags.map((t) => <span class:list={['tag', tag(t).cls]}>{tag(t).label}</span>)}</p>
           </article>
         ))}
       </div>

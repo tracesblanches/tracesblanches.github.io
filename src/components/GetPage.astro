@@ -38,10 +38,8 @@ const T = {
       { h: 'Your data stays with you', p: 'Your position, your tracks and your day plans stay on your phone.' },
     ],
     notesLabel: 'About the price',
-    outsideTitle: 'Outside the price',
-    outside: `Sending an outing to Strava, planned and optional, stays free: ${a(link('strava', lang), "Strava's API terms")} forbid charging for it.`,
     whyTitle: 'Why a single payment',
-    why: 'The map lives on your phone, and the route will be worked out there too. No service costs money for each skier every year, so one payment is enough.',
+    why: 'The map lives on your phone, and the route is worked out there too. No service costs money for each skier every year, so one payment is enough.',
     codeTitle: 'Open code',
     code: `Anyone can read ${a(REPO, 'the code of the app')} and check what it does. Your payment funds the work on the app and on its maps.`,
     faqTitle: 'Questions about the price',
@@ -72,10 +70,8 @@ const T = {
       { h: 'Vos données restent chez vous', p: 'Votre position, vos traces et vos plans de journée restent sur votre téléphone.' },
     ],
     notesLabel: 'À propos du prix',
-    outsideTitle: 'Hors du prix',
-    outside: `L'envoi d'une sortie vers Strava, prévu et facultatif, reste gratuit : ${a(link('strava', lang), "les conditions de l'API Strava")} interdisent de le faire payer.`,
     whyTitle: 'Pourquoi un paiement unique',
-    why: "La carte vit sur votre téléphone, et l'itinéraire s'y calculera aussi. Aucun service ne coûte de l'argent pour chaque skieur, chaque année : un seul paiement suffit.",
+    why: "La carte vit sur votre téléphone, et l'itinéraire s'y calcule aussi. Aucun service ne coûte de l'argent pour chaque skieur, chaque année : un seul paiement suffit.",
     codeTitle: 'Un code ouvert',
     code: `Chacun peut lire ${a(REPO, "le code de l'app")} et vérifier ce qu'elle fait. Votre paiement finance le travail sur l'app et sur ses cartes.`,
     faqTitle: 'Questions sur le prix',
@@ -117,7 +113,6 @@ const FOX = '(min-width: 68rem) 29rem, (min-width: 48rem) 44vw, calc(100vw - 2.2
 </section>
 
 <section class="get-section get-notes" aria-label={T.notesLabel}>
-<div class="note"><h2 id="outside">{T.outsideTitle}</h2><p set:html={t(T.outside)} /></div>
 <div class="note"><h2 id="why">{T.whyTitle}</h2><p>{t(T.why)}</p></div>
 <div class="note"><h2 id="open-code">{T.codeTitle}</h2><p set:html={t(T.code)} /></div>
 </section>

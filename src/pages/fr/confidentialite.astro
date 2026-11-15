@@ -2,11 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import { link } from '../../data/sources';
 ---
-<Base lang="fr" page="privacy" title="Confidentialité · Traces Blanches" description="Ce qui reste sur votre téléphone et ce que reçoit le serveur de Traces Blanches : packs téléchargés, alerte de non-retour facultative, connexion Strava facultative.">
+<Base lang="fr" page="privacy" title="Confidentialité · Traces Blanches" description="Ce qui reste sur votre téléphone et ce que reçoit le serveur de Traces Blanches : le téléchargement et la mise à jour des packs, rien d'autre.">
 <div class="text">
 <h1>Confidentialité</h1>
-<p class="lead">Votre position, vos traces et vos plans restent sur votre téléphone. Le serveur ne reçoit que ce qu'il faut pour trois services précis, dont deux sont facultatifs.</p>
-<div class="status"><p><b>L'app n'est pas encore publiée.</b> Cette page décrit ce qui est prévu. Elle sera mise à jour avant la publication sur Google Play, et chaque modification restera visible dans <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/fr/confidentialite.astro">l'historique de cette page</a>.</p></div>
+<p class="lead">Votre position, vos traces et vos plans restent sur votre téléphone. Le serveur ne reçoit que la demande des packs que vous téléchargez.</p>
+<div class="status"><p><b>L'app n'est pas encore publiée.</b> Cette page décrit ce que fait le code de l'app. Elle sera mise à jour avant la publication sur Google Play, et chaque modification restera visible dans <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/fr/confidentialite.astro">l'historique de cette page</a>.</p></div>
 <ul class="toc">
 <li><a href="#telephone">Sur le téléphone</a></li>
 <li><a href="#serveur">Ce que reçoit le serveur</a></li>
@@ -18,42 +18,34 @@ import { link } from '../../data/sources';
 
 <h2 id="telephone">Ce qui reste sur le téléphone</h2>
 <ul>
-<li><b>Votre position</b>, lue par le GPS pour la carte, le guidage et les alertes. Elle n'est envoyée nulle part.</li>
-<li><b>Vos traces et vos sorties</b>, enregistrées sur le téléphone. Vous les supprimez depuis l'app.</li>
-<li><b>Vos plans de journée</b>, sauf si vous activez l'alerte en cas de non-retour (voir plus bas).</li>
-<li><b>La voix</b>&nbsp;: les annonces sont des clips enregistrés à l'avance dans le pack et assemblés sur le téléphone. Aucun texte ne part vers un service de synthèse vocale.</li>
-<li><b>L'export vers Health Connect</b>, s'il est activé, reste sur le téléphone : <a href={link('healthConnect', 'fr')} rel="noopener">Health Connect</a> est l'espace d'Android qui range sur l'appareil les données d'activité et de santé.</li>
+<li><b>Votre position</b>, lue par le GPS pour la carte, le guidage et les alertes. Elle n'est envoyée nulle part. Hors d'une sortie, l'app ne demande qu'une position approximative, quand vous cherchez les domaines les plus proches.</li>
+<li><b>Vos traces et vos sorties</b>, enregistrées sur le téléphone. La sauvegarde Android est désactivée pour l'app : elles ne sont pas copiées dans le cloud.</li>
+<li><b>Vos plans de journée.</b> L'app rédige votre plan en un SMS pour la personne de votre choix ; il ne quitte le téléphone que si vous l'envoyez vous-même.</li>
+<li><b>La voix</b>&nbsp;: les annonces sont des clips enregistrés à l'avance dans le pack et assemblés sur le téléphone. Ce qui n'a pas de clip est lu par la voix du téléphone.</li>
 </ul>
 
 <h2 id="serveur">Ce que reçoit le serveur</h2>
 
-<h3>1. Le téléchargement des packs</h3>
-<p>L'app télécharge le pack du domaine que vous choisissez, comme un navigateur télécharge un fichier. Le serveur voit l'adresse IP de la connexion et le fichier demandé, donc le domaine choisi. Il ne reçoit pas votre position. Il n'y a pas de compte. <span class="tag plan">prévu</span></p>
+<h3>Le téléchargement et la mise à jour des packs</h3>
+<p>L'app télécharge le pack du domaine que vous choisissez, comme un navigateur télécharge un fichier, puis met à jour les packs installés une fois par jour si vous laissez la mise à jour automatique. Le serveur voit l'adresse IP de la connexion et le fichier demandé, donc le domaine choisi. Il ne reçoit pas votre position. Il n'y a pas de compte.</p>
 <p>La durée de conservation des journaux du serveur sera fixée avant la publication et écrite ici.</p>
 
-<h3>2. L'alerte en cas de non-retour, si vous l'activez</h3>
-<p>Ce service est facultatif. Si vous l'activez, l'app dépose sur le serveur votre plan de sortie : l'itinéraire, l'heure de retour prévue et le contact du proche à prévenir. Si vous ne confirmez pas votre retour à temps, le serveur alerte ce proche, même si votre téléphone est éteint. <span class="tag plan">prévu</span></p>
-<p>Le canal de l'alerte (notification, courriel ou SMS) et la durée de conservation du plan ne sont pas encore décidés. Ils seront écrits ici avant l'ouverture du service.</p>
-
-<h3>3. La connexion à Strava, si vous la demandez</h3>
-<p>Ce service est facultatif. Pour envoyer une sortie vers <a href={link('strava', 'fr')} rel="noopener">Strava</a>, vous vous connectez à votre compte Strava depuis l'app. Strava exige une clé secrète que l'app ne peut pas garder sans l'exposer : un petit service du serveur la garde et termine la connexion. L'app envoie ensuite la sortie que vous choisissez à Strava. Traces Blanches ne lit pas vos données Strava et ne les garde pas. <span class="tag plan">prévu</span></p>
-
-<h3>Plus tard</h3>
-<p>Les signalements partagés (neige, trace faite, refuge plein) sont prévus pour une version ultérieure. Cette page dira ce qu'ils envoient avant leur sortie.</p>
+<p>L'app n'envoie rien d'autre au serveur.</p>
 
 <h2 id="jamais">Ce que nous ne faisons pas</h2>
 <ul>
-<li>Aucune publicité. <span class="tag plan">prévu</span></li>
-<li>Aucun outil de mesure d'audience ni de traceur publicitaire dans l'app. <span class="tag plan">prévu</span></li>
-<li>Aucune vente de données. Rien ne part vers un tiers sans votre demande : Strava, ou le proche à prévenir. <span class="tag plan">prévu</span></li>
-<li>Aucune carte publique de vos passages hors piste. <span class="tag plan">prévu</span></li>
+<li>Aucune publicité.</li>
+<li>Aucun outil de mesure d'audience ni de traceur publicitaire dans l'app.</li>
+<li>Aucune vente de données. Rien ne part vers un tiers.</li>
+<li>Aucune carte publique de vos passages hors piste.</li>
 </ul>
 
-<h2 id="permissions">Permissions Android prévues</h2>
+<h2 id="permissions">Permissions Android</h2>
 <ul>
-<li><b>Localisation</b>, y compris écran éteint pendant une sortie que vous avez démarrée, pour le guidage vocal. Une notification reste visible tant que le guidage tourne.</li>
-<li><b>Notifications</b>, pour le guidage et les alertes.</li>
-<li><b>Accès à internet</b>, pour télécharger les packs et, si vous les activez, l'alerte de non-retour et Strava.</li>
+<li><b>Localisation précise</b>, y compris écran éteint pendant une sortie que vous avez démarrée, pour le guidage vocal. Une notification reste visible tant que le guidage tourne. <b>Localisation approximative</b>, une fois, quand vous cherchez les domaines les plus proches.</li>
+<li><b>Notifications</b>, pour le guidage, le rappel avant l'heure de retour et les alertes.</li>
+<li><b>Vibreur</b>, pour les vibrations du guidage.</li>
+<li><b>Accès à internet</b>, pour télécharger et mettre à jour les packs.</li>
 </ul>
 
 <h2>Google Play</h2>
