@@ -1,8 +1,8 @@
-# traceblanche.github.io
+# tracesblanches.github.io
 
-Le site de [traceblanche](https://github.com/traceblanche/traceblanche), l'app de ski de fond et de ski de randonnée nordique hors ligne : https://traceblanche.github.io/
+Le site de [Traces blanches](https://github.com/tracesblanches/tracesblanches), l'app de ski de fond et de ski de randonnée nordique hors ligne : https://tracesblanches.github.io/
 
-**[Site](https://traceblanche.github.io/)** · [Code source](https://github.com/traceblanche/traceblanche) · [Démarrage](https://traceblanche.github.io/fr/demarrage.html) · [FAQ](https://traceblanche.github.io/fr/faq.html) · [Confidentialité](https://traceblanche.github.io/fr/confidentialite.html) · [Licences](https://traceblanche.github.io/fr/licences.html) · [Version française](https://traceblanche.github.io/fr/)
+**[Site](https://tracesblanches.github.io/)** · [Code source](https://github.com/tracesblanches/tracesblanches) · [Démarrage](https://tracesblanches.github.io/fr/demarrage.html) · [FAQ](https://tracesblanches.github.io/fr/faq.html) · [Confidentialité](https://tracesblanches.github.io/fr/confidentialite.html) · [Licences](https://tracesblanches.github.io/fr/licences.html) · [Version française](https://tracesblanches.github.io/fr/)
 
 HTML et CSS, sans étape de construction. GitHub Pages sert `main` tel quel.
 
@@ -38,8 +38,8 @@ npm install --no-save playwright-core
 node scripts/test-lang.mjs       # détection et mémoire de la langue dans Chrome sans tête
 ```
 
-## Nom provisoire
+## Nom
 
-Le nom du projet est provisoire. `scripts/rename.sh NOUVEAU` le remplace dans tous les fichiers suivis ; le dépôt doit ensuite s'appeler `NOUVEAU.github.io`.
+Le nom affiché est « Traces blanches », en français comme en anglais : titres, en-têtes, textes, balises meta. L'identifiant technique est `tracesblanches`, sans espace ni tiret : organisation GitHub, dépôts, adresses. `scripts/rename.sh NOUVEAU` ne remplace que l'identifiant dans les fichiers suivis (le dépôt doit ensuite s'appeler `NOUVEAU.github.io`) ; le nom affiché se change à la main.
 
 Textes et images sous licence CC BY-SA 4.0, voir [LICENSE](LICENSE).

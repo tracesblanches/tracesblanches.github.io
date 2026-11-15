@@ -1,9 +1,10 @@
 #!/bin/sh
-# Renames the project everywhere in this repository: every occurrence of the
-# current name (file contents only, file names never contain it) becomes NEW.
+# Renames the project identifier (organisation, repositories, addresses) in this
+# repository: every occurrence of it (file contents only, file names never contain
+# it) becomes NEW. The displayed name ("Traces blanches") is changed by hand.
 # usage: scripts/rename.sh NEW        (run from the repository root)
 set -eu
-OLD=traceblanche
+OLD=tracesblanches
 NEW=${1:?usage: scripts/rename.sh NEW}
 case "$NEW" in *[!a-z0-9-]*) echo "NEW must be lowercase letters, digits or '-'" >&2; exit 2;; esac
 files=$(git grep -l -e "$OLD" -- . ':(exclude)scripts/rename.sh' || true)

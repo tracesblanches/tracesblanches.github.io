@@ -20,7 +20,7 @@ import sys
 import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = "https://traceblanche.github.io/"
+SITE = "https://tracesblanches.github.io/"
 SKIP_DIRS = {"scripts", "node_modules", ".git"}
 
 
