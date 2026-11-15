@@ -9,18 +9,31 @@ export const DEFAULT_LANG: Lang = 'en';
 
 export const SITE = 'https://tracesblanches.github.io';
 
-export type PageId = 'home' | 'start' | 'faq' | 'privacy' | 'licences';
+// The site is for skiers only: what it takes to install, build or contribute lives in the
+// GitHub repository (README, CONTRIBUTING), linked once from the footer ("Source code").
+export type PageId = 'home' | 'price' | 'faq' | 'privacy' | 'credits';
 
 export const PAGES: Record<PageId, Record<Lang, string>> = {
   home: { en: '/', fr: '/fr/' },
-  start: { en: '/getting-started.html', fr: '/fr/demarrage.html' },
+  price: { en: '/price.html', fr: '/fr/prix.html' },
   faq: { en: '/faq.html', fr: '/fr/faq.html' },
   privacy: { en: '/privacy.html', fr: '/fr/confidentialite.html' },
-  licences: { en: '/licences.html', fr: '/fr/licences.html' },
+  // The data credits keep the address of the former licences page.
+  credits: { en: '/licences.html', fr: '/fr/licences.html' },
 };
 
-/** Pages of the header navigation, in order. */
-export const NAV: PageId[] = ['start', 'faq', 'privacy', 'licences'];
+/** Pages of the header navigation, in order (the credits are in the footer). */
+export const NAV: PageId[] = ['price', 'faq', 'privacy'];
+
+/**
+ * Former addresses of technical pages, now in the repository: each is a static page with a
+ * meta refresh, a link and a canonical to its target (src/components/Redirect.astro).
+ */
+export const REPO = 'https://github.com/tracesblanches/tracesblanches';
+export const MOVED: { path: string; lang: Lang; to: string }[] = [
+  { path: '/getting-started.html', lang: 'en', to: `${REPO}#readme` },
+  { path: '/fr/demarrage.html', lang: 'fr', to: `${REPO}#readme` },
+];
 
 export const OTHER: Record<Lang, Lang> = { en: 'fr', fr: 'en' };
 

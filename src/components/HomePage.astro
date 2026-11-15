@@ -1,12 +1,13 @@
 ---
 // The home page, in English or French (text in src/copy/home.ts, pictures in
-// src/data/visuals.ts): the hero, a day on skis in three scenes, safety, nature, France, open
-// source, price, a few questions and the closing button.
+// src/data/visuals.ts): the hero, a day on skis in three scenes, safety, nature, France, price,
+// a few questions; the layout closes it with the release band (Notify.astro).
 import Base from '../layouts/Base.astro';
 import Hero from './Hero.astro';
 import Img from './Img.astro';
 import { type Lang, href } from '../i18n';
-import { HOME, RELEASE_ISSUE, CODE, CONTRIBUTING } from '../copy/home';
+import { HOME } from '../copy/home';
+import { UI, RELEASE_ISSUE } from '../i18n/ui';
 import { visual, type Slot } from '../data/visuals';
 import { heroPreload } from '../lib/images';
 
@@ -22,7 +23,7 @@ const tag = (t: string) => (t === 'today' ? { cls: 'done', label: c.today } : { 
 const SIDE = '(min-width: 68rem) 38rem, (min-width: 48rem) 56vw, calc(100vw - 2.2rem)';
 ---
 <Base lang={lang} page="home" title={c.title} description={c.description} preload={preload} bodyClass="home">
-{slides.length > 0 && <Hero slot="hero" slides={slides} eyebrow={c.eyebrow} title={c.h1} lead={c.lead} cta={{ href: RELEASE_ISSUE, label: c.notify }} pause={c.pause} />}
+{slides.length > 0 && <Hero slot="hero" slides={slides} eyebrow={c.eyebrow} title={c.h1} lead={c.lead} cta={{ href: RELEASE_ISSUE, label: UI[lang].notify }} pause={c.pause} />}
 
 <section class="section" aria-labelledby="day">
 <h2 id="day" class="big">{c.dayTitle}</h2>
@@ -69,33 +70,20 @@ const SIDE = '(min-width: 68rem) 38rem, (min-width: 48rem) 56vw, calc(100vw - 2.
   );
 })}
 
-<section class="section split" aria-labelledby="open">
-<div>
-<h2 id="open" class="big">{c.openTitle}</h2>
-{c.open.map((t) => <p>{t}</p>)}
-<ul class="links">
-<li><a href={CODE}>{c.openLinks.code}</a></li>
-<li><a href={href('licences', lang)}>{c.openLinks.licences}</a></li>
-<li><a href={CONTRIBUTING} hreflang={lang === 'en' ? 'fr' : undefined}>{c.openLinks.contributing}</a></li>
-</ul>
-</div>
+<section class="section text" aria-labelledby="price">
 <div class="price">
 <h2 id="price" class="big">{c.priceTitle}</h2>
 <p>{c.price}</p>
+<p><a href={href('price', lang)}>{c.priceLink}</a></p>
 </div>
 </section>
 
 <section class="section text" aria-labelledby="questions">
 <h2 id="questions" class="big">{c.faqTitle}</h2>
 {c.faq.map((f) => (
-  <details><summary>{f.q}</summary><p>{f.a}{'link' in f && <Fragment> <a href={href('start', lang, 'pack')}>{c.startLink}</a>.</Fragment>}</p></details>
+  <details><summary>{f.q}</summary><p>{f.a}</p></details>
 ))}
 <p><a href={href('faq', lang)}>{c.faqMore}</a></p>
 </section>
 
-<section class="final on-night" aria-labelledby="follow">
-<h2 id="follow" class="big">{c.finalTitle}</h2>
-<p>{c.finalText}</p>
-<div class="actions"><a class="btn primary big" href={RELEASE_ISSUE}>{c.notify}</a></div>
-</section>
 </Base>

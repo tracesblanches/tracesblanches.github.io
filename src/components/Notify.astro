@@ -1,0 +1,13 @@
+---
+// The closing band of every page but the 404: the main button again, after the text.
+import type { Lang } from '../i18n';
+import { UI, RELEASE_ISSUE } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const ui = UI[Astro.props.lang];
+---
+<section class="final on-night" aria-labelledby="follow">
+<h2 id="follow" class="big">{ui.notifyTitle}</h2>
+<p>{ui.notifyText}</p>
+<div class="actions"><a class="btn primary big" href={RELEASE_ISSUE}>{ui.notify}</a></div>
+</section>

@@ -1,0 +1,31 @@
+---
+// A former address that now lives elsewhere (src/i18n/index.ts, MOVED): a static page that opens
+// its target at once (meta refresh), names it with a link for browsers that do not follow the
+// refresh, and gives it as canonical. No header, no scripts; kept out of the sitemap.
+import { type Lang, MOVED } from '../i18n';
+
+interface Props { path: string }
+const moved = MOVED.find((m) => m.path === Astro.props.path);
+if (!moved) throw new Error(`no MOVED entry for ${Astro.props.path}`);
+const lang: Lang = moved.lang;
+const T = {
+  en: { title: 'This page has moved · Traces Blanches', h1: 'This page has moved', text: 'Installing, building and contributing are explained in the source code of Traces Blanches, on GitHub:', link: 'open the source code', home: 'Back to the home page', homeHref: '/' },
+  fr: { title: 'Cette page a déménagé · Traces Blanches', h1: 'Cette page a déménagé', text: "L'installation, la compilation et les contributions sont expliquées dans le code source de Traces Blanches, sur GitHub :", link: 'ouvrir le code source', home: "Revenir à l'accueil", homeHref: '/fr/' },
+}[lang];
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+<meta charset="utf-8" />
+<title>{T.title}</title>
+<meta http-equiv="refresh" content={`0; url=${moved.to}`} />
+<meta name="robots" content="noindex" />
+<link rel="canonical" href={moved.to} />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<h1>{T.h1}</h1>
+<p>{T.text} <a href={moved.to}>{T.link}</a>.</p>
+<p><a href={T.homeHref}>{T.home}</a></p>
+</body>
+</html>

@@ -15,7 +15,12 @@ exist and point back to each other; a FR | EN switch whose links (data-lang) lea
 same counterpart; the script that remembers the FR | EN choice inlined (src/scripts/lang-memory.js).
 Only the English home page carries the detection script (src/scripts/lang-root.js). Every page
 carries the menu and pause script (src/scripts/ui.js). Every page
-has its counterpart in the other language, and sitemap.xml lists exactly the pages but 404.html.
+has its counterpart in the other language, and sitemap.xml lists exactly the pages but 404.html
+and the redirect pages.
+
+Redirect pages (former addresses, src/components/Redirect.astro) are recognised by their
+<meta http-equiv="refresh">: each has a delay of 0, a canonical equal to its target, a link to the
+target in its body, the <html lang> of its folder, noindex, and an internal target that exists.
 External links are listed, not fetched. Exit status 1 on any problem.
 """
 import base64
@@ -41,6 +46,7 @@ class Page(html.parser.HTMLParser):
         self.ids, self.links, self.h1, self.lang = [], [], 0, None
         self.alternates, self.canonical, self.switch, self.scripts = {}, None, {}, []
         self.inline, self.csp, self.csp_pos, self.in_script, self.script_pos = [], None, None, False, []
+        self.refresh, self.robots = None, None
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -71,6 +77,10 @@ class Page(html.parser.HTMLParser):
             self.script_pos.append(self.getpos())
         if tag == "meta" and (a.get("http-equiv") or "").lower() == "content-security-policy":
             self.csp, self.csp_pos = a.get("content"), self.getpos()
+        if tag == "meta" and (a.get("http-equiv") or "").lower() == "refresh":
+            self.refresh = a.get("content")
+        if tag == "meta" and a.get("name") == "robots":
+            self.robots = a.get("content")
         if tag == "meta" and a.get("property") == "og:image":
             self.links.append(a["content"])
         if tag == "img":
@@ -125,6 +135,27 @@ def rel(p):
     return p.relative_to(ROOT).as_posix()
 
 
+redirects = {}
+for page, info in parsed.items():
+    if info.refresh is None:
+        continue
+    m = re.fullmatch(r"\s*0\s*;\s*url=(\S+)\s*", info.refresh)
+    name = rel(page)
+    if not m:
+        problems.append(f"{name}: meta refresh {info.refresh!r} is not '0; url=TARGET'")
+        continue
+    to = m.group(1)
+    redirects[page] = to
+    lang = "fr" if name.startswith("fr/") else "en"
+    if info.lang != lang:
+        problems.append(f"{name}: redirect page <html lang={info.lang!r}>, expected {lang!r}")
+    if info.canonical != to:
+        problems.append(f"{name}: canonical {info.canonical!r} differs from the refresh target {to!r}")
+    if to not in info.links:
+        problems.append(f"{name}: no link to the refresh target {to}")
+    if info.robots != "noindex":
+        problems.append(f"{name}: redirect page is not noindex")
+
 for page, info in parsed.items():
     if info.h1 != 1:
         problems.append(f"{rel(page)}: {info.h1} <h1> elements")
@@ -134,10 +165,12 @@ for page, info in parsed.items():
             problems.append(f"{rel(page)}: inline script at line {pos[0]} is not allowed by the CSP <meta> ({digest})")
         elif info.csp_pos > pos:
             problems.append(f"{rel(page)}: the CSP <meta> comes after the inline script at line {pos[0]}")
-    if UI not in info.inline:
+    if page in redirects:
+        pass
+    elif UI not in info.inline:
         problems.append(f"{rel(page)}: the menu and pause script (src/scripts/ui.js) is missing")
     has_detect = DETECT in info.inline
-    if has_detect != (rel(page) == "index.html"):
+    if page not in redirects and has_detect != (rel(page) == "index.html"):
         problems.append(f"{rel(page)}: language detection script {'present' if has_detect else 'missing'} (only on the English home page)")
     dup = {i for i in info.ids if info.ids.count(i) > 1}
     if dup:
@@ -161,7 +194,7 @@ for page, info in parsed.items():
 pairs = 0
 for page, info in parsed.items():
     name = rel(page)
-    if name == "404.html":
+    if name == "404.html" or page in redirects:
         continue
     lang = "fr" if name.startswith("fr/") else "en"
     other = "en" if lang == "fr" else "fr"
@@ -199,7 +232,7 @@ for page, info in parsed.items():
 sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8") if (ROOT / "sitemap.xml").exists() else ""
 locs = re.findall(r"<loc>(.*?)</loc>", sitemap)
 listed = {target_of(ROOT / "index.html", u)[0] for u in locs}
-expected = {p for p in parsed if rel(p) != "404.html"}
+expected = {p for p in parsed if rel(p) != "404.html" and p not in redirects}
 if listed != expected:
     problems.append(f"sitemap.xml lists {sorted(rel(p) for p in listed - expected)} too many and misses {sorted(rel(p) for p in expected - listed)}")
 for u in re.findall(r'href="([^"]*)"', sitemap):
@@ -208,7 +241,9 @@ for u in re.findall(r'href="([^"]*)"', sitemap):
         problems.append(f"sitemap.xml: alternate {u} does not exist")
 
 print(f"{len(pages)} pages, {checked} internal links, images and scripts checked, "
-      f"{pairs} pages with a checked counterpart, {len(external)} external links (not fetched)")
+      f"{pairs} pages with a checked counterpart, {len(redirects)} redirect pages, {len(external)} external links (not fetched)")
+for page, to in sorted(redirects.items()):
+    print(f"  redirect: {rel(page)} -> {to}")
 for e in sorted(external):
     print("  external:", e)
 for p in problems:

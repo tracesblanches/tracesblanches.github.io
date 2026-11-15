@@ -74,7 +74,7 @@ for (const [list, want] of [[["de-DE"], "/"], [["de-DE", "fr-FR", "en"], "/fr/"]
   check("then click EN on /fr/ → / and stays", path(p) === "/", path(p));
   await c.close(); }
 // 6. Shared links to a precise page are never redirected.
-for (const [loc, url] of [["fr-FR", "/faq.html"], ["fr-FR", "/getting-started.html#pack"], ["fr-FR", "/licences.html"], ["en-US", "/fr/faq.html"], ["en-US", "/fr/demarrage.html"]]) {
+for (const [loc, url] of [["fr-FR", "/faq.html"], ["fr-FR", "/price.html#why"], ["fr-FR", "/licences.html"], ["en-US", "/fr/faq.html"], ["en-US", "/fr/prix.html"]]) {
   const { c, p, navs } = await ctx({ locale: loc });
   await p.goto(B + url); await settle(p);
   check(`${loc} opening ${url} is not redirected`, path(p) === url.split("#")[0] && navs.length === 1, JSON.stringify(navs));
@@ -85,6 +85,15 @@ for (const [loc, url] of [["fr-FR", "/faq.html"], ["fr-FR", "/getting-started.ht
   await p.goto(B + "/faq.html"); await settle(p);
   check("saved FR, opening /faq.html is not redirected", path(p) === "/faq.html");
   await c.close(); }
+// 6b. Former technical addresses open the source code on GitHub (meta refresh), in any browser
+//     language, with JavaScript on or off; GitHub itself is answered locally, not fetched.
+for (const [loc, url, js] of [["fr-FR", "/getting-started.html", true], ["en-US", "/fr/demarrage.html", true], ["fr-FR", "/fr/demarrage.html", false]]) {
+  const { c, p } = await ctx({ locale: loc, javaScriptEnabled: js });
+  await c.route("https://github.com/**", (r) => r.fulfill({ status: 200, contentType: "text/html", body: "<title>repo</title>" }));
+  await p.goto(B + url); await p.waitForURL("https://github.com/**", { timeout: 5000 }).catch(() => {});
+  check(`${loc}${js ? "" : ", no JavaScript"}: ${url} → source code on GitHub`, p.url() === "https://github.com/tracesblanches/tracesblanches#readme", p.url());
+  await c.close();
+}
 // 7. Without JavaScript: English at the root, even for a French browser.
 { const { c, p, navs } = await ctx({ locale: "fr-FR", javaScriptEnabled: false });
   await p.goto(B + "/"); await settle(p);

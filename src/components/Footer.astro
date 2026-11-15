@@ -1,26 +1,19 @@
 ---
-// Footer: licences and where to ask. The 404 page (bilingual) carries both languages.
-import { type Lang, pagePath } from '../i18n';
-import { ISSUES } from '../i18n/ui';
+// Footer: the data credits (their licences ask for them to be reachable), the one link to the
+// source code (everything technical lives in the repository), the site licence and where to
+// ask. The 404 page (bilingual) carries both languages.
+import { type Lang, pagePath, REPO } from '../i18n';
+import { UI, ISSUES } from '../i18n/ui';
 
 interface Props { lang: Lang; bilingual?: boolean }
 const { lang, bilingual = false } = Astro.props;
+const langs: Lang[] = bilingual ? ['en', 'fr'] : [lang];
 ---
 <footer><div class="wrap">
-{bilingual ? (
-  <Fragment>
-<p>Code under GPL-3.0-or-later, with an app store exception. Site text and images under CC BY-SA 4.0. Data and map sources: <a href={pagePath('licences', 'en')}>licences</a>.</p>
-<p lang="fr">Code sous licence GPL-3.0-or-later, avec une exception pour les boutiques d'applications. Textes et images du site sous licence CC BY-SA 4.0. Sources des données et des cartes : <a href={pagePath('licences', 'fr')}>licences</a>.</p>
-  </Fragment>
-) : lang === 'fr' ? (
-  <Fragment>
-<p>Code sous licence GPL-3.0-or-later, avec une exception pour les boutiques d'applications. Textes et images du site sous licence CC BY-SA 4.0. Sources des données et des cartes : <a href={pagePath('licences', 'fr')}>licences</a>.</p>
-<p>Une question ou une erreur : <a href={ISSUES}>ouvrez une issue sur GitHub</a>.</p>
-  </Fragment>
-) : (
-  <Fragment>
-<p>Code under GPL-3.0-or-later, with an app store exception. Site text and images under CC BY-SA 4.0. Data and map sources: <a href={pagePath('licences', 'en')}>licences</a>.</p>
-<p>A question or a mistake: <a href={ISSUES}>open an issue on GitHub</a>.</p>
-  </Fragment>
-)}
+{langs.map((l) => {
+  const f = UI[l].footer;
+  return (
+    <p lang={bilingual && l !== lang ? l : undefined}><a href={pagePath('credits', l)}>{f.credits}</a>. {f.code} <a href={REPO}>{f.source}</a>. {f.site} {f.ask} <a href={ISSUES}>{f.askLink}</a>.</p>
+  );
+})}
 </div></footer>

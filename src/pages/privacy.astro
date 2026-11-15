@@ -5,7 +5,7 @@ import Base from '../layouts/Base.astro';
 <div class="text">
 <h1>Privacy</h1>
 <p class="lead">Your position, your tracks and your plans stay on your phone. The server only receives what three specific services need, and two of them are optional.</p>
-<div class="status"><p><b>The app is not published yet.</b> This page describes what is planned. It will be updated before the release on Google Play, and every change will remain visible in <a href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/privacy.html">the history of this page</a>. The <a href="/fr/confidentialite.html" hreflang="fr">French version</a> is the reference.</p></div>
+<div class="status"><p><b>The app is not published yet.</b> This page describes what is planned. It will be updated before the release on Google Play, and every change will remain visible in <a href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/privacy.astro">the history of this page</a>. The <a href="/fr/confidentialite.html" hreflang="fr">French version</a> is the reference.</p></div>
 <ul class="toc">
 <li><a href="#phone">On the phone</a></li>
 <li><a href="#server">What the server receives</a></li>
@@ -35,7 +35,7 @@ import Base from '../layouts/Base.astro';
 <p>The alert channel (notification, email or SMS) and how long the plan is kept are not decided yet. They will be written here before the service opens.</p>
 
 <h3>3. The Strava connection, if you ask for it</h3>
-<p>This service is optional. To send an outing to Strava, the app goes through Strava's sign-in (OAuth). Strava requires a secret that an app cannot hold without exposing it: a small service on the server holds it and exchanges the sign-in tokens. The app then sends the outing you choose to Strava. Traces Blanches does not read your Strava data and does not keep it. <span class="tag plan">planned</span></p>
+<p>This service is optional. To send an outing to Strava, you sign in to your Strava account from the app. Strava requires a secret key that an app cannot hold without exposing it: a small service on the server holds it and completes the sign-in. The app then sends the outing you choose to Strava. Traces Blanches does not read your Strava data and does not keep it. <span class="tag plan">planned</span></p>
 
 <h3>Later</h3>
 <p>Shared reports (snow, fresh track, full hut) are planned for a later version. This page will say what they send before they ship.</p>
@@ -63,6 +63,6 @@ import Base from '../layouts/Base.astro';
 <p>GitHub keeps its own server logs, see its <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>.</p>
 
 <h2 id="contact">Contact</h2>
-<p>For a question about your data, <a href="https://github.com/tracesblanches/tracesblanches/issues">open an issue on GitHub</a>. For a security problem, follow the <a href="https://github.com/tracesblanches/.github/blob/main/SECURITY.md">security policy</a>.</p>
+<p>For a question about your data, <a href="https://github.com/tracesblanches/tracesblanches/issues">ask it on GitHub</a>. For a security problem, follow the <a href="https://github.com/tracesblanches/.github/blob/main/SECURITY.md">security policy</a>.</p>
 </div>
 </Base>

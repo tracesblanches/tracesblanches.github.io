@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base lang="fr" page="faq" title="Questions fréquentes · Traces Blanches" description="Hors ligne, batterie, avalanches, données et licences, prix : les réponses aux questions sur Traces Blanches, l'app de ski nordique hors ligne.">
+<Base lang="fr" page="faq" title="Questions fréquentes · Traces Blanches" description="Hors ligne, batterie, avalanches, vos données, prix, téléphones compatibles : les réponses aux questions sur Traces Blanches, l'app de ski nordique hors ligne.">
 <div class="text">
 <h1>Questions fréquentes</h1>
 <p class="lead">Les questions que l'on se pose avant de partir sans réseau.</p>
@@ -9,21 +9,22 @@ import Base from '../../layouts/Base.astro';
 <li><a href="#hors-ligne">Hors ligne</a></li>
 <li><a href="#batterie">Batterie</a></li>
 <li><a href="#avalanches">Avalanches</a></li>
-<li><a href="#donnees">Données et licences</a></li>
+<li><a href="#donnees">Vos données</a></li>
 <li><a href="#prix">Prix</a></li>
+<li><a href="#appareils">Téléphones</a></li>
 <li><a href="#autres">Autres questions</a></li>
 </ul>
 
 <h2 id="hors-ligne">Hors ligne</h2>
 
 <h3>Qu'est-ce qui marche sans réseau ?</h3>
-<p>Tout ce qui est dans le pack du site : les fonds de carte, les pistes, les pentes, l'exposition aux avalanches, les zones protégées, les refuges, les zones sans réseau, la neige estimée et les clips de la voix. Le calcul d'itinéraire tournera sur le téléphone, sans serveur. La position vient des satellites, qui ne demandent aucun réseau.</p>
+<p>Tout ce qui est dans le pack du site : la carte, les pistes, les pentes, l'exposition aux avalanches, les zones protégées, les refuges, les zones sans réseau, la neige estimée et la voix. Le calcul de l'itinéraire se fera sur le téléphone. Votre position vient des satellites, qui ne demandent aucun réseau.</p>
 
 <h3>Que faut-il télécharger avant de partir ?</h3>
-<p>Le pack du site où vous skiez. Aujourd'hui, il pèse environ 40 Mo pour Cervières et 35 Mo pour Chapelle-des-Bois. Dans l'app, vous le téléchargerez avant de partir. La mise à jour des seules couches du jour (neige, bulletin, météo) est prévue.</p>
+<p>Le pack du site où vous skiez. Aujourd'hui, il pèse environ 40 Mo pour Cervières et 35 Mo pour Chapelle-des-Bois. Vous le téléchargerez dans l'app, au chalet ou chez vous, avant de partir. La mise à jour des seules informations du jour (neige, bulletin, météo) est prévue.</p>
 
 <h3>Et si le pack date de quelques jours ?</h3>
-<p>Chaque couche porte sa date et sa durée de validité. Les pentes et l'exposition aux avalanches dépendent du relief et de la forêt : elles ne changent pas d'un jour à l'autre. Les zones protégées sont à rafraîchir chaque mois. La neige, le bulletin d'avalanche et la météo vieillissent en heures ou en jours : l'app affichera leur âge à côté de l'information, pour que vous jugiez s'il faut encore la croire.</p>
+<p>Chaque information porte sa date. Les pentes et l'exposition aux avalanches dépendent du relief et de la forêt : elles ne changent pas d'un jour à l'autre. Les zones protégées sont à mettre à jour chaque mois. La neige, le bulletin d'avalanche et la météo vieillissent en heures ou en jours : l'app affichera leur âge à côté, pour que vous jugiez s'il faut encore les croire.</p>
 
 <h2 id="batterie">Batterie</h2>
 
@@ -31,62 +32,76 @@ import Base from '../../layouts/Base.astro';
 <p>Nous ne le savons pas encore : la mesure n'est pas faite. Des sorties de mesure par grand froid sont prévues cet hiver, à Cervières en janvier et à Chapelle-des-Bois en février et mars. Les chiffres seront publiés ici.</p>
 
 <h3>Que fait l'app pour l'économiser ?</h3>
-<p>Ce qui est prévu : guidage à la voix écran éteint, GPS adaptatif, arrêt détecté par l'accéléromètre, altitude lue sur le baromètre. L'app prévoira la batterie restante en fin de sortie et gardera une réserve pour un appel d'urgence.</p>
+<p>Ce qui est prévu : le guidage à la voix, écran éteint ; un GPS sollicité selon le besoin ; les arrêts repérés par le capteur de mouvement ; l'altitude lue sur le baromètre. L'app prévoira la batterie restante en fin de sortie et gardera une réserve pour un appel d'urgence.</p>
 
 <h2 id="avalanches">Avalanches</h2>
 
 <h3>L'app dit-elle si une pente est sûre ?</h3>
-<p>Non, jamais. Aucune carte ne peut le dire. Traces Blanches montre où le terrain est raide et où il est exposé selon un modèle. L'app affiche le bulletin d'avalanche du jour quand Météo-France en publie un. La décision reste la vôtre, sur place.</p>
+<p>Non, jamais. Aucune carte ne peut le dire. Traces Blanches montre où le terrain est raide et où il est exposé selon un calcul. L'app affiche le bulletin d'avalanche du jour quand Météo-France en publie un. La décision reste la vôtre, sur place.</p>
 
 <h3>D'où viennent les pentes ?</h3>
-<p>Du relief LiDAR HD de l'IGN, au pas de 5 m. Le pack les classe en quatre tranches : 30 à 35°, 35 à 40°, 40 à 45°, 45° et plus. Une pente de moins de 30° peut quand même être sous une pente plus raide : regardez aussi au-dessus de vous.</p>
+<p>Des relevés laser de l'IGN, avec une mesure tous les 5 m. La carte les classe en quatre tranches : 30 à 35°, 35 à 40°, 40 à 45°, 45° et plus. Une pente de moins de 30° peut quand même être sous une pente plus raide : regardez aussi au-dessus de vous.</p>
 
-<h3>Qu'est-ce que l'exposition aux avalanches du pack ?</h3>
-<p>Un calcul, pas une observation. Le noyau repère les zones de départ possibles sur le relief et la forêt (méthode AutoATES v3.0), puis suit la trajectoire d'une avalanche vers le bas (méthode Flow-Py). Les deux méthodes sont portées en Rust. La comparaison avec les avalanches connues est en cours. Une avalanche peut partir là où le modèle ne la voit pas.</p>
+<h3>Qu'est-ce que l'exposition aux avalanches de la carte ?</h3>
+<p>Un calcul, pas une observation. Le calcul repère les endroits d'où une avalanche peut partir, d'après le relief et la forêt, puis suit sa course vers le bas. Il reprend deux méthodes publiées par des chercheurs. La comparaison avec les avalanches connues est en cours. Une avalanche peut partir là où le calcul ne la voit pas.</p>
 
 <h3>Et le bulletin d'avalanche ?</h3>
-<p>Le pack reprend le bulletin d'estimation du risque d'avalanche (BERA) de Météo-France pour le massif du site, avec sa date. Le Jura n'a pas de BERA : pour Chapelle-des-Bois, le pack renvoie vers la météo montagne de Météo-France et vers le bulletin du SLF, qui couvre le Jura suisse voisin.</p>
+<p>Le pack reprend le bulletin d'estimation du risque d'avalanche (BERA) de Météo-France pour le massif du site, avec sa date. Le Jura n'a pas de BERA : pour Chapelle-des-Bois, le pack renvoie vers la météo montagne de Météo-France et vers le bulletin de l'institut suisse SLF, qui couvre le Jura suisse voisin.</p>
 
 <h3>L'app trace-t-elle des itinéraires hors piste ?</h3>
-<p>Le noyau sait déjà le faire : il évite les pentes de plus de 30°, refuse les zones interdites à la date choisie et tient compte de la neige estimée. Dans l'app, cette fonction est prévue pour une deuxième version.</p>
+<p>Le calcul sait déjà le faire : il évite les pentes de plus de 30°, refuse les zones interdites à la date choisie et tient compte de la neige estimée. Dans l'app, cette fonction est prévue pour une deuxième version.</p>
 
-<h2 id="donnees">Données et licences</h2>
+<h2 id="donnees">Vos données</h2>
 
-<h3>D'où viennent les données ?</h3>
-<p>De sources publiques et ouvertes : IGN, OpenStreetMap, Météo-France, ARCEP, l'inventaire national du patrimoine naturel, refuges.info, Camptocamp, entre autres. La page <a href="/fr/licences.html">licences et sources</a> les liste toutes, avec leur licence et la mention à afficher.</p>
+<h3>Ma position est-elle envoyée quelque part ?</h3>
+<p>Non. Votre position, vos traces et vos plans de journée restent sur votre téléphone. Deux exceptions, prévues et facultatives, seulement si vous les choisissez : l'alerte en cas de non-retour, qui dépose votre plan de sortie pour prévenir un proche, et l'envoi d'une sortie vers Strava.</p>
 
-<h3>Pourquoi l'état des pistes manque-t-il ?</h3>
-<p>Les exploitants publient l'état de leurs pistes sans licence qui permette de le reprendre. Nous le lisons pour un usage personnel, mais il n'entre dans aucun pack publié. Nous allons demander un accord écrit à l'Espace Nordique Jurassien et à Nordic France.</p>
+<h3>Faut-il créer un compte ?</h3>
+<p>Non. L'app télécharge les packs sans compte. Elle ne contiendra ni publicité, ni mesure d'audience.</p>
 
-<h3>Le plan des pistes est-il dans l'app ?</h3>
-<p>Non. Le plan dessiné par une station lui appartient, et nous ne le redistribuons jamais. Les pistes de l'app viennent d'OpenStreetMap. Un travail est prévu pour reporter les informations d'un plan (nom, couleur, sens) sur nos propres tracés, sans copier l'image.</p>
-
-<h3>Une piste est fausse ou manque. Que faire ?</h3>
-<p>Si elle est fausse dans OpenStreetMap, corrigez-la là-bas : elle arrivera dans le pack suivant. Sinon, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose">ouvrez une issue « Données ou site »</a> avec le lieu et la date du constat.</p>
+<h3>Qui voit mes sorties hors piste ?</h3>
+<p>Personne d'autre que vous. Aucune carte publique des sorties hors piste n'est prévue. La page <a href="/fr/confidentialite.html">confidentialité</a> détaille ce qui reste sur le téléphone et ce que reçoit le serveur.</p>
 
 <h2 id="prix">Prix</h2>
 
 <h3>Combien coûtera l'app ?</h3>
-<p>Le prix envisagé est un paiement unique, par exemple 4,99 €. Il n'y aura ni abonnement, ni publicité. Le projet évite tout service qui coûterait de l'argent par utilisateur et par an : c'est ce qui permet un paiement unique.</p>
+<p>Le montant sera annoncé à la sortie. Vous paierez une seule fois, par Google Play. Il n'y aura ni abonnement, ni publicité. La page <a href="/fr/prix.html">prix</a> dit ce que couvre ce paiement.</p>
 
-<h3>Pourquoi payer un logiciel libre ?</h3>
-<p>Le paiement finance le travail sur l'app. Le code reste sous licence GPL-3.0-or-later : vous pouvez le lire, le modifier et compiler l'app vous-même.</p>
+<h3>Pourquoi payer une app dont le code est ouvert ?</h3>
+<p>Le paiement finance le travail sur l'app et sur ses cartes. Le code reste ouvert : chacun peut le lire et vérifier ce que fait l'app.</p>
 
 <h3>L'envoi vers Strava sera-t-il payant ?</h3>
-<p>Non. Les conditions de l'API de Strava interdisent de faire payer ce qui passe par elle. L'envoi d'une sortie vers Strava, prévu et facultatif, restera hors de ce que vous payez.</p>
+<p>Non. Les conditions de Strava interdisent de faire payer ce qui passe par leur service. L'envoi d'une sortie vers Strava, prévu et facultatif, restera hors de ce que vous payez.</p>
+
+<h2 id="appareils">Téléphones</h2>
+
+<h3>Sur quels téléphones l'app tournera-t-elle ?</h3>
+<p>Sur les téléphones Android, à partir d'Android 10. Elle sortira d'abord sur Google Play, en test interne, puis pour tous.</p>
+
+<h3>Et sur iPhone ?</h3>
+<p>Plus tard. L'app Android vient d'abord. La licence du code prévoit déjà la diffusion par l'App Store.</p>
+
+<h3>Faut-il une montre ?</h3>
+<p>Non. Le téléphone seul suffit. Une app pour montre Wear OS est prévue en option, pour le confort : direction, temps restant, vibrations.</p>
 
 <h2 id="autres">Autres questions</h2>
 
 <h3>Quels lieux sont couverts ?</h3>
 <p>Aujourd'hui, deux sites tests : Cervières (Hautes-Alpes) et Chapelle-des-Bois (Doubs). Le recensement compte 219 domaines nordiques en France ; leurs packs sont prévus ensuite.</p>
 
-<h3>Et sur iPhone ?</h3>
-<p>Plus tard. L'app Android vient d'abord. La licence du code prévoit déjà la diffusion par l'App Store.</p>
+<h3>D'où viennent les cartes et les informations ?</h3>
+<p>De sources publiques et ouvertes : IGN, OpenStreetMap, Météo-France, ARCEP, l'inventaire national du patrimoine naturel, refuges.info et Camptocamp, entre autres. La page <a href="/fr/licences.html">crédits</a> les cite toutes.</p>
 
-<h3>Faut-il une montre ?</h3>
-<p>Non. Le téléphone seul suffit. Une app pour montre Wear OS est prévue en option, pour le confort : cap, temps restant, vibrations.</p>
+<h3>Pourquoi l'état des pistes manque-t-il ?</h3>
+<p>Les domaines publient l'état de leurs pistes sans autoriser sa reprise. Il n'est donc pas dans l'app. Nous allons demander un accord écrit à l'Espace Nordique Jurassien et à Nordic France.</p>
+
+<h3>Le plan des pistes de la station est-il dans l'app ?</h3>
+<p>Non. Le plan dessiné par une station lui appartient, et nous ne le reprenons jamais. Les pistes de l'app viennent d'OpenStreetMap, la carte collaborative du monde.</p>
+
+<h3>Une piste est fausse ou manque. Que faire ?</h3>
+<p>Si elle est fausse dans OpenStreetMap, vous pouvez la corriger là-bas : la correction arrivera dans le pack suivant. Sinon, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose">signalez-la sur GitHub</a>, avec le lieu et la date du constat.</p>
 
 <h3>Comment poser une autre question ?</h3>
-<p><a href="https://github.com/tracesblanches/tracesblanches/issues">Ouvrez une issue sur GitHub</a>. Les réponses utiles à tous viendront sur cette page.</p>
+<p><a href="https://github.com/tracesblanches/tracesblanches/issues">Posez-la sur GitHub</a>. Les réponses utiles à tous viendront sur cette page.</p>
 </div>
 </Base>
