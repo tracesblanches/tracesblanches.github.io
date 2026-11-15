@@ -1,105 +1,125 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Licences et sources des données · traceblanche</title>
-<meta name="description" content="Les sources des données de traceblanche (IGN, OpenStreetMap, Météo-France, ARCEP, refuges.info, Camptocamp…), leurs licences et leurs mentions, la licence du code et du site.">
+<title>Licences and data sources · traceblanche</title>
+<meta name="description" content="The data sources of traceblanche (IGN, OpenStreetMap, Météo-France, ARCEP, refuges.info, Camptocamp…), their licences and credits, and the licences of the code and of this website.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://traceblanche.github.io/licences.html">
+<link rel="alternate" hreflang="en" href="https://traceblanche.github.io/licences.html">
+<link rel="alternate" hreflang="fr" href="https://traceblanche.github.io/fr/licences.html">
+<link rel="alternate" hreflang="x-default" href="https://traceblanche.github.io/licences.html">
 <link rel="stylesheet" href="style.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#contenu">Aller au contenu</a>
+<a class="skip" href="#content">Skip to content</a>
 <header class="top"><div class="wrap">
-<a class="brand" href="./"><img src="favicon.svg" width="28" height="28" alt="">traceblanche</a>
-<nav aria-label="Navigation principale"><ul>
-<li><a href="demarrage.html">Démarrage</a></li>
+<a class="brand" href="./"><img src="favicon.svg" width="24" height="24" alt="">traceblanche</a>
+<div class="tools">
+<div class="lang" role="group" aria-label="Language"><a href="fr/licences.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="FR, Français">FR</a><span aria-current="true">EN</span></div>
+<a class="gh" href="https://github.com/traceblanche" aria-label="traceblanche on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</div>
+<nav class="site" aria-label="Main navigation"><ul>
+<li><a href="getting-started.html">Getting started</a></li>
 <li><a href="faq.html">FAQ</a></li>
-<li><a href="confidentialite.html">Confidentialité</a></li>
+<li><a href="privacy.html">Privacy</a></li>
 <li><a href="licences.html" aria-current="page">Licences</a></li>
-<li><a href="en/" lang="en" hreflang="en">English</a></li>
-<li><a href="https://github.com/traceblanche" aria-label="traceblanche sur GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
 </ul></nav>
 </div></header>
 
-<main id="contenu">
+<main id="content">
 <div class="wrap">
 <div class="text">
-<h1>Licences et sources des données</h1>
-<p class="lead">traceblanche assemble des données publiques. Chacune garde sa licence et sa mention. Cette page les liste, puis donne la licence du code et du site.</p>
+<h1>Licences and data sources</h1>
+<p class="lead">traceblanche assembles public data. Each source keeps its licence and its credit. This page lists them, then gives the licences of the code and of this website.</p>
 <ul class="toc">
-<li><a href="#principes">Principes</a></li>
+<li><a href="#principles">Principles</a></li>
 <li><a href="#sources">Sources</a></li>
-<li><a href="#exclues">Sources exclues des packs</a></li>
+<li><a href="#excluded">Sources kept out of packs</a></li>
 <li><a href="#code">Code</a></li>
-<li><a href="#site">Ce site</a></li>
+<li><a href="#maps">Maps on this site</a></li>
+<li><a href="#site">This website</a></li>
 </ul>
 
-<h2 id="principes">Principes</h2>
+<h2 id="principles">Principles</h2>
 <ul>
-<li><b>Une couche par source.</b> Un pack est une collection de couches indépendantes. Chaque couche garde la licence de sa source, écrite dans ses métadonnées et dans le manifeste du pack.</li>
-<li><b>Pas de mélange de licences incompatibles.</b> Les données d'OpenStreetMap (ODbL) et celles de refuges.info ou de Camptocamp (CC BY-SA) ne sont jamais mêlées pour un même type d'objet.</li>
-<li><b>Nos propres calculs</b> (pentes, exposition aux avalanches, neige estimée, zones sans réseau) sont diffusés sous Licence Ouverte 2.0, avec la mention de leurs sources.</li>
-<li><b>Le code de la chaîne de données est publié.</b> C'est l'offre que demande l'ODbL pour les couches tirées d'OpenStreetMap.</li>
-<li><b>L'app affiche les mentions</b> : « © OpenStreetMap » dans un coin de la carte, les autres dans un écran « Licences des données ». <span class="tag plan">prévu</span></li>
+<li><b>One layer per source.</b> A pack is a set of independent layers. Each layer keeps the licence of its source, written in its metadata and in the pack manifest.</li>
+<li><b>No mixing of incompatible licences.</b> Data from OpenStreetMap (ODbL) and data from refuges.info or Camptocamp (CC BY-SA) are never merged for the same kind of feature.</li>
+<li><b>Our own computations</b> (slopes, avalanche exposure, estimated snow, no-signal areas) are published under the Licence Ouverte 2.0, with the credit of their sources.</li>
+<li><b>The data pipeline code is published.</b> That is the offer the ODbL asks for, for the layers derived from OpenStreetMap.</li>
+<li><b>The app shows the credits</b>: “© OpenStreetMap” in a corner of the map, the others on a “Data licences” screen. <span class="tag plan">planned</span></li>
 </ul>
 </div>
 
 <h2 id="sources">Sources</h2>
 <div class="table">
 <table class="stack">
-<thead><tr><th scope="col">Donnée</th><th scope="col">Source</th><th scope="col">Licence</th><th scope="col">Mention</th></tr></thead>
+<thead><tr><th scope="col">Data</th><th scope="col">Source</th><th scope="col">Licence</th><th scope="col">Credit</th></tr></thead>
 <tbody>
-<tr><td data-label="Donnée">Fond de carte</td><td data-label="Source">IGN, Plan IGN v2 (tuiles vectorielles)</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Mention">© IGN – Plan IGN v2, avec la date de mise à jour</td></tr>
-<tr><td data-label="Donnée">Fond de carte</td><td data-label="Source">Protomaps, extrait d'OpenStreetMap</td><td data-label="Licence">ODbL 1.0</td><td data-label="Mention">Protomaps © contributeurs d'OpenStreetMap</td></tr>
-<tr><td data-label="Donnée">Pistes, domaines, graphe de routage</td><td data-label="Source">OpenStreetMap, extrait quotidien d'OpenSnowMap ; OpenSkiMap</td><td data-label="Licence">ODbL 1.0</td><td data-label="Mention">© contributeurs d'OpenStreetMap ; OpenSkiMap.org</td></tr>
-<tr><td data-label="Donnée">Relief, pentes, forêt</td><td data-label="Source">IGN, MNT et MNH LiDAR HD</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Mention">IGN, LiDAR HD MNT et MNH, avec l'édition</td></tr>
-<tr><td data-label="Donnée">Neige estimée</td><td data-label="Source">Météo-France, simulation nivologique ; contours des massifs de snowtools (CNRM)</td><td data-label="Licence">Licence Ouverte 2.0 ; CeCILL-C</td><td data-label="Mention">Météo-France ; snowtools, CNRM</td></tr>
-<tr><td data-label="Donnée">Bulletin d'avalanche</td><td data-label="Source">Météo-France, BERA</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Mention">Météo-France, BERA du jour</td></tr>
-<tr><td data-label="Donnée">Météo heure par heure</td><td data-label="Source">Météo-France, AROME <span class="tag plan">prévu</span></td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Mention">Météo-France, AROME</td></tr>
-<tr><td data-label="Donnée">Zones protégées</td><td data-label="Source">PatriNat (OFB, MNHN, CNRS, IRD), INPN ; Géoportail de l'urbanisme ; OFEV pour les districts francs suisses</td><td data-label="Licence">INPN : licence ouverte à confirmer ; GPU : Licence Ouverte ; OFEV : opendata.swiss, source obligatoire</td><td data-label="Mention">PatriNat, INPN ; Géoportail de l'urbanisme ; © OFEV, © swisstopo</td></tr>
-<tr><td data-label="Donnée">Règles de bivouac et d'accès</td><td data-label="Source">Arrêtés publics, saisis à la main</td><td data-label="Licence">Licence Ouverte 2.0 (notre saisie)</td><td data-label="Mention">Référence du texte de chaque règle</td></tr>
-<tr><td data-label="Donnée">Zones sans réseau</td><td data-label="Source">ARCEP, Mon Réseau Mobile</td><td data-label="Licence">Licence Ouverte</td><td data-label="Mention">ARCEP, Mon Réseau Mobile, avec la date des cartes</td></tr>
-<tr><td data-label="Donnée">Refuges et abris</td><td data-label="Source">refuges.info ; Camptocamp (documents collaboratifs)</td><td data-label="Licence">CC BY-SA 2.0 et 3.0, diffusées ensemble sous CC BY-SA 4.0</td><td data-label="Mention">© contributeurs de refuges.info ; contributeurs et lien du document Camptocamp</td></tr>
-<tr><td data-label="Donnée">Communes</td><td data-label="Source">geo.api.gouv.fr ; IGN, Admin Express</td><td data-label="Licence">Licence Ouverte (Admin Express)</td><td data-label="Mention">geo.api.gouv.fr ; IGN, Admin Express</td></tr>
-<tr><td data-label="Donnée">Méthodes d'exposition aux avalanches</td><td data-label="Source">AutoATES v3.0 ; com4FlowPy (AvaFrame)</td><td data-label="Licence">MIT ; EUPL-1.2</td><td data-label="Mention">AutoATES ; AvaFrame</td></tr>
-<tr><td data-label="Donnée">Voix</td><td data-label="Source">Pocket TTS (Kyutai), voix « estelle » ; pockettts.cpp</td><td data-label="Licence">CC BY 4.0 ; CC0 ; MIT</td><td data-label="Mention">Voix de synthèse : Pocket TTS, Kyutai</td></tr>
-<tr><td data-label="Donnée">Fartage</td><td data-label="Source">Plages de température publiées par Swix et Toko</td><td data-label="Licence">Faits cités, aucun tableau copié</td><td data-label="Mention">D'après Swix, Toko</td></tr>
+<tr><td data-label="Data">Base map</td><td data-label="Source">IGN, Plan IGN v2 (vector tiles)</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">© IGN – Plan IGN v2, with the update date</td></tr>
+<tr><td data-label="Data">Base map</td><td data-label="Source">Protomaps, OpenStreetMap extract</td><td data-label="Licence">ODbL 1.0</td><td data-label="Credit">Protomaps © OpenStreetMap contributors</td></tr>
+<tr><td data-label="Data">Trails, ski areas, routing graph</td><td data-label="Source">OpenStreetMap, daily OpenSnowMap extract; OpenSkiMap</td><td data-label="Licence">ODbL 1.0</td><td data-label="Credit">© OpenStreetMap contributors; OpenSkiMap.org</td></tr>
+<tr><td data-label="Data">Terrain, slopes, forest</td><td data-label="Source">IGN, LiDAR HD terrain and canopy height models</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">IGN, LiDAR HD MNT and MNH, with the edition</td></tr>
+<tr><td data-label="Data">Estimated snow</td><td data-label="Source">Météo-France, snowpack simulation; massif outlines from snowtools (CNRM)</td><td data-label="Licence">Licence Ouverte 2.0; CeCILL-C</td><td data-label="Credit">Météo-France; snowtools, CNRM</td></tr>
+<tr><td data-label="Data">Avalanche bulletin</td><td data-label="Source">Météo-France, BERA</td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">Météo-France, BERA of the day</td></tr>
+<tr><td data-label="Data">Hourly weather</td><td data-label="Source">Météo-France, AROME <span class="tag plan">planned</span></td><td data-label="Licence">Licence Ouverte 2.0</td><td data-label="Credit">Météo-France, AROME</td></tr>
+<tr><td data-label="Data">Protected areas</td><td data-label="Source">PatriNat (OFB, MNHN, CNRS, IRD), INPN; Géoportail de l'urbanisme; FOEN for the Swiss game reserves</td><td data-label="Licence">INPN: open licence to be confirmed; GPU: Licence Ouverte; FOEN: opendata.swiss, source required</td><td data-label="Credit">PatriNat, INPN; Géoportail de l'urbanisme; © FOEN, © swisstopo</td></tr>
+<tr><td data-label="Data">Bivouac and access rules</td><td data-label="Source">Public orders, entered by hand</td><td data-label="Licence">Licence Ouverte 2.0 (our entry)</td><td data-label="Credit">Reference of the text behind each rule</td></tr>
+<tr><td data-label="Data">No-signal areas</td><td data-label="Source">ARCEP, Mon Réseau Mobile</td><td data-label="Licence">Licence Ouverte</td><td data-label="Credit">ARCEP, Mon Réseau Mobile, with the date of the maps</td></tr>
+<tr><td data-label="Data">Huts and shelters</td><td data-label="Source">refuges.info; Camptocamp (collaborative documents)</td><td data-label="Licence">CC BY-SA 2.0 and 3.0, published together under CC BY-SA 4.0</td><td data-label="Credit">© refuges.info contributors; contributors and link of the Camptocamp document</td></tr>
+<tr><td data-label="Data">Municipalities</td><td data-label="Source">geo.api.gouv.fr; IGN, Admin Express</td><td data-label="Licence">Licence Ouverte (Admin Express)</td><td data-label="Credit">geo.api.gouv.fr; IGN, Admin Express</td></tr>
+<tr><td data-label="Data">Avalanche exposure methods</td><td data-label="Source">AutoATES v3.0; com4FlowPy (AvaFrame)</td><td data-label="Licence">MIT; EUPL-1.2</td><td data-label="Credit">AutoATES; AvaFrame</td></tr>
+<tr><td data-label="Data">Voice</td><td data-label="Source">Pocket TTS (Kyutai), “estelle” voice; pockettts.cpp</td><td data-label="Licence">CC BY 4.0; CC0; MIT</td><td data-label="Credit">Synthetic voice: Pocket TTS, Kyutai</td></tr>
+<tr><td data-label="Data">Waxing</td><td data-label="Source">Temperature ranges published by Swix and Toko</td><td data-label="Licence">Facts cited, no table copied</td><td data-label="Credit">After Swix, Toko</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="text">
-<p>Le détail de chaque licence, avec les passages lus et leur date de lecture, est dans le dépôt : <a href="https://github.com/traceblanche/traceblanche/blob/main/docs/licences-donnees.md">docs/licences-donnees.md</a>. Aucune de ces mentions ne signifie que la source approuve traceblanche.</p>
+<p>The detail of each licence, with the passages read and the date they were read, is in the repository, in French: <a href="https://github.com/traceblanche/traceblanche/blob/main/docs/licences-donnees.md" hreflang="fr">docs/licences-donnees.md</a>. None of these credits means that the source endorses traceblanche.</p>
 
-<h2 id="exclues">Sources exclues des packs publiés</h2>
-<p>Certaines sources n'autorisent pas la redistribution. La chaîne de données ne les lit que pour un usage personnel, avec une option désactivée par défaut, et ne les met dans aucun pack publié :</p>
+<h2 id="excluded">Sources kept out of published packs</h2>
+<p>Some sources do not allow redistribution. The data pipeline reads them only for personal use, behind an option that is off by default, and puts them in no published pack:</p>
 <ul>
-<li>l'état des pistes de l'Espace Nordique Jurassien et de Nordic France, et la page de damage de la mairie de Cervières : aucune licence de réutilisation ; nous allons demander un accord écrit ;</li>
-<li>la carte des avalanches connues (CLPA) et l'enquête permanente sur les avalanches (EPA) du site d'INRAE : réservées à un usage personnel ;</li>
-<li>la carte des avalanches connues republiée par la DDT des Hautes-Alpes sous Licence Ouverte : la DDT doit d'abord confirmer par écrit son droit de la republier ;</li>
-<li>les zones de Biodiv'sports : aucune licence trouvée ; un accord de la LPO reste à demander ;</li>
-<li>l'API gratuite d'Open-Meteo, réservée à un usage non commercial.</li>
+<li>trail status from the Espace Nordique Jurassien and Nordic France, and the grooming page of the Cervières town hall: no reuse licence; we will ask for written permission;</li>
+<li>the map of recorded avalanches (CLPA) and the permanent avalanche survey (EPA) on the INRAE website: restricted to personal use;</li>
+<li>the map of recorded avalanches republished by the Hautes-Alpes DDT under the Licence Ouverte: the DDT must first confirm in writing its right to republish it;</li>
+<li>the Biodiv'sports areas: no licence found; permission from the LPO is still to be requested;</li>
+<li>the free Open-Meteo API, restricted to non-commercial use.</li>
 </ul>
-<p>Les plans des pistes dessinés par les stations ne sont jamais redistribués, ni en image, ni en couche, ni dans le dépôt.</p>
+<p>Trail maps drawn by ski resorts are never redistributed, as images, as layers or in the repository.</p>
 
 <h2 id="code">Code</h2>
 <ul>
-<li>Le code est sous licence <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0-or-later</a>, avec une permission additionnelle qui autorise la diffusion par les boutiques d'applications (App Store, Google Play).</li>
-<li>Le calcul d'exposition aux avalanches (<code>crates/avalanche</code>) est un portage de com4FlowPy et reste sous <a href="https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12">EUPL-1.2</a>. Il tourne dans la chaîne de données ; le téléphone ne reçoit que la couche calculée.</li>
-<li>Les bibliothèques tierces sont sous licences permissives (MIT, Apache-2.0, BSD et voisines). Leur liste sera dans l'écran « Licences » de l'app. <span class="tag plan">prévu</span></li>
+<li>The code is under the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0-or-later</a>, with an additional permission that allows distribution through app stores (App Store, Google Play).</li>
+<li>The avalanche exposure computation (<code>crates/avalanche</code>) is a port of com4FlowPy and stays under the <a href="https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12">EUPL-1.2</a>. It runs in the data pipeline; the phone only receives the computed layer.</li>
+<li>Third-party libraries are under permissive licences (MIT, Apache-2.0, BSD and similar). Their list will be on the app's “Licences” screen. <span class="tag plan">planned</span></li>
 </ul>
 
-<h2 id="site">Ce site</h2>
-<p>Les textes et les images de ce site sont sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC BY-SA 4.0</a>. Les cartes reprennent des données des sources ci-dessus et portent leurs mentions dans leur légende.</p>
+<h2 id="maps">Maps on this site</h2>
+<p>The maps on this site are renders from the project's viewer, with the cross-country, backcountry and guidance styles, on the Cervières and Chapelle-des-Bois packs. Each caption carries a short credit; here are the full sources.</p>
+<ul>
+<li><b>Base map</b>: IGN, Plan IGN v2, Licence Ouverte 2.0.</li>
+<li><b>Slopes and terrain</b>: IGN, LiDAR HD terrain model, Licence Ouverte 2.0.</li>
+<li><b>Trails</b>: © OpenStreetMap contributors, ODbL 1.0, daily OpenSnowMap extract; Nordic centres: Protomaps © OpenStreetMap contributors.</li>
+<li><b>Huts</b>: © refuges.info contributors, CC BY-SA.</li>
+<li><b>No-signal areas</b>: ARCEP, Mon Réseau Mobile, maps of 30 June 2026, Licence Ouverte.</li>
+<li><b>Snow</b>: Météo-France, snowpack simulation of 14 November 2026, Licence Ouverte 2.0; massif outlines from snowtools (CNRM), CeCILL-C.</li>
+</ul>
+<p>No map on this site shows a source restricted to personal use, the map of recorded avalanches (CLPA) or the Biodiv'sports areas. The render script hides these layers before each capture.</p>
+
+<h2 id="site">This website</h2>
+<p>The text and images of this website are under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> licence. The maps use data from the sources above and carry their credits in their captions.</p>
 </div>
 </div>
 </main>
 
 <footer><div class="wrap">
-<p>Code sous licence GPL-3.0-or-later, avec une exception pour les boutiques d'applications. Textes et images du site sous licence CC BY-SA 4.0 ; les cartes portent les mentions de leurs sources.</p>
-<p>Une question ou une erreur : <a href="https://github.com/traceblanche/traceblanche/issues">ouvrez une issue sur GitHub</a>. Sources des données : <a href="licences.html">licences</a>.</p>
+<p>Code under GPL-3.0-or-later, with an app store exception. Site text and images under CC BY-SA 4.0. Data and map sources: <a href="licences.html">licences</a>.</p>
+<p>A question or a mistake: <a href="https://github.com/traceblanche/traceblanche/issues">open an issue on GitHub</a>.</p>
 </div></footer>
 </body>
 </html>

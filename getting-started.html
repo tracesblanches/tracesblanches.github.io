@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting started · traceblanche</title>
+<meta name="description" content="Install the app (planned), build a first offline pack with the project's command line, and contribute to the traceblanche code.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://traceblanche.github.io/getting-started.html">
+<link rel="alternate" hreflang="en" href="https://traceblanche.github.io/getting-started.html">
+<link rel="alternate" hreflang="fr" href="https://traceblanche.github.io/fr/demarrage.html">
+<link rel="alternate" hreflang="x-default" href="https://traceblanche.github.io/getting-started.html">
+<link rel="stylesheet" href="style.css">
+<script src="lang.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="./"><img src="favicon.svg" width="24" height="24" alt="">traceblanche</a>
+<div class="tools">
+<div class="lang" role="group" aria-label="Language"><a href="fr/demarrage.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="FR, Français">FR</a><span aria-current="true">EN</span></div>
+<a class="gh" href="https://github.com/traceblanche" aria-label="traceblanche on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</div>
+<nav class="site" aria-label="Main navigation"><ul>
+<li><a href="getting-started.html" aria-current="page">Getting started</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="privacy.html">Privacy</a></li>
+<li><a href="licences.html">Licences</a></li>
+</ul></nav>
+</div></header>
+
+<main id="content">
+<div class="wrap">
+<div class="text">
+<h1>Getting started</h1>
+<p class="lead">Three paths, depending on what you want to do: install the app, build a pack on your computer, or contribute to the code.</p>
+<ul class="toc">
+<li><a href="#install">Install the app</a></li>
+<li><a href="#pack">Build a first pack</a></li>
+<li><a href="#contribute">Contribute to the code</a></li>
+</ul>
+
+<h2 id="install">Install the app</h2>
+<p>The app is not available yet. It will come out on Google Play first, as an internal test, then for everyone. The iPhone version will follow.</p>
+<p>To know when it comes out, follow <a href="https://github.com/traceblanche/traceblanche/issues/122">the Google Play release issue</a> on GitHub.</p>
+
+<h2 id="pack">Build a first pack</h2>
+<p>Today, a pack is built on a computer with the project's command line. You then look at it in the viewer, in your browser. The maps on this site come from there.</p>
+
+<h3>What you need</h3>
+<ul>
+<li>A Linux computer. The project is developed and tested on Linux.</li>
+<li><code>git</code> and <a href="https://rustup.rs/">rustup</a>. The repository pins the Rust version in <code>rust-toolchain.toml</code>; <code>rustup toolchain install</code>, run inside the repository, installs it.</li>
+<li>An internet connection for the first run, and a few gigabytes of disk. The source cache takes 5 GB for the two test sites.</li>
+<li>Optional: a Météo-France API key, for the day's avalanche bulletin. Without a key, the data pipeline reads the public archive of bulletins.</li>
+</ul>
+
+<h3>1. Get the code</h3>
+<pre><code>git clone https://github.com/traceblanche/traceblanche
+cd traceblanche
+cargo run --release -p skimap-cli -- sites</code></pre>
+<p>The last command builds the command line, then lists the known sites. The command line prints in French:</p>
+<pre><code>cervieres          Cervières (05, INSEE 05027)
+  massif Météo-France   : 17 Queyras (vérifié sur les polygones snowtools) ; BERA : oui
+chapelle-des-bois  Chapelle-des-Bois (25, INSEE 25121)
+  massif Météo-France   : 55 Haut-Doubs / 56 Haut-Jura (vérifié sur les polygones snowtools) ; BERA : non</code></pre>
+
+<h3>2. Build the pack</h3>
+<pre><code>cargo run --release -p skimap-cli -- build-all cervieres</code></pre>
+<p>The command downloads the sources, computes each layer in the order of their dependencies, then writes the pack to <code>data/out/cervieres/pack/</code>. It prints one line per step, with its time and key figures:</p>
+<pre><code>build-all cervieres (Cervières)
+planet                24.05s  33113 pistes dans la zone France, données OSM du 2026-11-13T23:00:00Z
+pistes                 0.14s  195 ways, 66.72 km dont 61.56 km nordiques ; graphe 189 nœuds, 224 arêtes (1 connecteur …
+…
+terrain               10.80s  324 dalles, 3317 x 3480 cellules, 87.5 % valides, pente ≥ 30° : 39.6 % (rapport 07 : 38 …
+snow                   2.81s  simulation du 2026-11-14, 405034 cellules estimées, hauteur moyenne 7.6 cm (min 0, max …
+…
+avalanche-exposure   324.36s  3317 x 3480 cellules de 5 m ; terrain peu exposé (modèle) 9.3 %, exposé 51.8 %, très ex …
+…
+coverage               0.93s  ARCEP 2026_T2 : partie française 225.59 km², sans aucun réseau 51.25 km² (22.72 %), 117 …
+bera                   0.01s  Unavailable, massif Queyras, origine -, risque max -
+meteo                      -  ignoré : personal_sources désactivé (SKIMAP_PERSONAL_SOURCES)
+…
+build-pack             4.11s  pack 20261115T074709Z : 39.61 Mo, 34 couches, 4 absentes ; relecture : OK
+…
+total                386.97s</code></pre>
+<p>The first run downloads the sources: LiDAR HD terrain, Plan IGN tiles, an OpenStreetMap extract, the snow simulation, the ARCEP maps. With the cache already filled, the build takes a few minutes, most of them for avalanche exposure. The Cervières pack then weighs 39.6 MB, the Chapelle-des-Bois pack 35.0 MB.</p>
+<p>Sources restricted to personal use stay disabled by default: they never go into a published pack. Their steps are then skipped.</p>
+
+<h3>3. Look at the pack</h3>
+<pre><code>cargo run --release -p skimap-cli -- serve</code></pre>
+<p>Then open <code>http://127.0.0.1:8765/tools/viewer/index.html?pack=../../data/out/cervieres/pack/</code> in your browser. The viewer's panel picks the map style (cross-country, backcountry, guidance) and the layers; tapping a feature opens its details. The viewer loads MapLibre and PMTiles from jsDelivr the first time; after that, all data comes from the pack, on your machine.</p>
+
+<h3>4. Compute a route</h3>
+<pre><code>cargo run --release -p skimap-cli -- route cervieres \
+  44.85894,6.725006 44.84465,6.8157 --date 2027-01-15 --start 13:00</code></pre>
+<pre><code>44.85894,6.72501 → 44.84465,6.81570 (cervieres, style classique) : 11.36 km, D+ 462 m, D− 145 m
+temps estimé (C5) : 2h15 (montée 1h48, plat 0h22, descente 0h05), 5.1 km/h de moyenne
+C7, départ 13:00 le 2027-01-15 : coucher du soleil 17:16, fin du crépuscule civil 17:49, retour au plus tard 17:19 (crépuscule − 30 min) ; arrivée prévue 15:41 (temps × 1.2), marge 1h38</code></pre>
+<p>The route is written as GeoJSON to <code>route.geojson</code>. The other commands are described in <a href="https://github.com/traceblanche/traceblanche/blob/main/docs/architecture/compiler.md" hreflang="fr">docs/architecture/compiler.md</a> (in French).</p>
+
+<h2 id="contribute">Contribute to the code</h2>
+<p>The repository is a Rust workspace: one crate per domain (trails, terrain, snow, zones, huts, network, avalanches, pack, core, voice) and a command line that ties them together. <a href="https://github.com/traceblanche/traceblanche/blob/main/docs/architecture.md" hreflang="fr">docs/architecture.md</a> (in French) maps it out. The Android app, in Kotlin, will join it.</p>
+<ol>
+<li>Pick an issue, or open one to describe your change before you spend time on it.</li>
+<li>Write the test that proves the change. If a reference output moves, update it in the same commit and explain the difference.</li>
+<li>Run the checks:
+<pre><code>cargo fmt --all --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test --workspace</code></pre></li>
+<li>Sign off each commit with <code>git commit -s</code>, under the Developer Certificate of Origin.</li>
+<li>Open the pull request. Paste the output of the commands and tick the sentence agreeing to the licence and to the app store exception.</li>
+</ol>
+<p>Contributions written with an AI tool are welcome: you review them, you bring the evidence and you answer for them as for your own code.</p>
+<div class="actions">
+<a class="btn primary" href="https://github.com/traceblanche/.github/blob/main/CONTRIBUTING.md" hreflang="fr">Read the contribution rules (in French)</a>
+<a class="btn secondary" href="https://github.com/traceblanche/traceblanche/issues">Browse the issues</a>
+</div>
+</div>
+</div>
+</main>
+
+<footer><div class="wrap">
+<p>Code under GPL-3.0-or-later, with an app store exception. Site text and images under CC BY-SA 4.0. Data and map sources: <a href="licences.html">licences</a>.</p>
+<p>A question or a mistake: <a href="https://github.com/traceblanche/traceblanche/issues">open an issue on GitHub</a>.</p>
+</div></footer>
+</body>
+</html>
