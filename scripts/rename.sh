@@ -1,7 +1,7 @@
 #!/bin/sh
 # Renames the project identifier (organisation, repositories, addresses) in this
 # repository: every occurrence of it (file contents only, file names never contain
-# it) becomes NEW. The displayed name ("Traces blanches") is changed by hand.
+# it) becomes NEW. The displayed name ("Traces Blanches") is changed by hand.
 # usage: scripts/rename.sh NEW        (run from the repository root)
 set -eu
 OLD=tracesblanches

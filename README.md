@@ -1,6 +1,6 @@
 # tracesblanches.github.io
 
-Le site de [Traces blanches](https://github.com/tracesblanches/tracesblanches), l'app de ski de fond et de ski de randonnée nordique hors ligne : https://tracesblanches.github.io/
+Le site de [Traces Blanches](https://github.com/tracesblanches/tracesblanches), l'app de ski de fond et de ski de randonnée nordique hors ligne : https://tracesblanches.github.io/
 
 **[Site](https://tracesblanches.github.io/)** · [Code source](https://github.com/tracesblanches/tracesblanches) · [Démarrage](https://tracesblanches.github.io/fr/demarrage.html) · [FAQ](https://tracesblanches.github.io/fr/faq.html) · [Confidentialité](https://tracesblanches.github.io/fr/confidentialite.html) · [Licences](https://tracesblanches.github.io/fr/licences.html) · [Version française](https://tracesblanches.github.io/fr/)
 
@@ -20,23 +20,52 @@ L'anglais est à la racine et sert de langue par défaut ; le français est dans
 
 | Anglais (racine) | Français (`fr/`) |
 |---|---|
-| `index.html` | `fr/index.html` |
+| `/` | `/fr/` |
 | `getting-started.html` | `fr/demarrage.html` |
 | `faq.html` | `fr/faq.html` |
 | `privacy.html` (exigée par Google Play) | `fr/confidentialite.html` |
 | `licences.html` | `fr/licences.html` |
 
-`404.html` est bilingue, avec des adresses absolues. Chaque page porte `lang`, une adresse canonique, les liens `hreflang` `en`, `fr` et `x-default` (l'anglais), et le sélecteur FR | EN en haut à droite, qui mène à la page jumelle.
+`src/pages/404.astro` (servie comme `404.html`) est bilingue, avec des adresses absolues. Chaque page porte `lang`, une adresse canonique, les liens `hreflang` `en`, `fr` et `x-default` (l'anglais), et le sélecteur FR | EN en haut à droite, qui mène à la page jumelle.
 
 Choix de la langue :
 
-- Seule la racine `/` détecte la langue. Un court script dans `index.html` ouvre `/fr/` si le navigateur préfère le français à l'anglais (`navigator.languages`, dans l'ordre), quand le visiteur arrive de l'extérieur du site et n'a pas encore choisi.
-- Un clic sur FR ou EN enregistre le choix dans le stockage local du navigateur (`lang.js`, dans un `try`), et ce choix prime ensuite sur la détection. Un retour à la racine depuis une autre page du site ne déclenche pas la détection : avec un stockage bloqué, le lien EN ne renvoie donc pas vers `/fr/`.
+- Seule la racine `/` détecte la langue. Un court script (`src/scripts/lang-root.js`), inséré seulement dans la page d'accueil anglaise, ouvre `/fr/` si le navigateur préfère le français à l'anglais (`navigator.languages`, dans l'ordre), quand le visiteur arrive de l'extérieur du site et n'a pas encore choisi.
+- Un clic sur FR ou EN enregistre le choix dans le stockage local du navigateur (`src/scripts/lang-memory.js`, dans un `try`), et ce choix prime ensuite sur la détection. Un retour à la racine depuis une autre page du site ne déclenche pas la détection : avec un stockage bloqué, le lien EN ne renvoie donc pas vers `/fr/`.
 - Les liens vers une page précise ne sont jamais redirigés. Sans JavaScript, la racine reste en anglais.
+
+## Structure
+
+- `src/pages/` : une page Astro par adresse (`faq.astro` → `/faq.html`, `fr/demarrage.astro` → `/fr/demarrage.html`) ; l'accueil, anglais et français, est `src/components/HomePage.astro`, son texte `src/copy/home.ts`.
+- `src/i18n/` : la table des pages et de leurs jumelles (navigation, sélecteur, `hreflang`, sitemap), les textes d'interface.
+- `src/layouts/Base.astro` : `<head>`, en-tête, pied de page, scripts de langue. `src/styles/tokens.css` : seul endroit des couleurs (neige le jour, bleu nuit), tailles et espacements ; `node scripts/check-contrast.mjs` après tout changement.
+- `src/components/Img.astro` : images AVIF et WebP en plusieurs largeurs, repli JPEG, `sizes` donné par chaque usage. `Hero.astro` : le bandeau d'accueil, image préchargée, recadrée à droite sur un écran vertical.
+- Une Content-Security-Policy en `<meta>` autorise les deux scripts de langue par leur empreinte, calculée dans `astro.config.mjs` à partir de `src/scripts/`.
+
+## Logo
+
+Le logo n'est pas encore choisi. Il tient dans un seul composant, `src/components/Logo.astro` : aujourd'hui la marque provisoire (`src/assets/brand/logo.png`) suivie du nom en texte. Pour le changer, remplacer ce composant (et les icônes `public/favicon.png`, `public/apple-touch-icon.png`) ; garder le nom « Traces Blanches » comme texte ou comme nom accessible.
+
+## Visuels
+
+L'accueil a huit emplacements d'image. Le bandeau fait défiler en fondu deux images (`accueil`, `accueil-2`), en CSS seul : pas de défilement si le système demande moins d'animations, pause au survol, au focus ou par la case « Arrêter le défilement ».
+
+Illustrations en place (droits d'usage de l'auteur du projet, crédit « Illustrations : Traces Blanches » dans la page licences) : `accueil` (lynx sous la pleine lune, retourné en miroir pour mettre le lynx à droite), `accueil-portrait` (lièvre au coucher de soleil, recadré sous le titre peint, lièvre dans le tiers haut), `accueil-2` (cerfs au coucher du soleil) et `accueil-2-portrait` (recadrage sur les cerfs), `securite` (renard devant les sommets, recadré sous le titre peint), `nature` (loutre sous la lune). Elles font 1 672 px de large (1 122 px pour les affiches) : le site n'en tire pas de taille plus grande ; une version de 2 400 px ou plus améliorera les grands écrans. Le logo provisoire (`src/assets/brand/logo.png`, lièvre et lune) et les icônes `public/favicon.png` et `public/apple-touch-icon.png` en sont tirés en attendant la version vectorielle.
+
+Pour ajouter ou remplacer une image : Déposer un fichier dans `src/assets/visuels/` sous le nom de l'emplacement (JPEG, PNG, WebP ou AVIF) suffit : il remplace la carte provisoire à la construction suivante. Remplir ensuite son texte alternatif (vide si l'image est décorative) et son crédit dans `src/data/visuals.ts`, tableau `OWN`. Les images sont réencodées en AVIF et WebP : déposer l'original, pas une version compressée.
+
+| Fichier | Où | Exigences |
+|---|---|---|
+| `accueil.*`, `accueil-2.*` | bandeau plein écran, en fondu | paysage, 2 400 px de large au moins (3 000 conseillés), sujet dans le tiers droit, partie gauche et bas calmes et plutôt sombres (le texte s'y pose sur un dégradé) |
+| `accueil-portrait.*`, `accueil-2-portrait.*` | bandeau, téléphone tenu droit | facultatif ; portrait 3:5 environ, 1 400 × 2 300 px au moins, sujet en haut ; sans lui, le bandeau garde la partie droite du paysage |
+| `matin.*`, `piste.*`, `retour.*` | les trois moments de la journée | paysage 16:10, 2 000 px de large au moins |
+| `securite.*`, `nature.*`, `france.*` | sections sécurité, nature, France | paysage 16:10 ou carré, 2 000 px de large au moins ; `nature` n'a pas de carte provisoire : la section reste sans image tant qu'il manque |
+
+Droits : seulement des images dont vous détenez les droits ou sous une licence compatible avec CC BY-SA 4.0 (licence des images du site), crédit indiqué ; aucune personne reconnaissable sans son accord ; aucun plan des pistes de station (voir la page licences). Les cartes provisoires sont des rendus du visualiseur (`scripts/render-maps.mjs`) et du recensement (`scripts/render-france.mjs`), sources dans la page licences, section « Cartes du site ».
 
 ## Images
 
-Les images de `img/` sont des rendus du visualiseur du projet (`tools/viewer`, servi par `skimap serve`) avec les styles validés `fond`, `srn` et `guidage`, sur les packs de Cervières et de Chapelle-des-Bois, en WebP à 800 et 1600 pixels de large. `scripts/render-maps.mjs` les produit : il masque par CSS les commandes du visualiseur (panneau, boutons, attribution, échelle), retire la position et la décision de démonstration, et cache les couches qui ne doivent pas paraître sur une image publiée (carte des avalanches connues, Biodiv'sports, état des pistes, modèle d'avalanche nourri par la CLPA) ; il vérifie qu'aucune entité de ces couches n'est dessinée. Chaque légende porte une mention courte de ses sources ; la liste complète est dans la page licences, section « Cartes du site ».
+Les cartes de `src/assets/maps/` sont des rendus du visualiseur du projet (`tools/viewer`, servi par `skimap serve`) avec les styles validés `fond`, `srn` et `guidage`, sur les packs de Cervières et de Chapelle-des-Bois, en WebP de 1600 pixels de large, rangés dans `src/assets/maps/` ; le site en tire ses tailles. `scripts/render-maps.mjs` les produit : il masque par CSS les commandes du visualiseur (panneau, boutons, attribution, échelle), retire la position et la décision de démonstration, et cache les couches qui ne doivent pas paraître sur une image publiée (carte des avalanches connues, Biodiv'sports, état des pistes, modèle d'avalanche nourri par la CLPA) ; il vérifie qu'aucune entité de ces couches n'est dessinée. Chaque légende porte une mention courte de ses sources ; la liste complète est dans la page licences, section « Cartes du site ».
 
 ## Vérifier
 
@@ -53,6 +82,6 @@ node scripts/shots.mjs DOSSIER       # captures 390 et 1280 px, clair et sombre,
 
 ## Nom
 
-Le nom affiché est « Traces blanches », en français comme en anglais : titres, en-têtes, textes, balises meta. L'identifiant technique est `tracesblanches`, sans espace ni tiret : organisation GitHub, dépôts, adresses. `scripts/rename.sh NOUVEAU` ne remplace que l'identifiant dans les fichiers suivis (le dépôt doit ensuite s'appeler `NOUVEAU.github.io`) ; le nom affiché se change à la main.
+Le nom affiché est « Traces Blanches », en français comme en anglais : titres, en-têtes, textes, balises meta. L'identifiant technique est `tracesblanches`, sans espace ni tiret : organisation GitHub, dépôts, adresses. `scripts/rename.sh NOUVEAU` ne remplace que l'identifiant dans les fichiers suivis (le dépôt doit ensuite s'appeler `NOUVEAU.github.io`) ; le nom affiché se change à la main.
 
 Textes et images sous licence CC BY-SA 4.0, voir [LICENSE](LICENSE).

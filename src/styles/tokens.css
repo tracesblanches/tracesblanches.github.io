@@ -2,7 +2,7 @@
  * Design tokens: the ONLY place where colours, type sizes, spacing and the header height are
  * set. global.css reads these custom properties.
  *
- * Identity of Traces blanches: cold colours of snow and night. Snow white and blue-grey by day,
+ * Identity of Traces Blanches: cold colours of snow and night. Snow white and blue-grey by day,
  * deep night blue after dark, one ink blue for links and buttons, one warm ember for small
  * labels. Light and dark follow the system setting (prefers-color-scheme). System fonts: no
  * web font to download.
@@ -35,6 +35,13 @@
   --on-night-muted: #c9d6e2;
   --ice: #8fc1f0;         /* accent on night */
   --ice-fg: #0b1621;
+
+  /* Palette of the posters (night blue, peach and rose snow, white), ready for the visuals */
+  --poster-night: #023a5f;
+  --snow-peach: #f4caad;
+  --snow-rose: #ecb197;
+  --snow-white: #fbfbf9;
+  --poster-steel: #708bb0;
 
   /* Type */
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -100,6 +107,10 @@ on-night      night     4.5
 on-night-muted night    4.5
 ice           night     4.5
 ice-fg        ice       4.5   filled button on night
+snow-peach    night     4.5   hero label
+snow-white    poster-night 4.5
+snow-peach    poster-night 4.5
+poster-night  snow-peach 4.5
 accent        accent-soft 4.5 link on hover
 fg            accent-soft 4.5
 end-contrast-pairs

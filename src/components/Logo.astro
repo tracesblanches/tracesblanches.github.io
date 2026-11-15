@@ -1,7 +1,10 @@
 ---
-// The project's logo: the ONE place to change when the logo is chosen. Until then, the
-// provisional mark (public/favicon.svg) and the name set in text. Keep the name as text (or as
-// an accessible name) so that the link reads "Traces blanches". The header styles `.brand`
-// (src/styles/global.css, section "header") size whatever this renders.
+// The project's logo: the ONE place to change when the final logo comes. Until then, the
+// provisional mark (src/assets/brand/logo.png: the hare under the moon, waiting for its vector
+// version) and the name set in text. Keep the name as text (or as an accessible name) so that
+// the link reads "Traces Blanches". The header styles `.logo` (global.css, section "header").
+// The favicons (public/favicon.png, public/apple-touch-icon.png) come from the same picture.
+import { Image } from 'astro:assets';
+import mark from '../assets/brand/logo.png';
 ---
-<span class="logo"><img src="/favicon.svg" width="24" height="24" alt="" />Traces blanches</span>
+<span class="logo"><Image src={mark} width={28} height={28} densities={[1, 2, 3]} alt="" loading="eager" />Traces Blanches</span>

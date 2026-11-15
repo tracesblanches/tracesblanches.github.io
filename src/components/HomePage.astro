@@ -1,0 +1,101 @@
+---
+// The home page, in English or French (text in src/copy/home.ts, pictures in
+// src/data/visuals.ts): the hero, a day on skis in three scenes, safety, nature, France, open
+// source, price, a few questions and the closing button.
+import Base from '../layouts/Base.astro';
+import Hero from './Hero.astro';
+import Img from './Img.astro';
+import { type Lang, href } from '../i18n';
+import { HOME, RELEASE_ISSUE, CODE, CONTRIBUTING } from '../copy/home';
+import { visual, type Slot } from '../data/visuals';
+import { heroPreload } from '../lib/images';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = HOME[lang];
+const slides = (['accueil', 'accueil-2'] as const).map(visual).filter((v) => v.image)
+  .map((v) => ({ image: v.image!, portrait: v.portrait, alt: v.alt[lang], credit: v.credit?.[lang] }));
+const preload = slides.length ? await heroPreload(slides[0].image, slides[0].portrait) : [];
+const SCENES: Slot[] = ['matin', 'piste', 'retour'];
+const tag = (t: string) => (t === 'today' ? { cls: 'done', label: c.today } : { cls: 'plan', label: c.planned });
+// A picture beside a text column: drawn at about 60 % of the 68rem column from 48rem, else full width.
+const SIDE = '(min-width: 68rem) 38rem, (min-width: 48rem) 56vw, calc(100vw - 2.2rem)';
+---
+<Base lang={lang} page="home" title={c.title} description={c.description} preload={preload} bodyClass="home">
+{slides.length > 0 && <Hero slot="hero" slides={slides} eyebrow={c.eyebrow} title={c.h1} lead={c.lead} cta={{ href: RELEASE_ISSUE, label: c.notify }} pause={c.pause} />}
+
+<section class="section" aria-labelledby="day">
+<h2 id="day" class="big">{c.dayTitle}</h2>
+<p class="lead text">{c.dayIntro}</p>
+{c.scenes.map((s, i) => {
+  const v = visual(SCENES[i]);
+  return (
+    <article class:list={['scene', { flip: i % 2 === 1 }]}>
+      <div class="scene-text">
+        <p class="step">{i + 1}</p>
+        <h3>{s.title}</h3>
+        {s.text.map((t) => <p>{t}</p>)}
+        <p>{s.tags.map((t) => <span class:list={['tag', tag(t).cls]}>{tag(t).label}</span>)}</p>
+      </div>
+      {v.image && (
+        <figure class="scene-art">
+          <Img src={v.image} alt={v.alt[lang]} sizes={SIDE} />
+          {(v.caption || v.credit) && <figcaption>{v.caption?.[lang]}{v.credit && <span class="credit">{v.credit[lang]}</span>}</figcaption>}
+        </figure>
+      )}
+    </article>
+  );
+})}
+</section>
+
+{([['securite', 'safety', c.safetyTitle, c.safety, { href: href('faq', lang, 'avalanches'), label: c.safetyLink }],
+   ['nature', 'nature', c.natureTitle, c.nature, { href: href('privacy', lang, lang === 'fr' ? 'telephone' : 'phone'), label: c.natureLink }],
+   ['france', 'france', c.franceTitle, c.france, undefined]] as const).map(([slot, id, title, paras, link], i) => {
+  const v = visual(slot);
+  return (
+    <section class:list={['section', 'scene', { flip: i % 2 === 0, solo: !v.image }]} aria-labelledby={id}>
+      <div class="scene-text">
+        <h2 id={id} class="big">{title}</h2>
+        {paras.map((t) => <p>{t}</p>)}
+        {link && <p><a href={link.href}>{link.label}</a></p>}
+      </div>
+      {v.image && (
+        <figure class="scene-art">
+          <Img src={v.image} alt={v.alt[lang]} sizes={SIDE} />
+          {(v.caption || v.credit) && <figcaption>{v.caption?.[lang]}{v.credit && <span class="credit">{v.credit[lang]}</span>}</figcaption>}
+        </figure>
+      )}
+    </section>
+  );
+})}
+
+<section class="section split" aria-labelledby="open">
+<div>
+<h2 id="open" class="big">{c.openTitle}</h2>
+{c.open.map((t) => <p>{t}</p>)}
+<ul class="links">
+<li><a href={CODE}>{c.openLinks.code}</a></li>
+<li><a href={href('licences', lang)}>{c.openLinks.licences}</a></li>
+<li><a href={CONTRIBUTING} hreflang={lang === 'en' ? 'fr' : undefined}>{c.openLinks.contributing}</a></li>
+</ul>
+</div>
+<div class="price">
+<h2 id="price" class="big">{c.priceTitle}</h2>
+<p>{c.price}</p>
+</div>
+</section>
+
+<section class="section text" aria-labelledby="questions">
+<h2 id="questions" class="big">{c.faqTitle}</h2>
+{c.faq.map((f) => (
+  <details><summary>{f.q}</summary><p>{f.a}{'link' in f && <Fragment> <a href={href('start', lang, 'pack')}>{c.startLink}</a>.</Fragment>}</p></details>
+))}
+<p><a href={href('faq', lang)}>{c.faqMore}</a></p>
+</section>
+
+<section class="final on-night" aria-labelledby="follow">
+<h2 id="follow" class="big">{c.finalTitle}</h2>
+<p>{c.finalText}</p>
+<div class="actions"><a class="btn primary big" href={RELEASE_ISSUE}>{c.notify}</a></div>
+</section>
+</Base>

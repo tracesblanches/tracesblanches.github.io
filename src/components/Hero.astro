@@ -1,40 +1,47 @@
 ---
-// The home hero: full width, the rest of the first screen under the header, the picture
-// covering it, a dark gradient from the left and the bottom under the text (global.css, "home
-// hero"). Eyebrow, title, one sentence, one button. The picture is the page's largest paint:
-// loaded at once with high priority, and preloaded by the page (heroPreload in lib/images.ts,
-// passed to Base). On a screen held upright it shows the portrait file when there is one, else
-// the right part of the picture (PORTRAIT_CROP). The credit of the picture sits in the bottom
-// right corner.
+// The home hero: full width, the rest of the first screen under the header, one or more
+// pictures covering it, a dark gradient from the left and the bottom under the text
+// (global.css, "home hero"). Eyebrow, title, one sentence, one button.
+// Several pictures cross-fade in CSS alone (no script: the privacy page says the only script
+// is the language one). The slideshow stops under prefers-reduced-motion, pauses while the
+// pointer or the focus is in the hero, and a "Pause" checkbox stops it for good (WCAG 2.2.2).
+// The first picture is the page's largest paint: loaded at once with high priority, and
+// preloaded by the page (heroPreload in lib/images.ts, passed to Base). On a screen held
+// upright each slide shows its portrait file when there is one, else the right part of the
+// picture (PORTRAIT_CROP). The credit sits in the bottom right corner.
 import type { ImageMetadata } from 'astro';
 import Img from './Img.astro';
 import { coverSizes, PORTRAIT_CROP } from '../lib/images';
 
+export interface Slide { image: ImageMetadata; portrait?: ImageMetadata; alt: string; credit?: string }
 interface Props {
-  image: ImageMetadata;
-  portrait?: ImageMetadata;
-  alt: string;
+  slides: Slide[];
   eyebrow?: string;
   title: string;
   lead: string;
-  cta: { href: string; label: string; hreflang?: string };
-  credit?: string;
+  cta: { href: string; label: string };
+  pause: string;
 }
-const { image, portrait, alt, eyebrow, title, lead, cta, credit } = Astro.props;
+const { slides, eyebrow, title, lead, cta, pause } = Astro.props;
+// Two pictures at most: the cross-fade (global.css) is written for a second picture over the first.
+const n = Math.min(slides.length, 2);
 ---
-<section class="hero on-night" aria-labelledby="hero-title">
-<div class="hero-art">
-<Img src={image} alt={alt} eager sizes={coverSizes(image.width / image.height)}
-  portrait={portrait} portraitCrop={portrait ? undefined : PORTRAIT_CROP}
-  portraitSizes={coverSizes(portrait ? portrait.width / portrait.height : PORTRAIT_CROP.ratio)} />
-</div>
+<section class:list={['hero', 'on-night', { slideshow: n > 1 }]} aria-labelledby="hero-title">
+{slides.slice(0, n).map((s, i) => (
+  <div class="hero-art">
+    <Img src={s.image} alt={s.alt} eager={i === 0} sizes={coverSizes(s.image.width / s.image.height)}
+      portrait={s.portrait} portraitCrop={s.portrait ? undefined : PORTRAIT_CROP}
+      portraitSizes={coverSizes(s.portrait ? s.portrait.width / s.portrait.height : PORTRAIT_CROP.ratio)} />
+    {s.credit && <p class="hero-credit">{s.credit}</p>}
+  </div>
+))}
 <div class="wrap hero-body">
 <div class="hero-text">
 {eyebrow && <p class="eyebrow">{eyebrow}</p>}
 <h1 id="hero-title">{title}</h1>
 <p class="hero-lead">{lead}</p>
-<div class="actions"><a class="btn primary big" href={cta.href} hreflang={cta.hreflang}>{cta.label}</a></div>
+<div class="actions"><a class="btn primary big" href={cta.href}>{cta.label}</a></div>
 </div>
 </div>
-{credit && <p class="hero-credit">{credit}</p>}
+{n > 1 && <Fragment><input class="hero-pause" type="checkbox" id="hero-pause" /><label class="hero-pause-label" for="hero-pause">{pause}</label></Fragment>}
 </section>

@@ -1,5 +1,5 @@
 /*
- * Layout and components of the Traces blanches site. Colours, sizes and the header height come
+ * Layout and components of the Traces Blanches site. Colours, sizes and the header height come
  * from tokens.css only.
  */
 
@@ -26,7 +26,7 @@ a:hover { text-decoration-thickness: 2px; }
 .top .wrap { display: grid; grid-template-columns: 1fr auto; grid-template-rows: 3rem 2.75rem; grid-template-areas: "brand tools" "nav nav"; align-items: center; column-gap: 1rem; }
 .brand { grid-area: brand; display: inline-flex; align-items: center; min-height: 44px; justify-self: start; color: var(--fg); text-decoration: none; }
 .logo { display: inline-flex; align-items: center; gap: .45rem; font-weight: 700; font-size: 1.05rem; }
-.logo img { border-radius: .35rem; width: 24px; height: 24px; }
+.logo img { border-radius: .4rem; width: 28px; height: 28px; }
 .tools { grid-area: tools; display: flex; align-items: center; gap: .35rem; }
 .lang { display: flex; align-items: center; font-size: .85rem; font-weight: 600; letter-spacing: .03em; }
 .lang a, .lang span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 .45rem; border-radius: .35rem; text-decoration: none; }
@@ -81,17 +81,29 @@ pre code { background: none; padding: 0; overflow-wrap: normal; }
   linear-gradient(0deg, rgba(8, 15, 23, .9) 0%, rgba(8, 15, 23, .4) 25%, rgba(8, 15, 23, 0) 50%); }
 .hero-body { width: 100%; padding-top: 3rem; padding-bottom: clamp(2rem, 7vh, 4.5rem); }
 .hero-text { max-width: 40rem; }
-.hero .eyebrow { color: var(--ice); margin-bottom: 1rem; }
+.hero .eyebrow { color: var(--snow-peach); margin-bottom: 1rem; }
 .hero h1 { font-size: var(--fs-hero); line-height: 1.04; letter-spacing: -.03em; margin: 0; max-width: 13em; }
 .hero .hero-lead { font-size: var(--fs-hero-lead); line-height: 1.5; color: var(--on-night-muted); margin: 1.25rem 0 0; max-width: 36rem; }
 .hero .actions { margin: 1.75rem 0 0; }
-.hero-credit { position: absolute; right: .75rem; bottom: .5rem; margin: 0; max-width: calc(100% - 1.5rem); font-size: .72rem; line-height: 1.4; color: var(--on-night-muted); text-align: right; }
+.hero-credit { position: absolute; z-index: 1; right: .75rem; bottom: .5rem; margin: 0; max-width: calc(100% - 1.5rem); font-size: .72rem; line-height: 1.4; color: var(--on-night-muted); text-align: right; }
 .hero-caption { color: var(--muted); font-size: .875rem; line-height: 1.5; margin: .6rem 0 1.4rem; max-width: 44rem; }
 .hero-caption .credit { display: block; margin-top: .2rem; font-size: .75rem; line-height: 1.45; }
+/* Slideshow: the second picture fades in over the first and out again, 8 s each (no inline
+   style: the CSP allows none). Stopped under reduced motion; paused on hover, focus or the
+   checkbox. */
+.slideshow .hero-art + .hero-art { opacity: 0; animation: hero-fade 16s linear infinite; }
+@keyframes hero-fade { 0%, 37.5% { opacity: 0; } 50%, 87.5% { opacity: 1; } 100% { opacity: 0; } }
+.slideshow:hover .hero-art, .slideshow:focus-within .hero-art, .slideshow:has(.hero-pause:checked) .hero-art { animation-play-state: paused; }
+.hero-pause { position: absolute; z-index: 2; right: .75rem; top: .75rem; width: 1.25rem; height: 1.25rem; margin: .7rem .5rem; accent-color: var(--ice); }
+.hero-pause-label { position: absolute; z-index: 2; right: 2.75rem; top: .75rem; min-height: 44px; display: inline-flex; align-items: center; padding: 0 .5rem; font-size: .85rem; color: var(--on-night); background: rgba(8, 15, 23, .55); border-radius: .35rem; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) {
+  .slideshow .hero-art + .hero-art { display: none; }
+  .hero-pause, .hero-pause-label { display: none; }
+}
 @media (max-width: 47.99rem) {
   .hero-art img { object-position: 62% 50%; }
   .hero-art::after { background: linear-gradient(0deg, rgba(8, 15, 23, .95) 0%, rgba(8, 15, 23, .84) 42%, rgba(8, 15, 23, .45) 72%, rgba(8, 15, 23, .25) 100%); }
-  .hero-body { padding-bottom: 2.75rem; }
+  .hero-body { padding-bottom: 4.25rem; }
 }
 
 .status { border-left: 3px solid var(--warm); background: var(--surface); padding: .5rem .8rem; border-radius: 0 .4rem .4rem 0; margin: 1rem 0; font-size: .95rem; }
@@ -157,3 +169,30 @@ footer p { margin: .2rem 0; }
   .features.three { grid-template-columns: repeat(3, 1fr); }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* ---------------------------------------------------------------- home sections
+   Scenes: a text column beside a large picture, alternating sides; one band of night blue
+   at the end with the only other button. */
+.section { padding: var(--space-section) 0 0; }
+h2.big { font-size: var(--fs-h2-big); line-height: 1.12; letter-spacing: -.025em; margin: 0 0 1rem; }
+.scene { display: grid; gap: 1.25rem; align-items: center; margin-top: 2.75rem; }
+.section.scene { margin-top: 0; }
+.scene h3 { font-size: 1.4rem; margin: 0 0 .6rem; }
+.scene-text { max-width: 36rem; }
+.scene-art { margin: 0; }
+.step { font: 600 .8rem/1 var(--mono); color: var(--warm); letter-spacing: .08em; margin: 0 0 .6rem; }
+.step::before { content: "0"; }
+.split { display: grid; gap: 2.5rem; }
+.links { list-style: none; padding: 0; margin: 1rem 0 0; }
+.links li { margin: .4rem 0; }
+.price { border-top: 3px solid var(--accent); padding-top: 1.25rem; }
+.final { margin: var(--space-section) calc(50% - 50vw) -3rem; padding: var(--space-section) max(var(--pad), calc(50vw - var(--max) / 2 + var(--pad))); background: var(--night); color: var(--on-night); }
+.final p { color: var(--on-night-muted); max-width: 36rem; font-size: var(--fs-hero-lead); }
+.final .actions { margin-top: 1.5rem; }
+@media (min-width: 48rem) {
+  .scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: 2.5rem; }
+  .scene.flip { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+  .scene.flip .scene-art { order: -1; }
+  .scene.solo { grid-template-columns: minmax(0, 1fr); }
+  .split { grid-template-columns: 1.4fr 1fr; gap: 3.5rem; align-items: start; }
+}

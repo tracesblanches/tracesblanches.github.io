@@ -38,14 +38,15 @@ const og = await getImage({ src: ogSource, width: 1200, height: 630, fit: 'cover
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="color-scheme" content="light dark" />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 {page ? (
   <Fragment>
 <link rel="canonical" href={canonical} />
 {LOCALES.map((l) => <link rel="alternate" hreflang={l} href={absolute(pagePath(page, l))} />)}
 <link rel="alternate" hreflang="x-default" href={absolute(pagePath(page, DEFAULT_LANG))} />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Traces blanches" />
+<meta property="og:site_name" content="Traces Blanches" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />

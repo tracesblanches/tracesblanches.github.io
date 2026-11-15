@@ -18,7 +18,7 @@ export const UI: Record<Lang, UI> = {
     mainId: 'content',
     navLabel: 'Main navigation',
     langLabel: 'Language',
-    onGitHub: 'Traces blanches on GitHub',
+    onGitHub: 'Traces Blanches on GitHub',
     nav: { start: 'Getting started', faq: 'FAQ', privacy: 'Privacy', licences: 'Licences' },
   },
   fr: {
@@ -26,7 +26,7 @@ export const UI: Record<Lang, UI> = {
     mainId: 'contenu',
     navLabel: 'Navigation principale',
     langLabel: 'Langue',
-    onGitHub: 'Traces blanches sur GitHub',
+    onGitHub: 'Traces Blanches sur GitHub',
     nav: { start: 'Démarrage', faq: 'FAQ', privacy: 'Confidentialité', licences: 'Licences' },
   },
 };

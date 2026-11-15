@@ -4,9 +4,8 @@
 //   <base-url>: `skimap serve` on the skimap repository (packs built in data/out/<site>/pack);
 //   <laus-fonts-route.geojson>: written by `skimap route cervieres 44.85894,6.725006
 //   44.84465,6.8157 --date 2027-01-15 --start 13:00 --out FILE`. Needs playwright-core and Chrome
-//   (CHROME overrides /usr/bin/google-chrome). Then, per image, 1600 and 800 px WebP:
-//   magick X.png -strip -quality 80 -define webp:method=6 img/NAME-1600.webp
-//   magick X.png -strip -resize 800x500 -quality 80 -define webp:method=6 img/NAME-800.webp
+//   (CHROME overrides /usr/bin/google-chrome). Then, per image, one 1600 px WebP master (Astro derives the sizes the site serves):
+//   magick X.png -strip -quality 80 -define webp:method=6 src/assets/maps/NAME.webp
 //   (srn-izoard → pentes-izoard, fond-chapelle → pistes-chapelle, guidage-cervieres →
 //   itineraire-cervieres, reseau-chapelle and neige-cervieres keep their names).
 // The viewer's own controls (panel, buttons, attribution, scale) are hidden by injected CSS;

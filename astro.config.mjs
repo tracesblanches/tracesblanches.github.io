@@ -23,6 +23,8 @@ export default defineConfig({
   prefetch: false,
   devToolbar: { enabled: false },
   image: { responsiveStyles: false },
+  // No Markdown on the site; Shiki's inline styles would not pass the CSP.
+  markdown: { syntaxHighlight: false },
   i18n: {
     locales: ['en', 'fr'],
     defaultLocale: 'en',
