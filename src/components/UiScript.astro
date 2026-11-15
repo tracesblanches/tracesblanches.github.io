@@ -1,0 +1,7 @@
+---
+// The menu of the header and the pause button of the home slideshow (src/scripts/ui.js), on
+// every page, at the end of <body>. Inlined (a few lines); allowed by the hash computed in
+// astro.config.mjs from the same file.
+import code from '../scripts/ui.js?raw';
+---
+<script is:inline set:html={code.trim()} />

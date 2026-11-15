@@ -1,6 +1,6 @@
 ---
 // Every page goes through this layout: <head> (title, description, canonical, hreflang,
-// Open Graph), header, <main>, footer, and the language scripts. The 404 page (no `page`) is
+// Open Graph), header, <main>, footer, the language scripts and the menu and pause script. The 404 page (no `page`) is
 // bilingual: no canonical or alternates, noindex, both home pages in the switch.
 import '../styles/tokens.css';
 import '../styles/global.css';
@@ -9,6 +9,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LangRoot from '../components/LangRoot.astro';
 import LangMemory from '../components/LangMemory.astro';
+import UiScript from '../components/UiScript.astro';
 import { type Lang, type PageId, LOCALES, DEFAULT_LANG, OG_LOCALE, OTHER, absolute, pagePath } from '../i18n';
 import { UI } from '../i18n/ui';
 import ogSource from '../assets/maps/pentes-izoard.webp';
@@ -75,5 +76,6 @@ const og = await getImage({ src: ogSource, width: 1200, height: 630, fit: 'cover
 </main>
 <Footer lang={lang} bilingual={!page} />
 <LangMemory />
+<UiScript />
 </body>
 </html>

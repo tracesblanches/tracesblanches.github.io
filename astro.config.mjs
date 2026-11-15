@@ -3,7 +3,8 @@ import { defineConfig } from 'astro/config';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
-// The two language scripts are inlined in the pages (src/components/LangScripts.astro), so the
+// The two language scripts and the menu and pause script (src/scripts/ui.js) are inlined in the
+// pages (src/components/LangRoot.astro, LangMemory.astro, UiScript.astro), so the
 // Content-Security-Policy <meta> must allow them by hash: the hash is computed here from the
 // very files that are inlined, so editing a script can never leave a stale hash behind.
 /** @param {string} name @returns {`sha256-${string}`} */
@@ -39,7 +40,7 @@ export default defineConfig({
         "form-action 'none'",
         "object-src 'none'",
       ],
-      scriptDirective: { hashes: [inlineScript('lang-root.js'), inlineScript('lang-memory.js')] },
+      scriptDirective: { hashes: [inlineScript('lang-root.js'), inlineScript('lang-memory.js'), inlineScript('ui.js')] },
     },
   },
 });

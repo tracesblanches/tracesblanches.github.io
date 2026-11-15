@@ -1,14 +1,18 @@
 ---
 // The home hero: full width, the rest of the first screen under the header, one or more
-// pictures covering it, a dark gradient from the left and the bottom under the text
-// (global.css, "home hero"). Eyebrow, title, one sentence, one button.
-// Several pictures cross-fade in CSS alone (no script: the privacy page says the only script
-// is the language one). The slideshow stops under prefers-reduced-motion, pauses while the
-// pointer or the focus is in the hero, and a "Pause" checkbox stops it for good (WCAG 2.2.2).
+// pictures covering it, a dark veil in the bottom left corner under the text only, so that
+// the rest of the picture stays as painted (global.css, "home hero"). Eyebrow, title, one
+// sentence, one button.
+// Two pictures cross-fade in CSS. The slideshow stops under prefers-reduced-motion and pauses
+// while the pointer or the focus is in the hero. A small pause button in the top right corner
+// (aria-pressed) stops it for good (WCAG 2.2.2); src/scripts/ui.js shows it and toggles it.
+// Without that script the button stays hidden and the pictures do not move (no control, no
+// motion): the CSS only runs the cross-fade while the button is shown.
 // The first picture is the page's largest paint: loaded at once with high priority, and
 // preloaded by the page (heroPreload in lib/images.ts, passed to Base). On a screen held
 // upright each slide shows its portrait file when there is one, else the right part of the
-// picture (PORTRAIT_CROP). The credit sits in the bottom right corner.
+// picture (PORTRAIT_CROP). The credit of each picture sits in the bottom right corner, outside
+// .hero-art so that it is drawn above the veil of the text; it fades with its picture (.slide-2).
 import type { ImageMetadata } from 'astro';
 import Img from './Img.astro';
 import { coverSizes, PORTRAIT_CROP } from '../lib/images';
@@ -28,12 +32,14 @@ const n = Math.min(slides.length, 2);
 ---
 <section class:list={['hero', 'on-night', { slideshow: n > 1 }]} aria-labelledby="hero-title">
 {slides.slice(0, n).map((s, i) => (
-  <div class="hero-art">
+  <Fragment>
+  <div class:list={['hero-art', { 'slide-2': i === 1 }]}>
     <Img src={s.image} alt={s.alt} eager={i === 0} sizes={coverSizes(s.image.width / s.image.height)}
       portrait={s.portrait} portraitCrop={s.portrait ? undefined : PORTRAIT_CROP}
       portraitSizes={coverSizes(s.portrait ? s.portrait.width / s.portrait.height : PORTRAIT_CROP.ratio)} />
-    {s.credit && <p class="hero-credit">{s.credit}</p>}
   </div>
+  {s.credit && <p class:list={['hero-credit', { 'slide-1': n > 1 && i === 0, 'slide-2': i === 1 }]}>{s.credit}</p>}
+  </Fragment>
 ))}
 <div class="wrap hero-body">
 <div class="hero-text">
@@ -43,5 +49,9 @@ const n = Math.min(slides.length, 2);
 <div class="actions"><a class="btn primary big" href={cta.href}>{cta.label}</a></div>
 </div>
 </div>
-{n > 1 && <Fragment><input class="hero-pause" type="checkbox" id="hero-pause" /><label class="hero-pause-label" for="hero-pause">{pause}</label></Fragment>}
+{n > 1 && (
+<button class="hero-play" type="button" aria-pressed="false" aria-label={pause} title={pause} hidden>
+<svg class="icon-pause" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><svg class="icon-play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+</button>
+)}
 </section>

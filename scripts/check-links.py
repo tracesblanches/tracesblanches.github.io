@@ -14,6 +14,7 @@ a canonical link to the page itself; hreflang alternates en, fr and x-default (=
 exist and point back to each other; a FR | EN switch whose links (data-lang) lead to the
 same counterpart; the script that remembers the FR | EN choice inlined (src/scripts/lang-memory.js).
 Only the English home page carries the detection script (src/scripts/lang-root.js). Every page
+carries the menu and pause script (src/scripts/ui.js). Every page
 has its counterpart in the other language, and sitemap.xml lists exactly the pages but 404.html.
 External links are listed, not fetched. Exit status 1 on any problem.
 """
@@ -31,6 +32,7 @@ SITE = "https://tracesblanches.github.io/"
 SKIP_DIRS = set()
 MEMORY = (REPO / "src/scripts/lang-memory.js").read_text(encoding="utf-8").strip()
 DETECT = (REPO / "src/scripts/lang-root.js").read_text(encoding="utf-8").strip()
+UI = (REPO / "src/scripts/ui.js").read_text(encoding="utf-8").strip()
 
 
 class Page(html.parser.HTMLParser):
@@ -132,6 +134,8 @@ for page, info in parsed.items():
             problems.append(f"{rel(page)}: inline script at line {pos[0]} is not allowed by the CSP <meta> ({digest})")
         elif info.csp_pos > pos:
             problems.append(f"{rel(page)}: the CSP <meta> comes after the inline script at line {pos[0]}")
+    if UI not in info.inline:
+        problems.append(f"{rel(page)}: the menu and pause script (src/scripts/ui.js) is missing")
     has_detect = DETECT in info.inline
     if has_detect != (rel(page) == "index.html"):
         problems.append(f"{rel(page)}: language detection script {'present' if has_detect else 'missing'} (only on the English home page)")

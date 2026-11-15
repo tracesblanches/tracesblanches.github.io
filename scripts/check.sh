@@ -15,6 +15,7 @@ step build npm run build
 step links python3 -I scripts/check-links.py
 step html java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only --skip-non-html --also-check-css dist
 step lang node scripts/test-lang.mjs
+step hero node scripts/check-hero-contrast.mjs
 step lighthouse node scripts/lighthouse.mjs
 printf '\n=== summary\n'; printf '%s\n' "${SUMMARY[@]}"
 exit $FAILED

@@ -40,7 +40,8 @@ Choix de la langue :
 - `src/i18n/` : la table des pages et de leurs jumelles (navigation, sélecteur, `hreflang`, sitemap), les textes d'interface.
 - `src/layouts/Base.astro` : `<head>`, en-tête, pied de page, scripts de langue. `src/styles/tokens.css` : seul endroit des couleurs (neige le jour, bleu nuit), tailles et espacements ; `node scripts/check-contrast.mjs` après tout changement.
 - `src/components/Img.astro` : images AVIF et WebP en plusieurs largeurs, repli JPEG, `sizes` donné par chaque usage. `Hero.astro` : le bandeau d'accueil, image préchargée, recadrée à droite sur un écran vertical.
-- Une Content-Security-Policy en `<meta>` autorise les deux scripts de langue par leur empreinte, calculée dans `astro.config.mjs` à partir de `src/scripts/`.
+- `src/components/Header.astro` : sur un téléphone, une seule ligne (logo, FR | EN, GitHub, bouton menu) ; les liens des pages sont dans un `<details>` qui s'ouvre sous l'en-tête, utilisable sans JavaScript. `src/scripts/ui.js`, inséré dans chaque page, y ajoute `aria-expanded`, la fermeture par Échap (le focus revient au bouton), par un clic ou un focus ailleurs, et fait marcher le bouton pause de l'accueil.
+- Une Content-Security-Policy en `<meta>` autorise les deux scripts de langue et `ui.js` par leur empreinte, calculée dans `astro.config.mjs` à partir de `src/scripts/`.
 
 ## Logo
 
@@ -48,7 +49,7 @@ Le logo n'est pas encore choisi. Il tient dans un seul composant, `src/component
 
 ## Visuels
 
-L'accueil a huit emplacements d'image. Le bandeau fait défiler en fondu deux images (`accueil`, `accueil-2`), en CSS seul : pas de défilement si le système demande moins d'animations, pause au survol, au focus ou par la case « Arrêter le défilement ».
+L'accueil a huit emplacements d'image. Le bandeau fait défiler en fondu deux images (`accueil`, `accueil-2`), en CSS : pas de défilement si le système demande moins d'animations, pause au survol, au focus ou par le petit bouton pause/lecture en haut à droite du bandeau (`aria-pressed`, nom accessible « Arrêter le défilement »). Ce bouton passe par `src/scripts/ui.js` ; sans JavaScript il reste caché et les images ne défilent pas. Seul le texte du bandeau est assombri, par un voile flou juste derrière lui : `node scripts/check-hero-contrast.mjs` mesure le contraste du texte contre les pixels réels de chaque image, téléphone et ordinateur.
 
 Illustrations en place (droits d'usage de l'auteur du projet, crédit « Illustrations : Traces Blanches » dans la page licences) : `accueil` (lynx sous la pleine lune, retourné en miroir pour mettre le lynx à droite), `accueil-portrait` (lièvre au coucher de soleil, recadré sous le titre peint, lièvre dans le tiers haut), `accueil-2` (cerfs au coucher du soleil) et `accueil-2-portrait` (recadrage sur les cerfs), `securite` (renard devant les sommets, recadré sous le titre peint), `nature` (loutre sous la lune). Elles font 1 672 px de large (1 122 px pour les affiches) : le site n'en tire pas de taille plus grande ; une version de 2 400 px ou plus améliorera les grands écrans. Le logo provisoire (`src/assets/brand/logo.png`, lièvre et lune) et les icônes `public/favicon.png` et `public/apple-touch-icon.png` en sont tirés en attendant la version vectorielle.
 
@@ -56,7 +57,7 @@ Pour ajouter ou remplacer une image : Déposer un fichier dans `src/assets/visue
 
 | Fichier | Où | Exigences |
 |---|---|---|
-| `accueil.*`, `accueil-2.*` | bandeau plein écran, en fondu | paysage, 2 400 px de large au moins (3 000 conseillés), sujet dans le tiers droit, partie gauche et bas calmes et plutôt sombres (le texte s'y pose sur un dégradé) |
+| `accueil.*`, `accueil-2.*` | bandeau plein écran, en fondu | paysage, 2 400 px de large au moins (3 000 conseillés), sujet dans le tiers droit, partie gauche et bas calmes et plutôt sombres (le texte s'y pose sur un voile sombre limité à sa zone) |
 | `accueil-portrait.*`, `accueil-2-portrait.*` | bandeau, téléphone tenu droit | facultatif ; portrait 3:5 environ, 1 400 × 2 300 px au moins, sujet en haut ; sans lui, le bandeau garde la partie droite du paysage |
 | `matin.*`, `piste.*`, `retour.*` | les trois moments de la journée | paysage 16:10, 2 000 px de large au moins |
 | `securite.*`, `nature.*`, `france.*` | sections sécurité, nature, France | paysage 16:10 ou carré, 2 000 px de large au moins ; `nature` n'a pas de carte provisoire : la section reste sans image tant qu'il manque |
@@ -76,6 +77,7 @@ npm run build
 python3 -I scripts/check-links.py    # liens, images, ancres, une seule <h1>, paires, hreflang, sélecteur, hachages CSP, sitemap
 java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only --skip-non-html --also-check-css dist
 node scripts/test-lang.mjs           # détection et mémoire de la langue dans Chrome sans tête
+node scripts/check-hero-contrast.mjs # contraste du texte du bandeau contre les pixels de chaque image
 node scripts/lighthouse.mjs          # mobile et bureau, chaque note >= 98
 node scripts/shots.mjs DOSSIER       # captures 390 et 1280 px, clair et sombre, poids des pages
 ```
