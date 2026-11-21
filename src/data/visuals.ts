@@ -88,12 +88,12 @@ export const MAP = {
   },
   france: {
     image: france,
-    alt: { en: 'Map of metropolitan France. White dots mark the Nordic ski areas, in the Alps, the Jura, the Vosges, the Massif Central, the Pyrenees, the Ardennes and the Morvan. Orange outlines mark Nordic backcountry areas and traverses. Light blue rings mark the areas whose pack is already built, spread over every massif.',
-      fr: "Carte de la France métropolitaine. Des points blancs marquent les domaines nordiques, dans les Alpes, le Jura, les Vosges, le Massif central, les Pyrénées, les Ardennes et le Morvan. Des contours orange marquent des domaines et des traversées de ski de randonnée nordique. Des anneaux bleu clair marquent les domaines dont le pack est déjà construit, répartis dans tous les massifs." },
-    caption: { en: 'White: the 219 Nordic ski areas of the census. Orange: the Nordic backcountry areas and traverses found outside resorts, still being checked. Light blue rings: the packs already built, for 30 Nordic areas, the Vercors high plateaus, the Grande Traversée du Jura and the Corrençon – Col de Rousset traverse.',
-      fr: 'En blanc, les 219 domaines nordiques du recensement. En orange, les domaines et traversées de ski de randonnée nordique repérés hors stations, encore en cours de vérification. Anneaux bleu clair : les packs déjà construits, pour 30 domaines nordiques, les hauts plateaux du Vercors, la Grande Traversée du Jura et la traversée Corrençon – col de Rousset.' },
-    credit: { en: 'Areas © OpenStreetMap contributors, OpenSkiMap, Geotrek, DATAtourisme · outlines: IGN Admin Express via Etalab, Licence Ouverte',
-      fr: "Domaines © contributeurs d'OpenStreetMap, OpenSkiMap, Geotrek, DATAtourisme · contours : IGN Admin Express via Etalab, Licence Ouverte" },
+    alt: { en: 'Map of metropolitan France. White dots mark the Nordic ski areas, in the Alps, the Jura, the Vosges, the Massif Central, the Pyrenees, the Ardennes and the Morvan. Orange outlines mark Nordic backcountry areas and traverses. Each one has its pack.',
+      fr: "Carte de la France métropolitaine. Des points blancs marquent les domaines nordiques, dans les Alpes, le Jura, les Vosges, le Massif central, les Pyrénées, les Ardennes et le Morvan. Des contours orange marquent des domaines et des traversées de ski de randonnée nordique. Chacun a son pack." },
+    caption: { en: 'White: the 219 Nordic ski areas of the census. Orange: the Nordic backcountry areas and traverses outside resorts. Each one has its pack, updated every day.',
+      fr: 'En blanc, les 219 domaines nordiques du recensement. En orange, les domaines et traversées de ski de randonnée nordique hors stations. Chacun a son pack, mis à jour chaque jour.' },
+    credit: { en: 'Areas © OpenStreetMap contributors, OpenSkiMap, Geotrek, DATAtourisme · outlines: Etalab (IGN Admin Express, OpenStreetMap), ODbL',
+      fr: "Domaines © contributeurs d'OpenStreetMap, OpenSkiMap, Geotrek, DATAtourisme · contours : Etalab (IGN Admin Express, OpenStreetMap), ODbL" },
   },
 } satisfies Record<string, Visual & { caption: Text; credit: Text }>;
 

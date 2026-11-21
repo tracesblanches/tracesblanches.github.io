@@ -24,29 +24,29 @@ const ref = (id: string) => REFS.find((r) => r.id === id)!.href;
 <p>Tout ce qui est dans le pack de votre domaine : la carte, les pistes, les pentes, l'exposition aux avalanches, les zones protégées, les refuges, les zones sans réseau, la neige estimée et la voix. L'itinéraire se calcule sur le téléphone. Votre position vient des satellites, qui ne demandent aucun réseau.</p>
 
 <h3>Que faut-il télécharger avant de partir ?</h3>
-<p>Le pack du domaine où vous skiez. Il pèse d'environ 9 à 46 Mo pour un domaine nordique, et jusqu'à 100 Mo environ pour un tronçon de grande traversée. Vous le téléchargez dans l'app, au chalet ou chez vous, avant de partir. Ensuite, l'app met à jour chaque jour les packs installés, en ne téléchargeant que ce qui a changé, quand il y a du réseau et que la batterie n'est pas faible.</p>
+<p>Le pack du domaine où vous skiez. La plupart des packs pèsent moins de 10 Mo ; les plus gros, environ 50 Mo. Vous le téléchargez dans l'app, au chalet ou chez vous, avant de partir. Un serveur reconstruit les packs chaque jour ; l'app met à jour les packs installés en ne téléchargeant que ce qui a changé, quand il y a du réseau et que la batterie n'est pas faible.</p>
 
 <h3>Et si le pack date de quelques jours ?</h3>
-<p>Chaque information porte sa date. Les pentes et l'exposition aux avalanches dépendent du relief et de la forêt : elles ne changent pas d'un jour à l'autre. Les zones protégées sont à mettre à jour chaque mois. La neige, le bulletin d'avalanche et la météo vieillissent en heures ou en jours. Chaque fiche donne la source et la date de son information, et l'app dit jusqu'à quand le pack est valable, puis qu'il est périmé et qu'il faut le mettre à jour.</p>
+<p>Chaque information porte sa date. Les pentes et l'exposition aux avalanches dépendent du relief et de la forêt : elles ne changent pas d'un jour à l'autre. Les zones protégées sont à mettre à jour chaque mois. La neige, le bulletin d'avalanche et la météo vieillissent en heures ou en jours. Chaque fiche donne la source et la date de son information, et l'app montre jusqu'à quand le pack est valable.</p>
 
 <h2 id="batterie">Batterie</h2>
 
 <h3>Combien de temps tient la batterie ?</h3>
-<p>Nous ne le savons pas encore : la mesure n'est pas faite. Des sorties de mesure par grand froid auront lieu cet hiver, dans les Alpes du Sud en janvier et dans le Jura en février et mars. Les chiffres seront publiés ici.</p>
+<p>Nous ne le savons pas encore : ce n'est pas mesuré.</p>
 
 <h3>Que fait l'app pour l'économiser ?</h3>
-<p>Guidage à la voix, écran éteint ; positions lues par lots tant que la piste est évidente, chaque seconde près d'un carrefour ; pendant un arrêt, les satellites coupés, et le capteur de mouvement réveille la sortie quand vous repartez. Aucune minuterie pendant la sortie. En dehors, seule tourne la mise à jour quotidienne des packs installés, quand il y a du réseau et que la batterie n'est pas faible.</p>
+<p>Guidage à la voix, écran éteint ; positions lues par lots tant que la piste est évidente, chaque seconde près d'un carrefour ; pendant un arrêt, les satellites coupés, et le capteur de mouvement réveille la sortie quand vous repartez. Aucune minuterie pendant la sortie. En dehors, seule tourne la mise à jour des packs installés, quand il y a du réseau et que la batterie n'est pas faible.</p>
 
 <h2 id="avalanches">Avalanches</h2>
 
-<h3>L'app dit-elle si une pente est sûre ?</h3>
-<p>Non, jamais. Aucune carte ne peut le dire. Traces Blanches montre où le terrain est raide et où il est exposé selon un calcul. L'app affiche le <a href={link('bera', 'fr')} rel="noopener">bulletin d'avalanche</a> du jour quand <a href={link('meteofrance', 'fr')} rel="noopener">Météo-France</a> en publie un. La décision reste la vôtre, sur place.</p>
+<h3>L'app dit-elle si une pente peut partir en avalanche ?</h3>
+<p>Aucune carte ne peut l'exclure, et l'app ne le prétend jamais. Traces Blanches montre où le terrain est raide et où il est exposé selon un calcul. L'app affiche le <a href={link('bera', 'fr')} rel="noopener">bulletin d'avalanche</a> du jour quand <a href={link('meteofrance', 'fr')} rel="noopener">Météo-France</a> en publie un. L'app ne remplace ni le bulletin, ni votre jugement sur le terrain : la décision reste la vôtre.</p>
 
 <h3>D'où viennent les pentes ?</h3>
 <p>Des <a href={link('lidarMnt', 'fr')} rel="noopener">relevés laser de l'IGN</a>, avec une mesure tous les 5 m. La carte les classe en quatre tranches : 30 à 35°, 35 à 40°, 40 à 45°, 45° et plus. Une pente de moins de 30° peut quand même être sous une pente plus raide : regardez aussi au-dessus de vous.</p>
 
 <h3>Qu'est-ce que l'exposition aux avalanches de la carte ?</h3>
-<p>Un calcul, pas une observation. Le calcul repère les endroits d'où une avalanche peut partir, d'après le relief et la forêt, puis suit sa course vers le bas. Il reprend deux méthodes publiées par des chercheurs : <a href={ref('autoates2')} rel="noopener">AutoATES</a> pour les zones de départ et <a href={ref('flowpy')} rel="noopener">Flow-Py</a> pour la course de l'avalanche. La <a href={link('lidarMnh', 'fr')} rel="noopener">hauteur de végétation de l'IGN</a> donne la forêt. La comparaison avec les avalanches connues est en cours. Une avalanche peut partir là où le calcul ne la voit pas.</p>
+<p>Un calcul, pas une observation. Le calcul repère les endroits d'où une avalanche peut partir, d'après le relief et la forêt, puis suit sa course vers le bas. Il reprend deux méthodes publiées par des chercheurs : <a href={ref('autoates2')} rel="noopener">AutoATES</a> pour les zones de départ et <a href={ref('flowpy')} rel="noopener">Flow-Py</a> pour la course de l'avalanche. La <a href={link('lidarMnh', 'fr')} rel="noopener">hauteur de végétation de l'IGN</a> donne la forêt. Une avalanche peut partir là où le calcul ne la voit pas.</p>
 
 <h3>Et le bulletin d'avalanche ?</h3>
 <p>Le pack reprend le <a href={link('bera', 'fr')} rel="noopener">bulletin d'estimation du risque d'avalanche</a> (BERA) de Météo-France pour le massif du domaine, avec sa date. Le Jura n'a pas de BERA : <a href={link('juraNoBera', 'fr')} rel="noopener">Météo-France y diffuse des messages d'avertissement</a>, et le pack renvoie vers la météo montagne de Météo-France et vers le <a href={link('slf', 'fr')} rel="noopener">bulletin de l'institut suisse SLF</a>, qui couvre le Jura suisse voisin. Pour apprendre à lire un bulletin, l'<a href={link('anena', 'fr')} rel="noopener">ANENA</a> propose des formations.</p>
@@ -54,7 +54,7 @@ const ref = (id: string) => REFS.find((r) => r.id === id)!.href;
 <h2 id="donnees">Vos données</h2>
 
 <h3>Ma position est-elle envoyée quelque part ?</h3>
-<p>Non. Votre position, vos traces et vos plans de journée restent sur votre téléphone. Le plan du jour n'en part que si vous l'envoyez vous-même, par SMS, à la personne de votre choix.</p>
+<p>Pas sans vous. Votre position, vos traces et vos plans de journée restent sur votre téléphone. Le plan du jour n'en part que si vous l'envoyez vous-même, par SMS. En groupe, votre position va par Bluetooth aux seuls téléphones du groupe. Un signalement que vous faites part vers le serveur avec sa position.</p>
 
 <h3>Faut-il créer un compte ?</h3>
 <p>Non. L'app télécharge les packs sans compte. Elle ne contient ni publicité, ni mesure d'audience.</p>
@@ -64,19 +64,19 @@ const ref = (id: string) => REFS.find((r) => r.id === id)!.href;
 
 <h2 id="prix">Prix</h2>
 
-<h3>Combien coûtera l'app ?</h3>
-<p>Le montant sera annoncé à la sortie. Vous paierez une seule fois, par <a href={link('googlePlay', 'fr')} rel="noopener">Google Play</a>. Il n'y aura ni abonnement, ni publicité. La page <a href="/fr/obtenir.html">Obtenir l'app</a> dit ce que comprend l'achat.</p>
+<h3>Combien coûte l'app ?</h3>
+<p>4,99 € une fois, pour couvrir l'hébergement : le serveur qui construit et met à jour les packs chaque jour. Sans abonnement ni publicité. L'app n'est pas encore sur une boutique ; la page <a href="/fr/obtenir.html">Obtenir l'app</a> permet de suivre sa sortie.</p>
 
-<h3>Pourquoi payer une app dont le code est ouvert ?</h3>
-<p>Le paiement finance le travail sur l'app et sur ses cartes. Le code reste ouvert : chacun peut <a href={REPO} rel="noopener">le lire</a> et vérifier ce que fait l'app.</p>
+<h3>Pourquoi payer si tout le travail est public ?</h3>
+<p>Les 4,99 € couvrent seulement l'hébergement. Tout le travail reste public : chacun peut <a href={REPO} rel="noopener">le consulter</a> et vérifier ce que fait l'app.</p>
 
 <h2 id="appareils">Téléphones</h2>
 
-<h3>Sur quels téléphones l'app tournera-t-elle ?</h3>
-<p>Sur les téléphones Android, à partir d'Android 10. Elle sortira d'abord sur <a href={link('googlePlay', 'fr')} rel="noopener">Google Play</a>, en test interne, puis pour tous.</p>
+<h3>Sur quels téléphones l'app tourne-t-elle ?</h3>
+<p>Sur les téléphones Android, à partir d'Android 10.</p>
 
 <h3>Et sur iPhone ?</h3>
-<p>Pas pour l'instant. L'app Android vient d'abord, et aucune version iPhone n'est programmée. La licence du code autorise déjà la diffusion par l'App Store.</p>
+<p>Il n'existe pas de version iPhone.</p>
 
 <h3>Faut-il une montre ?</h3>
 <p>Non. Le téléphone seul suffit.</p>
@@ -84,21 +84,21 @@ const ref = (id: string) => REFS.find((r) => r.id === id)!.href;
 <h2 id="autres">Autres questions</h2>
 
 <h3>Quels lieux sont couverts ?</h3>
-<p>Toute la France. Le recensement compte 219 domaines nordiques, des Ardennes aux Pyrénées, et 43 domaines et traversées de ski de randonnée nordique hors stations, comme la <a href={link('gtj', 'fr')} rel="noopener">Grande Traversée du Jura</a>. Les packs de 30 domaines nordiques répartis dans tous les massifs sont construits, ainsi que ceux de la Grande Traversée du Jura et des hauts plateaux du Vercors. La page <a href="/fr/fonctionnalites.html#france">fonctionnalités</a> montre la carte.</p>
+<p>Toute la France. Le recensement compte 219 domaines nordiques, des Ardennes aux Pyrénées, et 41 domaines de ski de randonnée nordique et les grandes traversées hors stations, comme la <a href={link('gtj', 'fr')} rel="noopener">Grande Traversée du Jura</a>. Chaque domaine a son pack, mis à jour chaque jour. La page <a href="/fr/fonctionnalites.html#france">fonctionnalités</a> montre la carte.</p>
 
 <h3>D'où viennent les cartes et les informations ?</h3>
 <p>De sources publiques et ouvertes : <a href={link('ign', 'fr')} rel="noopener">IGN</a>, <a href={link('osm', 'fr')} rel="noopener">OpenStreetMap</a>, <a href={link('meteofrance', 'fr')} rel="noopener">Météo-France</a>, <a href={link('arcep', 'fr')} rel="noopener">ARCEP</a>, l'<a href={link('inpn', 'fr')} rel="noopener">inventaire national du patrimoine naturel</a>, <a href={link('refugesInfo', 'fr')} rel="noopener">refuges.info</a> et <a href={link('camptocamp', 'fr')} rel="noopener">Camptocamp</a>, entre autres. La page <a href="/fr/licences.html">sources et crédits</a> les cite toutes, avec les articles sur lesquels reposent les calculs.</p>
 
 <h3>Pourquoi l'état des pistes manque-t-il ?</h3>
-<p>Les domaines publient l'état de leurs pistes sans autoriser sa reprise. Il n'est donc pas dans l'app. Nous allons demander un accord écrit à l'<a href={link('enj', 'fr')} rel="noopener">Espace nordique jurassien</a> et à <a href={link('nordicFrance', 'fr')} rel="noopener">Nordic France</a>.</p>
+<p>Les domaines publient l'état de leurs pistes sans autoriser sa reprise. Il n'est donc pas dans l'app.</p>
 
 <h3>Le plan des pistes de la station est-il dans l'app ?</h3>
 <p>Non. Le plan dessiné par une station lui appartient, et nous ne le reprenons jamais. Les pistes de l'app viennent d'<a href={link('osm', 'fr')} rel="noopener">OpenStreetMap</a>, la carte collaborative du monde.</p>
 
 <h3>Une piste est fausse ou manque. Que faire ?</h3>
-<p>Si elle est fausse dans OpenStreetMap, vous pouvez la corriger là-bas : la correction arrivera dans le pack suivant. Sinon, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose" rel="noopener">signalez-la sur GitHub</a>, avec le lieu et la date du constat.</p>
+<p>Si elle est fausse dans OpenStreetMap, vous pouvez la corriger là-bas, ou laisser l'app préparer une note pour ses cartographes : la correction arrive dans les packs à une mise à jour suivante. Sinon, <a href="https://github.com/tracesblanches/tracesblanches/issues/new/choose" rel="noopener">signalez-la sur GitHub</a>, avec le lieu et la date du constat.</p>
 
 <h3>Comment poser une autre question ?</h3>
-<p><a href="https://github.com/tracesblanches/tracesblanches/issues" rel="noopener">Posez-la sur GitHub</a>. Les réponses utiles à tous viendront sur cette page.</p>
+<p><a href="https://github.com/tracesblanches/tracesblanches/issues" rel="noopener">Posez-la sur GitHub</a>.</p>
 </div>
 </Base>

@@ -2,13 +2,14 @@
 import Base from '../../layouts/Base.astro';
 import { link } from '../../data/sources';
 ---
-<Base lang="fr" page="privacy" title="Confidentialité · Traces Blanches" description="Ce qui reste sur votre téléphone et ce que reçoit le serveur de Traces Blanches : le téléchargement et la mise à jour des packs, rien d'autre.">
+<Base lang="fr" page="privacy" title="Confidentialité · Traces Blanches" description="Ce qui reste sur votre téléphone, ce que vous choisissez d'envoyer et ce que reçoit le serveur de Traces Blanches.">
 <div class="text">
 <h1>Confidentialité</h1>
-<p class="lead">Votre position, vos traces et vos plans restent sur votre téléphone. Le serveur ne reçoit que la demande des packs que vous téléchargez.</p>
-<div class="status"><p><b>L'app n'est pas encore publiée.</b> Cette page décrit ce que fait le code de l'app. Elle sera mise à jour avant la publication sur Google Play, et chaque modification restera visible dans <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/fr/confidentialite.astro">l'historique de cette page</a>.</p></div>
+<p class="lead">Votre position, vos traces et vos plans restent sur votre téléphone. Rien n'en part sans un geste de votre part.</p>
+<div class="status"><p><b>L'app n'est pas encore sur une boutique.</b> Cette page décrit ce que fait le code de l'app. Chaque modification reste visible dans <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/fr/confidentialite.astro">l'historique de cette page</a>.</p></div>
 <ul class="toc">
 <li><a href="#telephone">Sur le téléphone</a></li>
+<li><a href="#choix">Ce que vous choisissez d'envoyer</a></li>
 <li><a href="#serveur">Ce que reçoit le serveur</a></li>
 <li><a href="#jamais">Ce que nous ne faisons pas</a></li>
 <li><a href="#permissions">Permissions</a></li>
@@ -18,38 +19,43 @@ import { link } from '../../data/sources';
 
 <h2 id="telephone">Ce qui reste sur le téléphone</h2>
 <ul>
-<li><b>Votre position</b>, lue par le GPS pour la carte, le guidage et les alertes. Elle n'est envoyée nulle part. Hors d'une sortie, l'app ne demande qu'une position approximative, quand vous cherchez les domaines les plus proches.</li>
-<li><b>Vos traces et vos sorties</b>, enregistrées sur le téléphone. La sauvegarde Android est désactivée pour l'app : elles ne sont pas copiées dans le cloud.</li>
-<li><b>Vos plans de journée.</b> L'app rédige votre plan en un SMS pour la personne de votre choix ; il ne quitte le téléphone que si vous l'envoyez vous-même.</li>
-<li><b>La voix</b>&nbsp;: les annonces sont des clips enregistrés à l'avance dans le pack et assemblés sur le téléphone. Ce qui n'a pas de clip est lu par la voix du téléphone.</li>
+<li><b>Votre position</b>, lue par le GPS pour la carte, le guidage et les alertes. Hors d'une sortie, l'app ne demande qu'une position approximative, quand vous cherchez les domaines les plus proches.</li>
+<li><b>Vos traces, vos sorties et le rythme de vos groupes</b>, enregistrés sur le téléphone. La sauvegarde Android est désactivée pour l'app : ils ne sont pas copiés dans le cloud.</li>
+<li><b>Vos plans de journée</b>, calculés sur le téléphone.</li>
+<li><b>La voix</b>, produite sur le téléphone, sans réseau.</li>
+</ul>
+
+<h2 id="choix">Ce que vous choisissez d'envoyer</h2>
+<ul>
+<li><b>Le plan du jour.</b> L'app le rédige en un SMS pour la personne de votre choix, dans votre app de messagerie. Il ne part que si vous l'envoyez vous-même. Il en va de même du SMS « bien rentré ».</li>
+<li><b>Le groupe.</b> Si vous créez ou rejoignez un groupe, votre téléphone partage pendant la sortie votre prénom et votre position avec les téléphones du groupe, par Bluetooth, à quelques dizaines de mètres. Ni serveur, ni réseau.</li>
+<li><b>Les signalements.</b> Si vous signalez quelque chose sur le terrain (glace, obstacle, piste fermée…), le signalement part vers le serveur du projet avec sa position et son heure, et une photo si vous en ajoutez une, sans ses métadonnées. Il s'affiche pour les autres skieurs alentour, puis expire de lui-même, en 7 jours au plus sauf confirmation. Il est lié à un identifiant tiré au hasard par l'app et renouvelé tous les 30 jours ; le serveur n'en garde qu'une empreinte. Pas de compte, pas de texte libre. Vous pouvez supprimer votre signalement.</li>
+<li><b>Les notes OpenStreetMap.</b> Si vous signalez une erreur de la carte, l'app prépare une note publique et anonyme, à votre position, pour les cartographes d'<a href={link('osm', 'fr')} rel="noopener">OpenStreetMap</a>. Vous la relisez et l'envoyez vous-même.</li>
+<li><b>Le partage d'une sortie.</b> Le fichier GPX ou FIT va seulement à l'app que vous choisissez. Avec <a href={link('healthConnect', 'fr')} rel="noopener">Health Connect</a>, l'app y écrit la sortie (heure, itinéraire, distance, dénivelé) et ne lit que la fréquence cardiaque des heures de cette sortie, pour la mettre dans le fichier.</li>
 </ul>
 
 <h2 id="serveur">Ce que reçoit le serveur</h2>
-
-<h3>Le téléchargement et la mise à jour des packs</h3>
-<p>L'app télécharge le pack du domaine que vous choisissez, comme un navigateur télécharge un fichier, puis met à jour les packs installés une fois par jour si vous laissez la mise à jour automatique. Le serveur voit l'adresse IP de la connexion et le fichier demandé, donc le domaine choisi. Il ne reçoit pas votre position. Il n'y a pas de compte.</p>
-<p>La durée de conservation des journaux du serveur sera fixée avant la publication et écrite ici.</p>
-
-<p>L'app n'envoie rien d'autre au serveur.</p>
+<p>Pour télécharger ou mettre à jour un pack, le téléphone demande des fichiers au serveur, comme un navigateur. Le serveur voit le fichier demandé, donc le domaine choisi. Il ne reçoit pas votre position et n'enregistre pas votre adresse IP ; ses journaux ne gardent que le chemin demandé, la réponse, la taille et la durée, quelques jours. Les requêtes passent par Cloudflare, qui les traite selon <a href={link('cloudflarePrivacy', 'fr')} rel="noopener">sa propre politique</a>. Il n'y a pas de compte.</p>
+<p>En dehors des signalements décrits plus haut, l'app n'envoie rien d'autre au serveur.</p>
 
 <h2 id="jamais">Ce que nous ne faisons pas</h2>
 <ul>
 <li>Aucune publicité.</li>
 <li>Aucun outil de mesure d'audience ni de traceur publicitaire dans l'app.</li>
-<li>Aucune vente de données. Rien ne part vers un tiers.</li>
+<li>Aucune vente de données.</li>
 <li>Aucune carte publique de vos passages hors piste.</li>
 </ul>
 
 <h2 id="permissions">Permissions Android</h2>
 <ul>
-<li><b>Localisation précise</b>, y compris écran éteint pendant une sortie que vous avez démarrée, pour le guidage vocal. Une notification reste visible tant que le guidage tourne. <b>Localisation approximative</b>, une fois, quand vous cherchez les domaines les plus proches.</li>
+<li><b>Localisation précise</b>, y compris écran éteint pendant une sortie que vous avez démarrée, pour le guidage vocal. Une notification reste visible tant que le guidage tourne. <b>Localisation approximative</b>, quand vous cherchez les domaines les plus proches.</li>
 <li><b>Notifications</b>, pour le guidage, le rappel avant l'heure de retour et les alertes.</li>
 <li><b>Vibreur</b>, pour les vibrations du guidage.</li>
-<li><b>Accès à internet</b>, pour télécharger et mettre à jour les packs.</li>
+<li><b>Appareils à proximité (Bluetooth)</b>, seulement pour le groupe.</li>
+<li><b>Appareil photo</b>, pour scanner le code QR d'un groupe ou joindre une photo à un signalement.</li>
+<li><b>Health Connect</b>, seulement quand vous partagez une sortie.</li>
+<li><b>Accès à internet</b>, pour télécharger et mettre à jour les packs et envoyer vos signalements.</li>
 </ul>
-
-<h2>Google Play</h2>
-<p>L'achat passe par <a href={link('googlePlay', 'fr')} rel="noopener">Google Play</a>. Google traite le paiement selon ses propres règles de confidentialité ; Traces Blanches ne reçoit pas vos coordonnées bancaires.</p>
 
 <h2 id="site">Ce site</h2>
 <p>Des pages statiques servies par <a href={link('githubPages', 'fr')} rel="noopener">GitHub Pages</a>&nbsp;: aucun cookie, aucune mesure d'audience. Un script de quelques lignes gère la langue. À votre première visite de l'accueil, il lit la langue préférée de votre navigateur et ouvre la version française si c'est le français. Quand vous choisissez FR ou EN en haut de page, il garde ce choix dans le stockage local de votre navigateur. Un second script de quelques lignes ouvre et ferme le menu sur un téléphone et fait marcher le bouton pause des images de l'accueil ; il n'enregistre rien. Rien n'est envoyé.</p>

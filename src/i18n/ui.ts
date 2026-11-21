@@ -30,7 +30,7 @@ export const UI: Record<Lang, UI> = {
     notify: 'Get notified of the release',
     notifyTitle: 'Follow the release',
     notifyText: 'The button opens the release page on GitHub. Follow it there to be notified when the app comes out. No form, no mailing list.',
-    footer: { code: 'The code of the app is open:', source: 'source code', credits: 'Sources and credits', site: 'Site text and images under CC BY-SA 4.0.', ask: 'A question or a mistake?', askLink: 'Ask on GitHub' },
+    footer: { code: 'All the work on the app is public:', source: 'see it on GitHub', credits: 'Sources and credits', site: 'Site text and images under CC BY-SA 4.0.', ask: 'A question or a mistake?', askLink: 'Ask on GitHub' },
   },
   fr: {
     skip: 'Aller au contenu',
@@ -42,7 +42,7 @@ export const UI: Record<Lang, UI> = {
     notify: 'Être prévenu de la sortie',
     notifyTitle: 'Suivre la sortie',
     notifyText: "Le bouton ouvre la page de la sortie sur GitHub. Suivez-la pour être prévenu quand l'app sort. Aucun formulaire, aucune liste de diffusion.",
-    footer: { code: "Le code de l'app est ouvert :", source: 'code source', credits: 'Sources et crédits', site: 'Textes et images du site sous licence CC BY-SA 4.0.', ask: 'Une question ou une erreur ?', askLink: 'Posez-la sur GitHub' },
+    footer: { code: "Tout le travail sur l'app est public :", source: 'le voir sur GitHub', credits: 'Sources et crédits', site: 'Textes et images du site sous licence CC BY-SA 4.0.', ask: 'Une question ou une erreur ?', askLink: 'Posez-la sur GitHub' },
   },
 };
 

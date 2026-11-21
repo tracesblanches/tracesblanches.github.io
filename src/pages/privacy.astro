@@ -2,54 +2,60 @@
 import Base from '../layouts/Base.astro';
 import { link } from '../data/sources';
 ---
-<Base lang="en" page="privacy" title="Privacy · Traces Blanches" description="What stays on your phone and what the Traces Blanches server receives: the download and the update of the packs, nothing else.">
+<Base lang="en" page="privacy" title="Privacy · Traces Blanches" description="What stays on your phone, what you choose to send and what the Traces Blanches server receives.">
 <div class="text">
 <h1>Privacy</h1>
-<p class="lead">Your position, your tracks and your plans stay on your phone. The server only receives the requests for the packs you download.</p>
-<div class="status"><p><b>The app is not published yet.</b> This page describes what the code of the app does. It will be updated before the release on Google Play, and every change will remain visible in <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/privacy.astro">the history of this page</a>. The <a href="/fr/confidentialite.html" hreflang="fr">French version</a> is the reference.</p></div>
+<p class="lead">Your position, your tracks and your plans stay on your phone. Nothing leaves it without a gesture from you.</p>
+<div class="status"><p><b>The app is not in a store yet.</b> This page describes what the code of the app does. Every change remains visible in <a rel="noopener" href="https://github.com/tracesblanches/tracesblanches.github.io/commits/main/src/pages/privacy.astro">the history of this page</a>.</p></div>
 <ul class="toc">
 <li><a href="#phone">On the phone</a></li>
+<li><a href="#choice">What you choose to send</a></li>
 <li><a href="#server">What the server receives</a></li>
 <li><a href="#never">What we do not do</a></li>
 <li><a href="#permissions">Permissions</a></li>
-<li><a href="#site">This website</a></li>
+<li><a href="#site">This site</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
 
 <h2 id="phone">What stays on the phone</h2>
 <ul>
-<li><b>Your position</b>, read from GPS for the map, the guidance and the alerts. It is sent nowhere. Outside an outing, the app only asks for an approximate position, when you ask for the nearest areas.</li>
-<li><b>Your tracks and outings</b>, recorded on the phone. Android backup is turned off for the app: they are not copied to the cloud.</li>
-<li><b>Your day plans.</b> The app writes your plan as a text message for the person you choose; it leaves the phone only if you send it yourself.</li>
-<li><b>The voice</b>: announcements are clips recorded in advance in the pack and assembled on the phone. What has no clip is read by the phone's own voice.</li>
+<li><b>Your position</b>, read by GPS for the map, the guidance and the alerts. Outside an outing, the app only asks for an approximate position, when you look for the nearest areas.</li>
+<li><b>Your tracks, your outings and the pace of your groups</b>, recorded on the phone. Android backup is turned off for the app: they are not copied to the cloud.</li>
+<li><b>Your day plans</b>, computed on the phone.</li>
+<li><b>The voice</b>, produced on the phone, with no network.</li>
+</ul>
+
+<h2 id="choice">What you choose to send</h2>
+<ul>
+<li><b>The day plan.</b> The app writes it as a text message for the person you choose, in your messaging app. It leaves only if you send it yourself. The same goes for the "back home" message.</li>
+<li><b>The group.</b> If you create or join a group, during the outing your phone shares your first name and your position with the phones of the group, by Bluetooth, a few dozen metres apart. No server, no network.</li>
+<li><b>Reports.</b> If you report something on the ground (ice, an obstacle, a closed trail…), the report goes to the project's server with its position and time, and a photo if you add one, without its metadata. Other skiers nearby see it, then it expires by itself, within 7 days unless confirmed. It is tied to an identifier drawn at random by the app and renewed every 30 days; the server keeps only a hash of it. No account, no free text. You can delete your report.</li>
+<li><b>OpenStreetMap notes.</b> If you report a mistake on the map, the app prepares a public, anonymous note at your position for the mappers of <a href={link('osm', 'en')} rel="noopener">OpenStreetMap</a>. You read it and send it yourself.</li>
+<li><b>Sharing an outing.</b> The GPX or FIT file goes only to the app you choose. With <a href={link('healthConnect', 'en')} rel="noopener">Health Connect</a>, the app writes the outing there (time, route, distance, climb) and reads only the heart rate of the hours of that outing, to put it in the file.</li>
 </ul>
 
 <h2 id="server">What the server receives</h2>
-
-<h3>Pack downloads and updates</h3>
-<p>The app downloads the pack of the ski area you choose, the way a browser downloads a file, then updates the installed packs once a day if you leave automatic updates on. The server sees the IP address of the connection and the file requested, and so the area you chose. It does not receive your position. There is no account.</p>
-<p>How long the server keeps its logs will be set before the release and written here.</p>
-
-<p>The app sends nothing else to the server.</p>
+<p>To download or update a pack, the phone asks the server for files, as a browser does. The server sees the file asked for, hence the area chosen. It does not receive your position and does not record your IP address; its logs keep only the path, the response, the size and the duration, for a few days. Requests go through Cloudflare, which handles them under <a href={link('cloudflarePrivacy', 'en')} rel="noopener">its own policy</a>. There is no account.</p>
+<p>Apart from the reports described above, the app sends nothing else to the server.</p>
 
 <h2 id="never">What we do not do</h2>
 <ul>
-<li>No advertising.</li>
-<li>No audience measurement and no advertising tracker in the app.</li>
-<li>No sale of data. Nothing goes to a third party.</li>
-<li>No public map of your off-piste tracks.</li>
+<li>No ads.</li>
+<li>No audience measurement or advertising tracker in the app.</li>
+<li>No sale of data.</li>
+<li>No public map of your off-piste routes.</li>
 </ul>
 
 <h2 id="permissions">Android permissions</h2>
 <ul>
-<li><b>Precise location</b>, including with the screen off during an outing you started, for voice guidance. A notification stays visible while guidance runs. <b>Approximate location</b>, once, when you ask for the nearest areas.</li>
-<li><b>Notifications</b>, for guidance, the reminder before the time to be back and the alerts.</li>
-<li><b>Vibration</b>, for the vibration codes of the guidance.</li>
-<li><b>Internet access</b>, to download and update the packs.</li>
+<li><b>Precise location</b>, including with the screen off during an outing you started, for voice guidance. A notification stays visible while guidance runs. <b>Approximate location</b>, when you look for the nearest areas.</li>
+<li><b>Notifications</b>, for guidance, the reminder before the time to be back, and alerts.</li>
+<li><b>Vibration</b>, for the guidance vibrations.</li>
+<li><b>Nearby devices (Bluetooth)</b>, only for the group.</li>
+<li><b>Camera</b>, to scan the QR code of a group or add a photo to a report.</li>
+<li><b>Health Connect</b>, only when you share an outing.</li>
+<li><b>Internet access</b>, to download and update packs and send your reports.</li>
 </ul>
-
-<h2>Google Play</h2>
-<p>The purchase goes through <a href={link('googlePlay', 'en')} rel="noopener">Google Play</a>. Google handles the payment under its own privacy rules; Traces Blanches does not receive your payment details.</p>
 
 <h2 id="site">This website</h2>
 <p>Static pages served by <a href={link('githubPages', 'en')} rel="noopener">GitHub Pages</a>: no cookies, no analytics. A script of a few lines handles the language. On your first visit to the home page, it reads your browser's preferred language and opens the French version if that is French. When you pick FR or EN at the top of a page, it keeps that choice in your browser's local storage. A second script of a few lines opens and closes the menu on a phone and runs the pause button of the home page pictures; it stores nothing. Nothing is sent.</p>

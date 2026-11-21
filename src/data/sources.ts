@@ -57,6 +57,7 @@ export const LINKS = {
   avaframe: 'https://avaframe.org/',
   munter: 'https://backcountryaccess.com/en-be/blog/p/how-to-calculate-backcountry-touring-time-based-distance-elevation-gain',
   githubPages: 'https://pages.github.com/',
+  cloudflarePrivacy: 'https://www.cloudflare.com/privacypolicy/',
 } satisfies Record<string, Url>;
 
 export type LinkId = keyof typeof LINKS;
@@ -77,8 +78,8 @@ export interface Ref {
 export const REFS: Ref[] = [
   { id: 'ates2', authors: 'Statham, G. et Campbell, C.', year: 2025, title: 'The Avalanche Terrain Exposure Scale (ATES) v.2',
     where: 'Natural Hazards and Earth System Sciences, 25, 1113–1137', doi: '10.5194/nhess-25-1113-2025', href: 'https://doi.org/10.5194/nhess-25-1113-2025',
-    use: { fr: "L'échelle d'exposition au terrain d'avalanche que la carte reprend, et la raison pour laquelle elle ne dit jamais « sûr ».",
-      en: 'The avalanche terrain exposure scale the map follows, and why it never says "safe".' } },
+    use: { fr: "L'échelle d'exposition au terrain d'avalanche que la carte reprend, et la raison pour laquelle elle ne présente jamais un terrain comme hors de portée des avalanches.",
+      en: 'The avalanche terrain exposure scale the map follows, and why it never presents terrain as out of reach of avalanches.' } },
   { id: 'autoates2', authors: 'Toft, H. B., Sykes, J., Schauer, A., Hendrikx, J. et Hetland, A.', year: 2024, title: 'AutoATES v2.0: Automated Avalanche Terrain Exposure Scale mapping',
     where: 'Natural Hazards and Earth System Sciences, 24, 1779–1793', doi: '10.5194/nhess-24-1779-2024', href: 'https://doi.org/10.5194/nhess-24-1779-2024',
     use: { fr: "La méthode qui repère les zones de départ d'avalanche à partir du relief et de la forêt, puis classe le terrain.",
