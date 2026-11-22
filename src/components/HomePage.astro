@@ -9,7 +9,7 @@ import Hero from './Hero.astro';
 import Img from './Img.astro';
 import { type Lang, href } from '../i18n';
 import { HOME } from '../copy/home';
-import { RELEASE_ISSUE, UI } from '../i18n/ui';
+import { NOTIFY_ANCHOR, UI } from '../i18n/ui';
 import { visual, type Slot } from '../data/visuals';
 import { heroPreload } from '../lib/images';
 import { typo } from '../lib/typo';
@@ -29,7 +29,7 @@ const WIDE = '(min-width: 64rem) min(56rem, calc(50vw + 34rem - 1.1rem - 24rem -
 const fr = visual('france');
 ---
 <Base lang={lang} page="home" title={c.title} description={t(c.description)} preload={preload} bodyClass="home">
-{slides.length > 0 && <Hero slot="hero" slides={slides} eyebrow={c.eyebrow} title={c.h1} lead={c.lead} cta={{ href: RELEASE_ISSUE, label: UI[lang].notify }} pause={c.pause} />}
+{slides.length > 0 && <Hero slot="hero" slides={slides} eyebrow={c.eyebrow} title={c.h1} lead={c.lead} cta={{ href: NOTIFY_ANCHOR, label: UI[lang].notify }} pause={c.pause} />}
 
 <section class="france on-night" aria-labelledby="france">
 <div class="france-in">

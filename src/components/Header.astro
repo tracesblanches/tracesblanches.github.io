@@ -1,5 +1,6 @@
 ---
 // Header: the logo (Logo.astro), the page links, the main button "Get notified of the release"
+// (to the release form at the bottom of the page, Notify.astro)
 // and the FR | EN switch to the page's counterpart. On the 404 page (`page` undefined) the switch
 // leads to both home pages and there are no page links.
 // The page links sit in a <details>: on a phone its <summary> is the menu button and the list
@@ -11,7 +12,7 @@
 // stays).
 import Logo from './Logo.astro';
 import { type Lang, type PageId, NAV, LANG_NAMES, pagePath } from '../i18n';
-import { UI, RELEASE_ISSUE } from '../i18n/ui';
+import { UI, NOTIFY_ANCHOR } from '../i18n/ui';
 
 // FR first, then EN, as on the hand-written site.
 const SWITCH: Lang[] = ['fr', 'en'];
@@ -19,11 +20,13 @@ const SWITCH: Lang[] = ['fr', 'en'];
 interface Props { lang: Lang; page?: PageId }
 const { lang, page } = Astro.props;
 const ui = UI[lang];
+// The release form is at the bottom of every page but the 404, whose button leads to the home page's.
+const notifyHref = page ? NOTIFY_ANCHOR : `${pagePath('home', lang)}${NOTIFY_ANCHOR}`;
 ---
 <header class="top"><div class="wrap">
 <a class="brand" href={pagePath('home', lang)}><Logo /></a>
 <div class="tools">
-<a class="btn primary cta" href={RELEASE_ISSUE} rel="noopener">{ui.notify}</a>
+<a class="btn primary cta" href={notifyHref}>{ui.notify}</a>
 <div class="lang" role="group" aria-label={ui.langLabel}>{SWITCH.map((l) => (
   page && l === lang
     ? <span aria-current="true">{l.toUpperCase()}</span>
@@ -35,7 +38,7 @@ const ui = UI[lang];
 <summary><svg class="menu-open" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="menu-close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="visually-hidden">{ui.menu}</span></summary>
 <nav class="site" aria-label={ui.navLabel}><ul>
 {NAV.map((id) => <li><a href={pagePath(id, lang)} aria-current={id === page ? 'page' : undefined}>{ui.nav[id as Exclude<PageId, 'home'>]}</a></li>)}
-<li class="menu-cta"><a class="btn primary" href={RELEASE_ISSUE} rel="noopener">{ui.notify}</a></li>
+<li class="menu-cta"><a class="btn primary" href={notifyHref}>{ui.notify}</a></li>
 </ul></nav>
 </details>
 )}

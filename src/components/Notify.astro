@@ -1,13 +1,46 @@
 ---
-// The closing band of every page but the 404: the main button again, after the text.
+// The closing band of every page but the 404: the "Get notified of the release" form (#notify),
+// the target of the main button of the header and of the pages. The address goes to the project's
+// server (src/data/notify.ts), for one message at the release; the privacy page says what is kept.
+// The form needs its script (src/scripts/notify.js, inlined, allowed by its hash in
+// astro.config.mjs) for the anti-robot check: it stays hidden without it, and a <noscript> says so.
 import type { Lang } from '../i18n';
-import { UI, RELEASE_ISSUE } from '../i18n/ui';
+import { pagePath } from '../i18n';
+import { UI } from '../i18n/ui';
+import { NOTIFY } from '../data/notify';
+import code from '../scripts/notify.js?raw';
 
 interface Props { lang: Lang }
-const ui = UI[Astro.props.lang];
+const { lang } = Astro.props;
+const ui = UI[lang];
+const f = ui.form;
+const messages = JSON.stringify(f.messages);
 ---
-<section class="final on-night" aria-labelledby="follow">
+<section id="notify" class="final on-night" aria-labelledby="follow">
 <h2 id="follow" class="big">{ui.notifyTitle}</h2>
 <p>{ui.notifyText}</p>
-<div class="actions"><a class="btn primary big" href={RELEASE_ISSUE} rel="noopener">{ui.notify}</a></div>
+<form id="notify-form" class="notify-form" action={NOTIFY.endpoint} method="post" novalidate hidden
+  data-sitekey={NOTIFY.turnstileSiteKey} data-script={NOTIFY.turnstileScript} data-messages={messages}>
+<input type="hidden" name="lang" value={lang} />
+<div class="field">
+<label for="notify-email">{f.email}</label>
+<input id="notify-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-describedby="notify-email-error" />
+<p id="notify-email-error" class="field-error"></p>
+</div>
+<div class="notify-hp" aria-hidden="true">
+<label for="notify-website">{f.honeypot}</label>
+<input id="notify-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+</div>
+<div class="field check">
+<input id="notify-consent" name="consent" type="checkbox" value="on" required aria-describedby="notify-consent-error" />
+<label for="notify-consent">{f.consent}</label>
+<p id="notify-consent-error" class="field-error"></p>
+</div>
+<div id="notify-ts"></div>
+<div class="actions"><button type="submit" class="btn primary big">{f.submit}</button></div>
+<p id="notify-status" class="notify-status" role="status" aria-live="polite"></p>
+</form>
+<noscript><p class="notify-noscript">{f.noscript}</p></noscript>
+<p class="notify-privacy"><a href={`${pagePath('privacy', lang)}#${f.privacyAnchor}`}>{f.privacy}</a></p>
+<script is:inline set:html={code.trim()} />
 </section>

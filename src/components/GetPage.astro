@@ -7,7 +7,7 @@
 import Base from '../layouts/Base.astro';
 import Img from './Img.astro';
 import { type Lang, REPO, href } from '../i18n';
-import { RELEASE_ISSUE, UI } from '../i18n/ui';
+import { NOTIFY_ANCHOR, UI } from '../i18n/ui';
 import badger from '../assets/visuels/obtenir.webp';
 import { typo } from '../lib/typo';
 
@@ -96,7 +96,7 @@ const ART = '(min-width: 68rem) 29rem, (min-width: 48rem) 44vw, calc(100vw - 2.2
 <p class="buy-label">{T.label}</p>
 <p id="buy-amount" class="buy-amount">{T.amount}</p>
 <p class="buy-once" set:html={t(T.once)} />
-<div class="actions"><a class="btn primary big" href={RELEASE_ISSUE} rel="noopener">{UI[lang].notify}</a></div>
+<div class="actions"><a class="btn primary big" href={NOTIFY_ANCHOR}>{UI[lang].notify}</a></div>
 </div>
 </section>
 

@@ -13,6 +13,7 @@ import { link } from '../data/sources';
 <li><a href="#server">What the server receives</a></li>
 <li><a href="#never">What we do not do</a></li>
 <li><a href="#permissions">Permissions</a></li>
+<li><a href="#release">Notified of the release</a></li>
 <li><a href="#site">This site</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
@@ -57,8 +58,18 @@ import { link } from '../data/sources';
 <li><b>Internet access</b>, to download and update packs and send your reports.</li>
 </ul>
 
+<h2 id="release">Notified of the release</h2>
+<p>If you leave your address in the "Get notified of the release" form at the bottom of the pages, the project's server keeps <b>your e-mail address, the language of the site (French or English) and the date</b> you signed up. Nothing else: no name, no IP address.</p>
+<ul>
+<li><b>Why:</b> to send you a single message, when the app comes out. No newsletter, no other use, never passed on to anyone.</li>
+<li><b>Where:</b> on the project's server, hosted in France, in the Paris region of <a href={link('oracleCloudRegions', 'en')} rel="noopener">Oracle Cloud</a>. Requests to it go through Cloudflare, which handles them under <a href={link('cloudflarePrivacy', 'en')} rel="noopener">its own policy</a>.</li>
+<li><b>How long:</b> the whole list is deleted once that message is sent.</li>
+<li><b>Unsubscribing:</b> at any time, with the link shown once you sign up or the one in the release message; the address is removed at once.</li>
+<li><b>Anti-robot check:</b> the form uses <a href={link('turnstile', 'en')} rel="noopener">Cloudflare Turnstile</a>, an invisible check whose script is loaded only when you use the form. Your IP address is used, without being kept, for that check and to limit sign-ups to five per hour.</li>
+</ul>
+
 <h2 id="site">This website</h2>
-<p>Static pages served by <a href={link('githubPages', 'en')} rel="noopener">GitHub Pages</a>: no cookies, no analytics. A script of a few lines handles the language. On your first visit to the home page, it reads your browser's preferred language and opens the French version if that is French. When you pick FR or EN at the top of a page, it keeps that choice in your browser's local storage. A second script of a few lines opens and closes the menu on a phone and runs the pause button of the home page pictures; it stores nothing. Nothing is sent.</p>
+<p>Static pages served by <a href={link('githubPages', 'en')} rel="noopener">GitHub Pages</a>: no cookies, no analytics. A script of a few lines handles the language. On your first visit to the home page, it reads your browser's preferred language and opens the French version if that is French. When you pick FR or EN at the top of a page, it keeps that choice in your browser's local storage. A second script of a few lines opens and closes the menu on a phone and runs the pause button of the home page pictures; it stores nothing. Nothing is sent, apart from the release form if you use it (<a href="#release">above</a>).</p>
 <p>GitHub keeps its own server logs, see its <a rel="noopener" href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>.</p>
 
 <h2 id="contact">Contact</h2>

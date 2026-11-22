@@ -230,6 +230,26 @@ h2.big { font-size: var(--fs-h2-big); line-height: 1.12; letter-spacing: -.025em
 .final { margin: var(--space-section) calc(50% - 50vw) -3rem; padding: var(--space-section) max(var(--pad), calc(50vw - var(--max) / 2 + var(--pad))); background: var(--night); color: var(--on-night); }
 .final p { color: var(--on-night-muted); max-width: 36rem; font-size: var(--fs-hero-lead); }
 .final .actions { margin-top: 1.5rem; }
+/* The release form (Notify.astro): on the night band, white fields with dark text. */
+.final a { color: var(--ice); }
+.notify-form { max-width: 36rem; margin-top: 1.75rem; }
+.notify-form .field { margin: 0 0 1rem; }
+.notify-form label { display: block; font-weight: 600; margin-bottom: .35rem; color: var(--on-night); }
+.notify-form input[type=email] { box-sizing: border-box; width: 100%; min-height: 48px; padding: .55rem .75rem; font: inherit; font-size: 1.05rem; color: #14202b; background: #ffffff; border: 2px solid #c9d6e2; border-radius: .5rem; }
+.notify-form input[type=email]:focus-visible { outline: 3px solid var(--ice); outline-offset: 2px; }
+.notify-form input[aria-invalid=true] { border-color: #ffb48a; }
+.notify-form .check { display: grid; grid-template-columns: auto 1fr; gap: .2rem .7rem; align-items: start; }
+.notify-form .check input { width: 1.4rem; height: 1.4rem; margin: .15rem 0 0; accent-color: var(--ice); }
+.notify-form .check label { font-weight: 400; margin: 0; }
+.notify-form .check .field-error { grid-column: 2; }
+.final .notify-form p.field-error { margin: .3rem 0 0; font-size: .95rem; color: #ffb48a; }
+.final .notify-form p.field-error:empty { display: none; }
+.final p.notify-status { font-size: 1rem; margin: 1rem 0 0; color: var(--on-night); }
+.final p.notify-status:empty { display: none; }
+.final p.notify-status.error { color: #ffb48a; }
+.final p.notify-status.done { color: #a9e6bd; }
+.final p.notify-privacy, .final p.notify-noscript { font-size: 1rem; margin-top: 1.25rem; }
+.notify-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 @media (min-width: 48rem) {
   .scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: 2.5rem; }
   .scene.flip { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
