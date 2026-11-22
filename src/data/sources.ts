@@ -58,6 +58,8 @@ export const LINKS = {
   munter: 'https://backcountryaccess.com/en-be/blog/p/how-to-calculate-backcountry-touring-time-based-distance-elevation-gain',
   githubPages: 'https://pages.github.com/',
   cloudflarePrivacy: 'https://www.cloudflare.com/privacypolicy/',
+  turnstile: 'https://www.cloudflare.com/application-services/products/turnstile/',
+  oracleCloudRegions: 'https://www.oracle.com/cloud/public-cloud-regions/',
 } satisfies Record<string, Url>;
 
 export type LinkId = keyof typeof LINKS;

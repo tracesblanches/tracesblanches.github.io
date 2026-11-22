@@ -13,6 +13,7 @@ import { link } from '../../data/sources';
 <li><a href="#serveur">Ce que reçoit le serveur</a></li>
 <li><a href="#jamais">Ce que nous ne faisons pas</a></li>
 <li><a href="#permissions">Permissions</a></li>
+<li><a href="#sortie">Être prévenu de la sortie</a></li>
 <li><a href="#site">Ce site</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
@@ -57,8 +58,18 @@ import { link } from '../../data/sources';
 <li><b>Accès à internet</b>, pour télécharger et mettre à jour les packs et envoyer vos signalements.</li>
 </ul>
 
+<h2 id="sortie">Être prévenu de la sortie</h2>
+<p>Si vous laissez votre adresse dans le formulaire « Être prévenu de la sortie » en bas des pages, le serveur du projet garde <b>votre adresse e-mail, la langue du site (français ou anglais) et la date</b> de votre inscription. Rien d'autre : ni nom, ni adresse IP.</p>
+<ul>
+<li><b>Pourquoi :</b> vous envoyer un seul message, à la sortie de l'app. Pas de lettre d'information, aucun autre usage, aucune cession.</li>
+<li><b>Où :</b> sur le serveur du projet, hébergé en France, dans la région de Paris d'<a href={link('oracleCloudRegions', 'fr')} rel="noopener">Oracle Cloud</a>. Les requêtes passent par Cloudflare, qui les traite selon <a href={link('cloudflarePrivacy', 'fr')} rel="noopener">sa propre politique</a>.</li>
+<li><b>Combien de temps :</b> toute la liste est supprimée une fois ce message envoyé.</li>
+<li><b>Désinscription :</b> à tout moment, par le lien affiché après l'inscription ou par celui du message de sortie ; l'adresse est retirée aussitôt.</li>
+<li><b>Vérification anti-robot :</b> le formulaire utilise <a href={link('turnstile', 'fr')} rel="noopener">Cloudflare Turnstile</a>, une vérification invisible dont le script n'est chargé que lorsque vous utilisez le formulaire. Votre adresse IP sert, sans être gardée, à cette vérification et à limiter les inscriptions à cinq par heure.</li>
+</ul>
+
 <h2 id="site">Ce site</h2>
-<p>Des pages statiques servies par <a href={link('githubPages', 'fr')} rel="noopener">GitHub Pages</a>&nbsp;: aucun cookie, aucune mesure d'audience. Un script de quelques lignes gère la langue. À votre première visite de l'accueil, il lit la langue préférée de votre navigateur et ouvre la version française si c'est le français. Quand vous choisissez FR ou EN en haut de page, il garde ce choix dans le stockage local de votre navigateur. Un second script de quelques lignes ouvre et ferme le menu sur un téléphone et fait marcher le bouton pause des images de l'accueil ; il n'enregistre rien. Rien n'est envoyé.</p>
+<p>Des pages statiques servies par <a href={link('githubPages', 'fr')} rel="noopener">GitHub Pages</a>&nbsp;: aucun cookie, aucune mesure d'audience. Un script de quelques lignes gère la langue. À votre première visite de l'accueil, il lit la langue préférée de votre navigateur et ouvre la version française si c'est le français. Quand vous choisissez FR ou EN en haut de page, il garde ce choix dans le stockage local de votre navigateur. Un second script de quelques lignes ouvre et ferme le menu sur un téléphone et fait marcher le bouton pause des images de l'accueil ; il n'enregistre rien. Rien n'est envoyé, sauf le formulaire de la sortie si vous l'utilisez (<a href="#sortie">ci-dessus</a>).</p>
 <p>GitHub garde ses propres journaux de serveur, voir sa <a rel="noopener" href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">déclaration de confidentialité</a>.</p>
 
 <h2 id="contact">Contact</h2>
