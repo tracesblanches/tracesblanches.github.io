@@ -1,4 +1,4 @@
-import type { Lang } from '../i18n';
+import { type Lang, REPO } from '../i18n';
 import { link, REFS } from '../data/sources';
 
 // Text of the home page, English and French. Facts come from the project repository (README,
@@ -65,12 +65,12 @@ export const HOME = {
       'Your position, your tracks and your day plans stay on your phone. There is no public map of off-piste outings.',
     ],
     natureLink: 'Read what stays on the phone',
-    getTitle: '€4.99, once',
-    get: '€4.99 once, to cover the hosting: the server that builds and updates the packs every day. No subscription, no ads. All the work is public. The app is not in a store yet.',
+    getTitle: 'Coming winter 2027',
+    get: `The Android app comes out in winter 2027, at a modest price, with no subscription and no ads. Until then, ${a(REPO, 'all the work is public on GitHub')}.`,
     getLink: 'Get the app',
     faqTitle: 'Questions',
     faq: [
-      { q: 'Can I install the app?', a: 'Not yet: it is not in a store. The button below lets you follow its release.' },
+      { q: 'Can I install the app?', a: 'Not yet: it comes out in winter 2027. The button below lets you follow its release.' },
       { q: 'Does it work without a network?', a: 'Yes. You download the pack of your ski area before you leave; after that, the phone needs no network.' },
       { q: 'Which phones?', a: 'Android phones running Android 10 or later. There is no iPhone version. A watch is not needed.' },
     ],
@@ -117,12 +117,12 @@ export const HOME = {
       "Votre position, vos traces et vos plans de journée restent sur votre téléphone. Il n'existe aucune carte publique des sorties hors piste.",
     ],
     natureLink: 'Lire ce qui reste sur le téléphone',
-    getTitle: '4,99 €, une fois',
-    get: "4,99 € une fois, pour couvrir l'hébergement : le serveur qui construit et met à jour les packs chaque jour. Sans abonnement ni publicité. Tout le travail est public. L'app n'est pas encore sur une boutique.",
+    getTitle: 'Sortie hiver 2027',
+    get: `L'app Android sort à l'hiver 2027, à un prix modique, sans abonnement ni publicité. D'ici là, ${a(REPO, 'tout le travail est consultable sur GitHub')}.`,
     getLink: "Obtenir l'app",
     faqTitle: 'Questions',
     faq: [
-      { q: "Peut-on déjà installer l'app ?", a: "Pas encore : elle n'est sur aucune boutique. Le bouton ci-dessous vous permet de suivre sa sortie." },
+      { q: "Peut-on déjà installer l'app ?", a: "Pas encore : elle sort à l'hiver 2027. Le bouton ci-dessous vous permet de suivre sa sortie." },
       { q: 'Fonctionne-t-elle sans réseau ?', a: "Oui. Vous téléchargez le pack de votre domaine avant de partir ; ensuite, le téléphone n'a plus besoin de réseau." },
       { q: 'Sur quels téléphones ?', a: "Les téléphones Android, à partir d'Android 10. Il n'existe pas de version iPhone. Une montre n'est pas nécessaire." },
     ],

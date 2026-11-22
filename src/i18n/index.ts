@@ -16,7 +16,7 @@ export type PageId = 'home' | 'features' | 'get' | 'faq' | 'privacy' | 'credits'
 export const PAGES: Record<PageId, Record<Lang, string>> = {
   home: { en: '/', fr: '/fr/' },
   features: { en: '/features.html', fr: '/fr/fonctionnalites.html' },
-  // "Get the app": the one-time purchase (formerly "Price", at /price.html and /fr/prix.html).
+  // "Get the app": the release, coming winter 2027 (formerly "Price", at /price.html and /fr/prix.html).
   get: { en: '/get.html', fr: '/fr/obtenir.html' },
   faq: { en: '/faq.html', fr: '/fr/faq.html' },
   privacy: { en: '/privacy.html', fr: '/fr/confidentialite.html' },

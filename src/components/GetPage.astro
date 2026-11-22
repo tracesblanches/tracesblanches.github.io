@@ -1,9 +1,9 @@
 ---
-// "Get the app" (/get.html, /fr/obtenir.html; formerly "Price"): the price decided by the project
-// (4.99 euros once, to cover the hosting of the server that builds and updates the packs every
-// day; no subscription, no ads), what it gives access to, and the honest state: the app is not in
-// a store yet, all the work is public. No store link until the app is in one. The price block
-// uses the poster palette (night blue, peach snow, white) with the badger illustration.
+// "Get the app" (/get.html, /fr/obtenir.html; formerly "Price"): the release, coming winter 2027,
+// at a modest price with no subscription and no ads (no amount is announced), what it gives
+// access to, and the honest state: the app is not in a store yet, all the work is public on
+// GitHub. No store link until the app is in one. The release block uses the poster palette
+// (night blue, peach snow, white) with the badger illustration.
 import Base from '../layouts/Base.astro';
 import Img from './Img.astro';
 import { type Lang, REPO, href } from '../i18n';
@@ -18,12 +18,12 @@ const a = (url: string, text: string) => `<a href="${url}" rel="noopener">${text
 const T = {
   en: {
     title: 'Get the app · Traces Blanches',
-    description: 'Traces Blanches costs €4.99 once, to cover the hosting of the server that builds and updates the packs every day. No subscription, no ads. The Android app is not in a store yet.',
+    description: 'The Traces Blanches Android app comes out in winter 2027, at a modest price, with no subscription and no ads. Until then, all the work is public on GitHub.',
     h1: 'Get the app',
-    lead: 'The Android app is not in a store yet. The button below lets you follow its release; all the work is already public.',
-    label: 'Single payment',
-    amount: '€4.99',
-    once: 'Once, to cover the hosting: the server that builds and updates the packs every day. No subscription, no ads.',
+    lead: 'The Android app comes out in winter 2027. Until then, all the work is public on GitHub; the button below lets you follow its release.',
+    label: 'The Android app',
+    amount: 'Coming winter 2027',
+    once: `At a modest price, with no subscription and no ads. Until then, ${a(REPO, 'all the work is public on GitHub')}.`,
     alt: 'Illustration: a badger walks on fresh snow at the edge of a dark forest, its tracks behind it.',
     includesTitle: 'What it gives access to',
     includes: [
@@ -31,17 +31,17 @@ const T = {
       { h: 'Every pack', p: 'Download as many areas as you like. Each one then works without a network.' },
       { h: 'The updates', p: 'The packs are rebuilt every day; new versions of the app come at no extra cost.' },
       { h: 'No ads', p: 'No advertising and no audience tracking in the app.' },
-      { h: 'No subscription', p: 'You pay once. Nothing renews, nothing expires.' },
+      { h: 'No subscription', p: 'Nothing renews, nothing expires.' },
       { h: 'Your data stays with you', p: 'Your position, your tracks and your day plans stay on your phone.' },
     ],
     notesLabel: 'About the price',
-    whyTitle: 'Why €4.99',
-    why: 'The map lives on your phone, and the route is worked out there too. What costs money is the server that builds and updates the packs of the whole of France every day. The €4.99 cover that hosting, nothing else.',
+    whyTitle: 'Why a price',
+    why: 'The map lives on your phone, and the route is worked out there too. What costs money is the server that builds and updates the packs of the whole of France every day. The price covers that hosting.',
     codeTitle: 'All the work is public',
     code: `Anyone can ${a(REPO, 'look at all the work on the app')} and check what it does.`,
     faqTitle: 'Questions',
     faq: [
-      { q: 'When can I install it?', a: 'When it is in a store. There is no date yet. The button above lets you follow its release.' },
+      { q: 'When can I install it?', a: 'In winter 2027. The button above lets you follow its release.' },
       { q: 'Is there an iPhone version?', a: 'No. The app runs on Android phones, from Android 10.' },
       { q: 'Can I see the work before then?', a: `Yes. ${a(REPO, 'Everything is public')}: what the app does, how the packs are built, and the open questions.` },
     ],
@@ -49,12 +49,12 @@ const T = {
   },
   fr: {
     title: "Obtenir l'app · Traces Blanches",
-    description: "Traces Blanches coûte 4,99 € une fois, pour couvrir l'hébergement du serveur qui construit et met à jour les packs chaque jour. Sans abonnement ni publicité. L'app Android n'est pas encore sur une boutique.",
+    description: "L'app Android Traces Blanches sort à l'hiver 2027, à un prix modique, sans abonnement ni publicité. D'ici là, tout le travail est consultable sur GitHub.",
     h1: "Obtenir l'app",
-    lead: "L'app Android n'est pas encore sur une boutique. Le bouton ci-dessous permet de suivre sa sortie ; tout le travail est déjà public.",
-    label: 'Paiement unique',
-    amount: '4,99 €',
-    once: "Une fois, pour couvrir l'hébergement : le serveur qui construit et met à jour les packs chaque jour. Sans abonnement ni publicité.",
+    lead: "L'app Android sort à l'hiver 2027. D'ici là, tout le travail est consultable sur GitHub ; le bouton ci-dessous permet de suivre sa sortie.",
+    label: "L'app Android",
+    amount: 'Sortie hiver 2027',
+    once: `À un prix modique, sans abonnement ni publicité. D'ici là, ${a(REPO, 'tout le travail est consultable sur GitHub')}.`,
     alt: "Illustration : un blaireau marche dans la neige fraîche au bord d'une forêt sombre, ses traces derrière lui.",
     includesTitle: 'Ce que cela donne',
     includes: [
@@ -62,24 +62,24 @@ const T = {
       { h: 'Tous les packs', p: 'Téléchargez autant de domaines que vous voulez. Chacun marche ensuite sans réseau.' },
       { h: 'Les mises à jour', p: "Les packs sont reconstruits chaque jour ; les nouvelles versions de l'app arrivent sans supplément." },
       { h: 'Aucune publicité', p: "Ni publicité, ni mesure d'audience dans l'app." },
-      { h: 'Aucun abonnement', p: "Vous payez une fois. Rien ne se renouvelle, rien n'expire." },
+      { h: 'Aucun abonnement', p: "Rien ne se renouvelle, rien n'expire." },
       { h: 'Vos données restent chez vous', p: 'Votre position, vos traces et vos plans de journée restent sur votre téléphone.' },
     ],
     notesLabel: 'À propos du prix',
-    whyTitle: 'Pourquoi 4,99 €',
-    why: "La carte vit sur votre téléphone, et l'itinéraire s'y calcule aussi. Ce qui coûte, c'est le serveur qui construit et met à jour chaque jour les packs de toute la France. Les 4,99 € couvrent cet hébergement, rien d'autre.",
+    whyTitle: 'Pourquoi un prix',
+    why: "La carte vit sur votre téléphone, et l'itinéraire s'y calcule aussi. Ce qui coûte, c'est le serveur qui construit et met à jour chaque jour les packs de toute la France. Le prix couvre cet hébergement.",
     codeTitle: 'Tout le travail est public',
     code: `Chacun peut ${a(REPO, "consulter tout le travail sur l'app")} et vérifier ce qu'elle fait.`,
     faqTitle: 'Questions',
     faq: [
-      { q: "Quand pourrai-je l'installer ?", a: "Quand elle sera sur une boutique. Il n'y a pas encore de date. Le bouton plus haut permet de suivre sa sortie." },
+      { q: "Quand pourrai-je l'installer ?", a: "À l'hiver 2027. Le bouton plus haut permet de suivre sa sortie." },
       { q: 'Existe-t-il une version iPhone ?', a: "Non. L'app tourne sur les téléphones Android, à partir d'Android 10." },
       { q: "Peut-on voir le travail d'ici là ?", a: `Oui. ${a(REPO, 'Tout est public')} : ce que fait l'app, comment les packs sont construits, et les questions ouvertes.` },
     ],
     more: 'Toutes les fonctionnalités, expliquées',
   },
 }[lang];
-// The badger beside the price on a wide screen (about 44 % of the 68rem column), above it on a phone.
+// The badger beside the release block on a wide screen (about 44 % of the 68rem column), above it on a phone.
 const t = (x: string) => typo(lang, x);
 const ART = '(min-width: 68rem) 29rem, (min-width: 48rem) 44vw, calc(100vw - 2.2rem)';
 ---
