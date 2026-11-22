@@ -24,6 +24,8 @@ type UI = {
     honeypot: string;
     noscript: string;
     privacy: string;
+    /** Discreet link under the form to the release issue on GitHub ([`RELEASE_ISSUE`]). */
+    github: string;
     /** Anchor of the release-list section of the privacy page. */
     privacyAnchor: string;
     /** Messages of src/scripts/notify.js, by server error code. */
@@ -50,6 +52,7 @@ export const UI: Record<Lang, UI> = {
       honeypot: 'Leave this field empty',
       noscript: 'This form needs JavaScript for its anti-robot check.',
       privacy: 'What we keep and for how long',
+      github: 'or follow the release on GitHub',
       privacyAnchor: 'release',
       messages: {
         email: 'Enter a valid e-mail address, such as name@example.org.',
@@ -88,6 +91,7 @@ export const UI: Record<Lang, UI> = {
       honeypot: 'Laissez ce champ vide',
       noscript: 'Ce formulaire a besoin de JavaScript pour sa vérification anti-robot.',
       privacy: 'Ce que nous gardons et combien de temps',
+      github: 'ou suivez la sortie sur GitHub',
       privacyAnchor: 'sortie',
       messages: {
         email: 'Saisissez une adresse e-mail valide, par exemple nom@exemple.fr.',
@@ -112,5 +116,7 @@ export const UI: Record<Lang, UI> = {
 };
 
 export const ISSUES = 'https://github.com/tracesblanches/tracesblanches/issues';
+/** The pinned release issue of the public repository: subscribing to it is the other way to be notified. */
+export const RELEASE_ISSUE = 'https://github.com/tracesblanches/tracesblanches/issues/1';
 /** The release form, at the bottom of every page but the 404 (src/components/Notify.astro). */
 export const NOTIFY_ANCHOR = '#notify';

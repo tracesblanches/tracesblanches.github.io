@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Quality gates of the site, as in CI (.github/workflows/pages.yml) plus Lighthouse.
+# Quality gates of the site, run locally before each publication (no GitHub Actions).
 #   bash scripts/check.sh            SKIP="lighthouse" skips steps by name.
 # Needs Node (.nvmrc), Python 3, Java (vnu) and Google Chrome (CHROME).
 set -uo pipefail

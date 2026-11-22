@@ -6,7 +6,7 @@
 // astro.config.mjs) for the anti-robot check: it stays hidden without it, and a <noscript> says so.
 import type { Lang } from '../i18n';
 import { pagePath } from '../i18n';
-import { UI } from '../i18n/ui';
+import { UI, RELEASE_ISSUE } from '../i18n/ui';
 import { NOTIFY } from '../data/notify';
 import code from '../scripts/notify.js?raw';
 
@@ -42,5 +42,6 @@ const messages = JSON.stringify(f.messages);
 </form>
 <noscript><p class="notify-noscript">{f.noscript}</p></noscript>
 <p class="notify-privacy"><a href={`${pagePath('privacy', lang)}#${f.privacyAnchor}`}>{f.privacy}</a></p>
+<p class="notify-github"><a href={RELEASE_ISSUE} rel="noopener">{f.github}</a></p>
 <script is:inline set:html={code.trim()} />
 </section>

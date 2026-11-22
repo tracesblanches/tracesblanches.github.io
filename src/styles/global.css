@@ -249,6 +249,7 @@ h2.big { font-size: var(--fs-h2-big); line-height: 1.12; letter-spacing: -.025em
 .final p.notify-status.error { color: #ffb48a; }
 .final p.notify-status.done { color: #a9e6bd; }
 .final p.notify-privacy, .final p.notify-noscript { font-size: 1rem; margin-top: 1.25rem; }
+.final p.notify-github { font-size: .95rem; margin-top: .5rem; }
 .notify-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 @media (min-width: 48rem) {
   .scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); gap: 2.5rem; }
